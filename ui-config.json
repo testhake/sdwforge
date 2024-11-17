@@ -1747,5 +1747,10 @@
     "civitai_interface/Update model info & tags/visible": true,
     "civitai_interface/Update model preview/visible": true,
     "civitai_interface/Scan for available updates/visible": true,
-    "civitai_interface/Load all installed models/visible": true
+    "civitai_interface/Load all installed models/visible": true,
+    "infinite-image-browsing/button/visible": true,
+    "infinite-image-browsing/Send to txt2img/visible": true,
+    "infinite-image-browsing/Send to img2img/visible": true,
+    "infinite-image-browsing/Send to inpaint/visible": true,
+    "infinite-image-browsing/Send to extras/visible": true
 }
