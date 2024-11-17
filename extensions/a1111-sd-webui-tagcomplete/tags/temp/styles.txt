@@ -1,0 +1,215 @@
+Kamph_Professional Scenic Photographs (PO)
+---------------- STYLES ----------------
+---------- STYLES_INTEGRATED -----------
+Kamph_Default_Negative (Low Token) (NO)
+Kamph_Black and White Film Noir (PO)
+Kamph_Realistic Photo Portraits (PO)
+futuristic-biomechanical cyberpunk
+Kamph_Default_Negative (sfw) (NO)
+papercraft-thick layered papercut
+Bens_Red Dress (Tutorial Prompt)
+Kamph_Skin Enhancer (clean)(PO)
+Kamph_Vector Illustrations (PO)
+Kamph_Original Photo Style (PO)
+artstyle-abstract expressionism
+futuristic-cyberpunk cityscape
+papercraft-papercut shadow box
+Bens_Daguerreotype Photo 1920
+Tranquil Relaxing Atmosphere
+Bens Underwater and god rays
+Kamph_Default_Negative (NO)
+Kamph_Digital Painting (PO)
+futuristic-cybernetic robot
+papercraft-papercut collage
+papercraft-stacked papercut
+Blueprint Schematic Drawing
+Dripping Paint Splatter Art
+Kamph_Isometric Rooms (PO)
+futuristic-retro cyberpunk
+Kamph_Space Hologram (PO)
+Kamph_Cute Creatures (PO)
+futuristic-retro futurism
+papercraft-paper quilling
+Kamph_Photo without Bokeh
+Kamph_Skin Enhancer (PO)
+futuristic-biomechanical
+papercraft-flat papercut
+artstyle-constructivist
+Light Cheery Atmosphere
+artstyle-expressionist
+artstyle-impressionist
+papercraft-paper mache
+Abstract Expressionism
+Character Design Sheet
+Harlem Renaissance Art
+Kamph_Photo with Bokeh
+Kamph_Indie Game (PO)
+ads-fashion editorial
+artstyle-hyperrealism
+futuristic-cybernetic
+futuristic-futuristic
+game-rpg fantasy game
+misc-techwear fashion
+Adorable 3D Character
+Dark Moody Atmosphere
+Pencil Sketch Drawing
+Whimsical and Playful
+ads-food photography
+artstyle-art nouveau
+artstyle-pointillism
+artstyle-psychedelic
+artstyle-renaissance
+futuristic-vaporwave
+Bauhaus-Style Poster
+Color Field Painting
+Faded Polaroid Photo
+Ink Dripping Drawing
+Japanese Ink Drawing
+Knolling Photography
+Ornate and Intricate
+artstyle-surrealist
+artstyle-typography
+artstyle-watercolor
+game-cyberpunk game
+papercraft-kirigami
+photo-long exposure
+Infographic Drawing
+Volumetric Lighting
+artstyle-steampunk
+game-bubble bobble
+game-fighting game
+game-strategy game
+game-streetfighter
+misc-architectural
+misc-stained glass
+papercraft-collage
+Colored Pencil Art
+Fortnite Art Style
+Luxurious Elegance
+Kamph_Ghibli (PO)
+artstyle-abstract
+artstyle-art deco
+artstyle-graffiti
+futuristic-sci-fi
+game-retro arcade
+misc-lovecraftian
+Macro Photography
+Neo-Impressionism
+Simple Vector Art
+Vibrant Rim Light
+Kamph_Analog film
+Kamph_Digital art
+Kamph_Fantasy art
+sai-photographic
+artstyle-pop art
+photo-silhouette
+photo-tilt-shift
+Googie Art Style
+Kamph_Comic book
+cinematic_still
+sai-analog film
+sai-digital art
+sai-fantasy art
+ads-advertising
+ads-real estate
+artstyle-cubist
+game-retro game
+misc-dreamscape
+misc-fairy tale
+misc-metropolis
+misc-minimalist
+misc-monochrome
+photo-film noir
+photo-neon noir
+Adorable Kawaii
+Double Exposure
+Sticker Designs
+Kamph_Cinematic
+Kamph_Cyberpunk
+sai-comic book
+sai-craft clay
+ads-automotive
+game-minecraft
+misc-dystopian
+misc-zentangle
+cinematic-diva
+Cel Shaded Art
+Classicism Art
+Conceptual Art
+Constructivism
+Marker Drawing
+Silhouette Art
+Kamph_3d-model
+Kamph_Enhancer
+sai-cinematic
+sai-isometric
+sai-pixel art
+ads-corporate
+misc-nautical
+Action Figure
+DMT Art Style
+Expressionism
+Impressionism
+Neo-Byzantine
+Neoclassicism
+sai-3d-model
+sai-line art
+sai-neonpunk
+game-pokemon
+misc-macabre
+Dark Fantasy
+Graffiti Art
+High Fashion
+Neo-Futurism
+Watercolor 2
+sai-enhance
+sai-lowpoly
+sai-origami
+sai-texture
+misc-gothic
+misc-grunge
+misc-horror
+misc-kawaii
+misc-tribal
+photo-alien
+Art Nouveau
+Astral Aura
+Avant-garde
+Flat 2D Art
+Logo Design
+Mandola Art
+Medievalism
+Neo-Baroque
+Steampunk 2
+Suprematism
+Kamph_Anime
+ads-luxury
+ads-retail
+game-mario
+game-zelda
+misc-disco
+misc-manga
+misc-space
+Caricature
+Doodle Art
+Glitchcore
+Minimalism
+Neo-Rococo
+Surrealism
+sai-anime
+photo-hdr
+Pop Art 2
+game-gta
+Academia
+Art Deco
+Futurism
+Sketchup
+Terragen
+Baroque
+Dadaism
+Fauvism
+Idyllic
+Cubism
+Glo-fi
+Op Art
+Rococo
