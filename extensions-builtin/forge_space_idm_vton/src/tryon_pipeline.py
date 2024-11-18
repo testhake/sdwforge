@@ -665,7 +665,7 @@ class StableDiffusionXLInpaintPipeline(
             elif batch_size != len(negative_prompt):
                 raise ValueError(
                     f"`negative_prompt`: {negative_prompt} has batch size {len(negative_prompt)}, but `prompt`:"
-                    f" {prompt} has batch size {batch_size}. Please make sure that passed `negative_prompt` matches"
+                    f" prompt has batch size {batch_size}. Please make sure that passed `negative_prompt` matches"
                     " the batch size of `prompt`."
                 )
             else:
@@ -796,12 +796,12 @@ class StableDiffusionXLInpaintPipeline(
 
         if prompt is not None and prompt_embeds is not None:
             raise ValueError(
-                f"Cannot forward both `prompt`: {prompt} and `prompt_embeds`: {prompt_embeds}. Please make sure to"
+                f"Cannot forward both `prompt`:  and `prompt_embeds`: . Please make sure to"
                 " only forward one of the two."
             )
         elif prompt_2 is not None and prompt_embeds is not None:
             raise ValueError(
-                f"Cannot forward both `prompt_2`: {prompt_2} and `prompt_embeds`: {prompt_embeds}. Please make sure to"
+                f"Cannot forward both `prompt_2`:  and `prompt_embeds`: . Please make sure to"
                 " only forward one of the two."
             )
         elif prompt is None and prompt_embeds is None:

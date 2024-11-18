@@ -226,7 +226,7 @@ def img2img_function(id_task: str, request: gr.Request, mode: int, prompt: str, 
     p.user = request.username
 
     if shared.opts.enable_console_prompts:
-        print(f"\nimg2img: {prompt}", file=shared.progress_print_out)
+        print(f"\nimg2img: prompt", file=shared.progress_print_out)
 
     with closing(p):
         if is_batch:
