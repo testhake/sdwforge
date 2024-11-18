@@ -26,15 +26,15 @@ class _bn_relu_conv(nn.Module):
         return self.model(x)
 
         # the following are for debugs
-        #print("****", np.max(x.cpu().numpy()), np.min(x.cpu().numpy()), np.mean(x.cpu().numpy()), np.std(x.cpu().numpy()), x.shape)
+        print("****", np.max(x.cpu().numpy()), np.min(x.cpu().numpy()), np.mean(x.cpu().numpy()), np.std(x.cpu().numpy()), x.shape)
         for i,layer in enumerate(self.model):
             if i != 2:
                 x = layer(x)
             else:
                 x = layer(x)
                 #x = nn.functional.pad(x, (1, 1, 1, 1), mode='constant', value=0)
-            #print("____", np.max(x.cpu().numpy()), np.min(x.cpu().numpy()), np.mean(x.cpu().numpy()), np.std(x.cpu().numpy()), x.shape)
-            #print(x[0])
+            print("____", np.max(x.cpu().numpy()), np.min(x.cpu().numpy()), np.mean(x.cpu().numpy()), np.std(x.cpu().numpy()), x.shape)
+            print(x[0])
         return x
 
 class _u_bn_relu_conv(nn.Module):
@@ -64,13 +64,13 @@ class _shortcut(nn.Module):
                 )
 
     def forward(self, x, y):
-        ##print(x.size(), y.size(), self.process)
+        #print(x.size(), y.size(), self.process)
         if self.process:
             y0 = self.model(x)
-            ##print("merge+", torch.max(y0+y), torch.min(y0+y),torch.mean(y0+y), torch.std(y0+y), y0.shape)
+            #print("merge+", torch.max(y0+y), torch.min(y0+y),torch.mean(y0+y), torch.std(y0+y), y0.shape)
             return y0 + y
         else:
-            ##print("merge", torch.max(x+y), torch.min(x+y),torch.mean(x+y), torch.std(x+y), y.shape)
+            #print("merge", torch.max(x+y), torch.min(x+y),torch.mean(x+y), torch.std(x+y), y.shape)
             return x + y
 
 class _u_shortcut(nn.Module):

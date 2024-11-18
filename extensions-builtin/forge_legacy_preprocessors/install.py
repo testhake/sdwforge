@@ -57,8 +57,8 @@ def install_requirements(req_file):
                         f"forge_legacy_preprocessor requirement: {package}",
                     )
             except Exception as e:
-                #print(e)
-                #print(
+                print(e)
+                print(
                     f"Warning: Failed to install {package}, some preprocessors may not work."
                 )
 
@@ -78,8 +78,8 @@ def try_install_from_wheel(pkg_name: str, wheel_url: str, version: Optional[str]
             f"forge_legacy_preprocessor requirement: {pkg_name}",
         )
     except Exception as e:
-        #print(e)
-        #print(f"Warning: Failed to install {pkg_name}. Some processors will not work.")
+        print(e)
+        print(f"Warning: Failed to install {pkg_name}. Some processors will not work.")
 
 
 def try_install_insight_face():
@@ -107,12 +107,12 @@ def try_install_insight_face():
                 "forge_legacy_preprocessor requirement: insightface",
             )
         except Exception as e:
-            #print(e)
-            #print(
+            print(e)
+            print(
                 "Legacy Preprocessor init warning: Unable to install insightface automatically. "
             )
     else:
-        #print(
+        print(
             "Legacy Preprocessor init warning: Unable to install insightface automatically. "
             "Please try run `pip install insightface` manually."
         )
@@ -125,8 +125,8 @@ def try_remove_legacy_submodule():
         try:
             shutil.rmtree(submodule)
         except Exception as e:
-            #print(e)
-            #print(
+            print(e)
+            print(
                 f"Failed to remove submodule {submodule} automatically. You can manually delete the directory."
             )
 

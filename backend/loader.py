@@ -86,14 +86,14 @@ def load_huggingface_component(guess, component_name, lib_name, cls_name, repo_p
             state_dict_dtype = memory_management.state_dict_dtype(state_dict)
 
             if state_dict_dtype in [torch.float8_e4m3fn, torch.float8_e5m2, 'nf4', 'fp4', 'gguf']:
-                #print(f'Using Detected T5 Data Type: {state_dict_dtype}')
+                print(f'Using Detected T5 Data Type: {state_dict_dtype}')
                 storage_dtype = state_dict_dtype
                 if state_dict_dtype in ['nf4', 'fp4', 'gguf']:
-                    #print(f'Using pre-quant state dict!')
+                    print(f'Using pre-quant state dict!')
                     if state_dict_dtype in ['gguf']:
                         beautiful_print_gguf_state_dict_statics(state_dict)
             else:
-                #print(f'Using Default T5 Data Type: {storage_dtype}')
+                print(f'Using Default T5 Data Type: {storage_dtype}')
 
             if storage_dtype in ['nf4', 'fp4', 'gguf']:
                 with modeling_utils.no_init_weights():
@@ -128,10 +128,10 @@ def load_huggingface_component(guess, component_name, lib_name, cls_name, repo_p
             if unet_storage_dtype_overwrite is not None:
                 storage_dtype = unet_storage_dtype_overwrite
             elif state_dict_dtype in [torch.float8_e4m3fn, torch.float8_e5m2, 'nf4', 'fp4', 'gguf']:
-                #print(f'Using Detected UNet Type: {state_dict_dtype}')
+                print(f'Using Detected UNet Type: {state_dict_dtype}')
                 storage_dtype = state_dict_dtype
                 if state_dict_dtype in ['nf4', 'fp4', 'gguf']:
-                    #print(f'Using pre-quant state dict!')
+                    print(f'Using pre-quant state dict!')
                     if state_dict_dtype in ['gguf']:
                         beautiful_print_gguf_state_dict_statics(state_dict)
 
@@ -166,7 +166,7 @@ def load_huggingface_component(guess, component_name, lib_name, cls_name, repo_p
 
             return model
 
-    #print(f'Skipped: {component_name} = {lib_name}.{cls_name}')
+    print(f'Skipped: {component_name} = {lib_name}.{cls_name}')
     return None
 
 
@@ -261,7 +261,7 @@ def split_state_dict(sd, additional_state_dicts: list = None):
     state_dict['ignore'] = sd
 
     print_dict = {k: len(v) for k, v in state_dict.items()}
-    #print(f'StateDict Keys: {print_dict}')
+    print(f'StateDict Keys: {print_dict}')
 
     del state_dict['ignore']
 
@@ -333,5 +333,5 @@ def forge_loader(sd, additional_state_dicts=None):
         if any(isinstance(estimated_config, x) for x in M.matched_guesses):
             return M(estimated_config=estimated_config, huggingface_components=huggingface_components)
 
-    #print('Failed to recognize model type!')
+    print('Failed to recognize model type!')
     return None

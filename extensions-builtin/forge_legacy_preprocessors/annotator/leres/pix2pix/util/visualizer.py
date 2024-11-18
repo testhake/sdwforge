@@ -71,7 +71,7 @@ class Visualizer():
         if self.use_html:  # create an HTML object at <checkpoints_dir>/web/; images will be saved under <checkpoints_dir>/web/images/
             self.web_dir = os.path.join(opt.checkpoints_dir, opt.name, 'web')
             self.img_dir = os.path.join(self.web_dir, 'images')
-            #print('create web directory %s...' % self.web_dir)
+            print('create web directory %s...' % self.web_dir)
             util.mkdirs([self.web_dir, self.img_dir])
         # create a logging file to store training losses
         self.log_name = os.path.join(opt.checkpoints_dir, opt.name, 'loss_log.txt')
@@ -86,8 +86,8 @@ class Visualizer():
     def create_visdom_connections(self):
         """If the program could not connect to Visdom server, this function will start a new server at port < self.port > """
         cmd = sys.executable + ' -m visdom.server -p %d &>/dev/null &' % self.port
-        #print('\n\nCould not connect to Visdom server. \n Trying to start a server....')
-        #print('Command: %s' % cmd)
+        print('\n\nCould not connect to Visdom server. \n Trying to start a server....')
+        print('Command: %s' % cmd)
         Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
 
     def display_current_results(self, visuals, epoch, save_result):
@@ -161,6 +161,6 @@ class Visualizer():
         for k, v in losses.items():
             message += '%s: %.3f ' % (k, v)
 
-        #print(message)  # print the message
+        print(message)  # print the message
         with open(self.log_name, "a") as log_file:
             log_file.write('%s\n' % message)  # save the message

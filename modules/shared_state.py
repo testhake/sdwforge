@@ -162,7 +162,7 @@ class State:
 
         except Exception as e:
             # traceback.print_exc()
-            # #print(e)
+            # print(e)
             # when switching models during genration, VAE would be on CPU, so creating an image will fail.
             # we silently ignore this error
             errors.record_exception()

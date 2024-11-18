@@ -100,7 +100,7 @@ def download_model(model_path, model_url):
     if not os.path.exists(model_path):
         os.makedirs(os.path.dirname(model_path), exist_ok=True)
 
-        #print(f'Downloading TAESD model to: {model_path}')
+        print(f'Downloading TAESD model to: {model_path}')
         torch.hub.download_url_to_file(model_url, model_path)
 
 

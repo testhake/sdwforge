@@ -502,7 +502,7 @@ def load_scripts():
 
     syspath = sys.path
 
-    # #print(f'Current System Paths = {syspath}')
+    # print(f'Current System Paths = {syspath}')
 
     def register_scripts_from_module(module):
         for script_class in module.__dict__.values():
@@ -766,7 +766,7 @@ class ScriptRunner:
                 except ValueError:
                     params['Script'] = None
                     massage = f'Cannot find Script: "{title}"'
-                    #print(massage)
+                    print(massage)
                     gr.Warning(massage)
             return gr.update(visible=False)
 

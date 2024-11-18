@@ -138,11 +138,11 @@ class ZoeDepth(DepthModel):
 
         """
         b, c, h, w = x.shape
-        # #print("input shape ", x.shape)
+        # print("input shape ", x.shape)
         self.orig_input_width = w
         self.orig_input_height = h
         rel_depth, out = self.core(x, denorm=denorm, return_rel_depth=True)
-        # #print("output shapes", rel_depth.shape, out.shape)
+        # print("output shapes", rel_depth.shape, out.shape)
 
         outconv_activation = out[0]
         btlnck = out[1]
@@ -186,7 +186,7 @@ class ZoeDepth(DepthModel):
         x = self.conditional_log_binomial(last, b_embedding)
 
         # Now depth value is Sum px * cx , where cx are bin_centers from the last bin tensor
-        # #print(x.shape, b_centers.shape)
+        # print(x.shape, b_centers.shape)
         b_centers = nn.functional.interpolate(
             b_centers, x.shape[-2:], mode='bilinear', align_corners=True)
         out = torch.sum(x * b_centers, dim=1, keepdim=True)

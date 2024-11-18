@@ -83,7 +83,7 @@ class DataBase:
             conn.commit()
         clz.num += 1
         if is_dev:
-            #print(f"当前连接数{clz.num}")
+            print(f"当前连接数{clz.num}")
         return conn
 
 
@@ -204,7 +204,7 @@ class Image:
                     f"DELETE FROM image WHERE id IN ({placeholders})", image_ids
                 )
             except BaseException as e:
-                #print(e)
+                print(e)
             finally:
                 conn.commit()
 
@@ -495,7 +495,7 @@ class ImageTag:
             for folder_path in folder_paths:
                 folder_clauses.append("(image.path LIKE ?)")
                 params.append(os.path.join(folder_path, "%"))
-                #print(folder_path)
+                print(folder_path)
             where_clauses.append("(" + " OR ".join(folder_clauses) + ")")
 
         if cursor:

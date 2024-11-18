@@ -31,7 +31,7 @@ def talker():
     while not rospy.is_shutdown():
         ret, cv_image = cap.read()
         if ret==False:
-            #print("Talker: Video is over")
+            print("Talker: Video is over")
             rospy.loginfo("Video is over")
             return
 
@@ -39,7 +39,7 @@ def talker():
             image = bridge.cv2_to_imgmsg(cv_image, "bgr8")
         except CvBridgeError as e:
             rospy.logerr("Talker: cv2image conversion failed: ", e)
-            #print(e)
+            print(e)
             continue
 
         rospy.loginfo("Talker: Publishing frame")

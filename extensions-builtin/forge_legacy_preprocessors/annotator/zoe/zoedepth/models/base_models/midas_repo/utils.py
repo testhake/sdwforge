@@ -176,7 +176,7 @@ def write_depth(path, depth, grayscale, bits=1):
 
     if not np.isfinite(depth).all():
         depth=np.nan_to_num(depth, nan=0.0, posinf=0.0, neginf=0.0)
-        #print("WARNING: Non-finite depth values present")
+        print("WARNING: Non-finite depth values present")
 
     depth_min = depth.min()
     depth_max = depth.max()

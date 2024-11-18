@@ -149,7 +149,7 @@ class Script(scripts.Script):
 
             jobs.append(args)
 
-        #print(f"Will process {len(lines)} lines in {job_count} jobs.")
+        print(f"Will process {len(lines)} lines in {job_count} jobs.")
         if (checkbox_iterate or checkbox_iterate_batch) and p.seed == -1:
             p.seed = int(random.randrange(4294967294))
 

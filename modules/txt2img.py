@@ -54,7 +54,7 @@ def txt2img_create_processing(id_task: str, request: gr.Request, prompt: str, ne
     p.user = request.username
 
     if shared.opts.enable_console_prompts:
-        #print(f"\ntxt2img: {prompt}", file=shared.progress_print_out)
+        print(f"\ntxt2img: {prompt}", file=shared.progress_print_out)
 
     return p
 
@@ -134,7 +134,7 @@ def txt2img_function(id_task: str, request: gr.Request, *args):
 
     generation_info_js = processed.js()
     if opts.samples_log_stdout:
-        #print(generation_info_js)
+        print(generation_info_js)
 
     if opts.do_not_show_images:
         processed.images = []

@@ -87,7 +87,7 @@ class DistEvalHook(_DistEvalHook):
             gpu_collect=self.gpu_collect,
             efficient_test=self.efficient_test)
         if runner.rank == 0:
-            #print('\n')
+            print('\n')
             self.evaluate(runner, results)
 
     def after_train_epoch(self, runner):
@@ -105,5 +105,5 @@ class DistEvalHook(_DistEvalHook):
             tmpdir=osp.join(runner.work_dir, '.eval_hook'),
             gpu_collect=self.gpu_collect)
         if runner.rank == 0:
-            #print('\n')
+            print('\n')
             self.evaluate(runner, results)

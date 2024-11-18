@@ -61,7 +61,7 @@ def depth_to_points(depth, R=None, t=None):
     coord = coord[None]  # bs, h, w, 3
 
     D = depth[:, :, :, None, None]
-    # #print(D.shape, Kinv[None, None, None, ...].shape, coord[:, :, :, :, None].shape )
+    # print(D.shape, Kinv[None, None, None, ...].shape, coord[:, :, :, :, None].shape )
     pts3D_1 = D * Kinv[None, None, None, ...] @ coord[:, :, :, :, None]
     # pts3D_1 live in your coordinate system. Convert them to Py3D's
     pts3D_1 = M[None, None, None, ...] @ pts3D_1

@@ -13,7 +13,7 @@ def close_video_file_reader(path):
     try:
         video_file_handler[path].close()
     except Exception as e:
-        #print(f"close file error: {e}")
+        print(f"close file error: {e}")
     
 
 def send_bytes_range_requests(

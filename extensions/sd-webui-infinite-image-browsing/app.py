@@ -56,18 +56,18 @@ def paths_check(paths):
         else:
             abs_path = os.path.normpath(os.path.join(os.getcwd(), path))
         if not os.path.exists(abs_path):
-            #print(f"{tag} The path '{abs_path}' will be ignored (value: {path}).")
+            print(f"{tag} The path '{abs_path}' will be ignored (value: {path}).")
 
 
 def do_update_image_index(sd_webui_config: str, relative_to_config=False):
     dirs = get_all_img_dirs(sd_webui_config, relative_to_config)
     if not len(dirs):
-        return #print(f"{tag} no valid image directories, skipped")
+        return print(f"{tag} no valid image directories, skipped")
     conn = DataBase.get_conn()
     update_image_data(dirs)
     if Image.count(conn=conn) == 0:
-        return #print(f"{tag} it appears that there is some issue")
-    #print("update image index completed. ✨")
+        return print(f"{tag} it appears that there is some issue")
+    print("update image index completed. ✨")
 
 
 class AppUtils:

@@ -202,7 +202,7 @@ def register_custom_op_onnx_export(
     if min_torch_version(min_version):
         return
     register_custom_op_symbolic(opname, symbolic_fn, opset_version)
-    #print(f"_register_custom_op_onnx_export({opname}, {opset_version}) succeeded.")
+    print(f"_register_custom_op_onnx_export({opname}, {opset_version}) succeeded.")
 
 
 def unregister_custom_op_onnx_export(opname: str, opset_version: int, min_version: str) -> None:
@@ -266,7 +266,7 @@ def unregister_custom_op_onnx_export(opname: str, opset_version: int, min_versio
     if min_torch_version(min_version):
         return
     _unregister_custom_op_symbolic(opname, opset_version)
-    #print(f"_unregister_custom_op_onnx_export({opname}, {opset_version}) succeeded.")
+    print(f"_unregister_custom_op_onnx_export({opname}, {opset_version}) succeeded.")
 
 
 skipIfOnCPUCI = unittest.skipIf(

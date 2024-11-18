@@ -24,7 +24,7 @@ def generate_colors(nlabels, type='bright', first_color_black=False, last_color_
         return
 
     if verbose:
-        #print('Number of labels: ' + str(nlabels))
+        print('Number of labels: ' + str(nlabels))
 
     # Generate color map for bright colors, based on hsv
     if type == 'bright':

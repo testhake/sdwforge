@@ -145,7 +145,7 @@ def patch_freeu_v2(unet_patcher, b1, b2, s1, s2):
                 try:
                     hsp = Fourier_filter(hsp, threshold=1, scale=scale[1])
                 except:
-                    #print("Device", hsp.device, "does not support the torch.fft.")
+                    print("Device", hsp.device, "does not support the torch.fft.")
                     on_cpu_devices[hsp.device] = True
                     hsp = Fourier_filter(hsp.cpu(), threshold=1, scale=scale[1]).to(hsp.device)
             else:

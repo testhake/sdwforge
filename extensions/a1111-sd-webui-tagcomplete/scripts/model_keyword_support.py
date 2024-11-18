@@ -79,7 +79,7 @@ def write_model_keyword_path():
             f.write(f"{base_keywords[0].parent.as_posix()},{custom_found}")
         return True
     else:
-        #print(
+        print(
             "Tag Autocomplete: Could not locate model-keyword extension, Lora trigger word completion will be limited to those added through the extra networks menu."
         )
         return False

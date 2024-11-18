@@ -61,7 +61,7 @@ def extract_image_data_embed(image):
     outarr = crop_black(np.array(image.convert('RGB').getdata()).reshape(image.size[1], image.size[0], d).astype(np.uint8)) & 0x0F
     black_cols = np.where(np.sum(outarr, axis=(0, 2)) == 0)
     if black_cols[0].shape[0] < 2:
-        #print(f'{os.path.basename(getattr(image, "filename", "unknown image file"))}: no embedded information found.')
+        print(f'{os.path.basename(getattr(image, "filename", "unknown image file"))}: no embedded information found.')
         return None
 
     data_block_lower = outarr[:, :black_cols[0].min(), :].astype(np.uint8)
@@ -182,7 +182,7 @@ class EmbeddingDatabase:
             else:
                 self.skipped_embeddings[name] = embedding
         else:
-            #print(f"Unable to load Textual inversion embedding due to data issue: '{name}'.")
+            print(f"Unable to load Textual inversion embedding due to data issue: '{name}'.")
 
     def load_from_dir(self, embdir):
         if not os.path.isdir(embdir.path):
@@ -198,7 +198,7 @@ class EmbeddingDatabase:
 
                     self.load_from_file(fullfn, fn)
                 except Exception:
-                    #print(f"Error loading embedding {fn}")
+                    print(f"Error loading embedding {fn}")
                     continue
 
     def load_textual_inversion_embeddings(self):

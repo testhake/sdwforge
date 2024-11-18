@@ -90,14 +90,14 @@ def main():
         end = time.time()
 
         if i % args.print_freq == 0:
-            #print('Test: [{0}/{1}]\t'
+            print('Test: [{0}/{1}]\t'
                   'Time {batch_time.val:.3f} ({batch_time.avg:.3f}, {rate_avg:.3f}/s, {ms_avg:.3f} ms/sample) \t'
                   'Prec@1 {top1.val:.3f} ({top1.avg:.3f})\t'
                   'Prec@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
                 i, len(loader), batch_time=batch_time, rate_avg=input.size(0) / batch_time.avg,
                 ms_avg=100 * batch_time.avg / input.size(0), top1=top1, top5=top5))
 
-    #print(' * Prec@1 {top1.avg:.3f} ({top1a:.3f}) Prec@5 {top5.avg:.3f} ({top5a:.3f})'.format(
+    print(' * Prec@1 {top1.avg:.3f} ({top1a:.3f}) Prec@5 {top5.avg:.3f} ({top5a:.3f})'.format(
         top1=top1, top1a=100-top1.avg, top5=top5, top5a=100.-top5.avg))
 
 

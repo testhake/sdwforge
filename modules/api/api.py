@@ -152,7 +152,7 @@ def api_middleware(app: FastAPI):
         res.headers["X-Process-Time"] = duration
         endpoint = req.scope.get('path', 'err')
         if shared.cmd_opts.api_log and endpoint.startswith('/sdapi'):
-            #print('API {t} {code} {prot}/{ver} {method} {endpoint} {cli} {duration}'.format(
+            print('API {t} {code} {prot}/{ver} {method} {endpoint} {cli} {duration}'.format(
                 t=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"),
                 code=res.status_code,
                 ver=req.scope.get('http_version', '0.0'),
@@ -174,7 +174,7 @@ def api_middleware(app: FastAPI):
         if not isinstance(e, HTTPException):  # do not print backtrace on known httpexceptions
             message = f"API error: {request.method}: {request.url} {err}"
             if rich_available:
-                #print(message)
+                print(message)
                 console.print_exception(show_locals=True, max_frames=2, extra_lines=1, suppress=[anyio, starlette], word_wrap=False, width=min([console.width, 200]))
             else:
                 errors.report(message, exc_info=True)

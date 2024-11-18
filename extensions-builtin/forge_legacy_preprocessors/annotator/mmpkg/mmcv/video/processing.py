@@ -47,7 +47,7 @@ def convert_video(in_file,
     cmd = f'ffmpeg -y {pre_options} -i {in_file} {" ".join(options)} ' \
           f'{out_file}'
     if print_cmd:
-        #print(cmd)
+        print(cmd)
     subprocess.call(cmd, shell=True)
 
 

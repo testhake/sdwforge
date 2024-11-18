@@ -45,7 +45,7 @@ class UiCheckpointMerger:
                         from modules import shared, sd_models
                         sd_models.forge_model_reload()
                         p = shared.sd_model.save_unet(long_filename)
-                        #print(f'Saved UNet at: {p}')
+                        print(f'Saved UNet at: {p}')
                         return f'Saved UNet at: {p}'
 
                     def save_checkpoint(filename):
@@ -55,7 +55,7 @@ class UiCheckpointMerger:
                         from modules import shared
                         sd_models.forge_model_reload()
                         p = shared.sd_model.save_checkpoint(long_filename)
-                        #print(f'Saved checkpoint at: {p}')
+                        print(f'Saved checkpoint at: {p}')
                         return f'Saved checkpoint at: {p}'
 
                     btn_save_unet_forge.click(save_unet, inputs=textbox_file_name_forge, outputs=result_html)

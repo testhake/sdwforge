@@ -555,9 +555,9 @@ def save_graph_base(net, file_name, graph_name="net", op_only=True, blob_rename_
         elif format == ".svg":
             graph.write_svg(file_name)
         else:
-            #print("Incorrect format {}".format(format))
+            print("Incorrect format {}".format(format))
     except Exception as e:
-        #print("Error when writing graph to image {}".format(e))
+        print("Error when writing graph to image {}".format(e))
 
     return graph
 

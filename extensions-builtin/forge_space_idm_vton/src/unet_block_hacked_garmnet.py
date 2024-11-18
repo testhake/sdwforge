@@ -2314,12 +2314,12 @@ class CrossAttnUpBlock2D(nn.Module):
         garment_features = []
         for resnet, attn in zip(self.resnets, self.attentions):
             # pop res hidden states
-            # #print("h.shape")
-            # #print(h.shape)
-            # #print("hidden_states.shape)
-            # #print(hidden_states.shape)
-            # #print("attn_block")
-            # #print(attn)
+            # print("h.shape")
+            # print(h.shape)
+            # print("hidden_states.shape)
+            # print(hidden_states.shape)
+            # print("attn_block")
+            # print(attn)
 
             res_hidden_states = res_hidden_states_tuple[-1]
             res_hidden_states_tuple = res_hidden_states_tuple[:-1]
@@ -2337,8 +2337,8 @@ class CrossAttnUpBlock2D(nn.Module):
                 )
 
             hidden_states = torch.cat([hidden_states, res_hidden_states], dim=1)
-            # #print(hidden_states.shape)
-            # #print(encoder_hidden_states.shape)
+            # print(hidden_states.shape)
+            # print(encoder_hidden_states.shape)
             if self.training and self.gradient_checkpointing:
 
                 def create_custom_forward(module, return_dict=None):
@@ -2510,9 +2510,9 @@ class UpBlock2D(nn.Module):
     #         and getattr(self, "b2", None)
     #     )
 
-    #     # #print(len(self.resnets))
-    #     # #print(len(zero_block))
-    #     # #print(len(hint))
+    #     # print(len(self.resnets))
+    #     # print(len(zero_block))
+    #     # print(len(hint))
     #     # for resnet in self.resnets:
     #     for resnet, zero,h in zip(self.resnets,zero_block,hint):
 
@@ -2533,11 +2533,11 @@ class UpBlock2D(nn.Module):
     #                 b2=self.b2,
     #             )
 
-    #         # #print(hidden_states.shape)
-    #         # # #print(h.shape)
-    #         # #print(res_hidden_states.shape)
+    #         # print(hidden_states.shape)
+    #         # # print(h.shape)
+    #         # print(res_hidden_states.shape)
     #         hidden_states = torch.cat([hidden_states, res_hidden_states], dim=1)
-    #         # #print(hidden_states.shape)
+    #         # print(hidden_states.shape)
 
     #         if self.training and self.gradient_checkpointing:
 

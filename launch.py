@@ -31,7 +31,7 @@ def main():
     if args.dump_sysinfo:
         filename = launch_utils.dump_sysinfo()
 
-        #print(f"Sysinfo saved as {filename}. Exiting...")
+        print(f"Sysinfo saved as {filename}. Exiting...")
 
         exit(0)
 

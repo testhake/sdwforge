@@ -34,9 +34,9 @@ def init():
     old_download = False
 
 _print = print
-def #print(print_message):
-    _#print(f'\033[96mCivitAI Browser+\033[0m: {print_message}')
+def print(print_message):
+    _print(f'\033[96mCivitAI Browser+\033[0m: {print_message}')
     
-def debug_#print(print_message):
+def debug_print(print_message):
     if do_debug_print:
-        _#print(f'\033[96m[DEBUG] CivitAI Browser+\033[0m: {print_message}')
+        _print(f'\033[96m[DEBUG] CivitAI Browser+\033[0m: {print_message}')

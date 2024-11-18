@@ -48,7 +48,7 @@ def apply_control(h, control, name):
             try:
                 h += ctrl
             except:
-                #print("warning control could not be applied", h.shape, ctrl.shape)
+                print("warning control could not be applied", h.shape, ctrl.shape)
     return h
 
 

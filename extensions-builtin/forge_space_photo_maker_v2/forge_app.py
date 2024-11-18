@@ -122,7 +122,7 @@ def generate_image(
 
     # determine output dimensions by the aspect ratio
     output_w, output_h = aspect_ratios[aspect_ratio_name]
-    #print(f"[Debug] Generate image using aspect ratio [{aspect_ratio_name}] => {output_w} x {output_h}")
+    print(f"[Debug] Generate image using aspect ratio [{aspect_ratio_name}] => {output_w} x {output_h}")
 
     # apply the style template
     prompt, negative_prompt = apply_style(style_name, prompt, negative_prompt)
@@ -150,13 +150,13 @@ def generate_image(
 
     generator = torch.Generator(device=device).manual_seed(seed)
 
-    #print("Start inference...")
-    #print(f"[Debug] Seed: {seed}")
-    #print(f"[Debug] Prompt: {prompt}, \n[Debug] Neg Prompt: {negative_prompt}")
+    print("Start inference...")
+    print(f"[Debug] Seed: {seed}")
+    print(f"[Debug] Prompt: {prompt}, \n[Debug] Neg Prompt: {negative_prompt}")
     start_merge_step = int(float(style_strength_ratio) / 100 * num_steps)
     if start_merge_step > 30:
         start_merge_step = 30
-    #print(start_merge_step)
+    print(start_merge_step)
     images = pipe(
         prompt=prompt,
         width=output_w,

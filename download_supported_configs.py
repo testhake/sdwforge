@@ -19,6 +19,6 @@ for config_name, config in DIFFUSERS_DEFAULT_PIPELINE_PATHS.items():
         snapshot_download(pretrained_model_name_or_path, local_dir=local_dir, allow_patterns=['*.json', '*.txt'],
                           token=token, force_download=True)
         shutil.rmtree(os.path.join(local_dir, '.cache'))
-        #print(pretrained_model_name_or_path)
+        print(pretrained_model_name_or_path)
     except Exception as e:
-        #print(e)
+        print(e)

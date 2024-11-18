@@ -22,7 +22,7 @@ class MidasNet_small(BaseModel):
             features (int, optional): Number of features. Defaults to 256.
             backbone (str, optional): Backbone network for encoder. Defaults to resnet50
         """
-        #print("Loading weights: ", path)
+        print("Loading weights: ", path)
 
         super(MidasNet_small, self).__init__()
 
@@ -80,7 +80,7 @@ class MidasNet_small(BaseModel):
             tensor: depth
         """
         if self.channels_last==True:
-            #print("self.channels_last = ", self.channels_last)
+            print("self.channels_last = ", self.channels_last)
             x.contiguous(memory_format=torch.channels_last)
 
 
@@ -113,13 +113,13 @@ def fuse_model(m):
     previous_name = ''
     for name, module in m.named_modules():
         if prev_previous_type == nn.Conv2d and previous_type == nn.BatchNorm2d and type(module) == nn.ReLU:
-            # #print("FUSED ", prev_previous_name, previous_name, name)
+            # print("FUSED ", prev_previous_name, previous_name, name)
             torch.quantization.fuse_modules(m, [prev_previous_name, previous_name, name], inplace=True)
         elif prev_previous_type == nn.Conv2d and previous_type == nn.BatchNorm2d:
-            # #print("FUSED ", prev_previous_name, previous_name)
+            # print("FUSED ", prev_previous_name, previous_name)
             torch.quantization.fuse_modules(m, [prev_previous_name, previous_name], inplace=True)
         # elif previous_type == nn.Conv2d and type(module) == nn.ReLU:
-        #    #print("FUSED ", previous_name, name)
+        #    print("FUSED ", previous_name, name)
         #    torch.quantization.fuse_modules(m, [previous_name, name], inplace=True)
 
         prev_previous_type = previous_type

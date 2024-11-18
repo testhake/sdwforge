@@ -15,7 +15,7 @@ class TimerSubcategory:
         self.timer.subcategory_level += 1
 
         if self.timer.print_log:
-            #print(f"{'  ' * self.timer.subcategory_level}{self.category}:")
+            print(f"{'  ' * self.timer.subcategory_level}{self.category}:")
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         elapsed_for_subcategroy = time.time() - self.start
@@ -54,7 +54,7 @@ class Timer:
         self.total += e + extra_time
 
         if self.print_log and not disable_log:
-            #print(f"{'  ' * self.subcategory_level}{category}: done in {e + extra_time:.3f}s")
+            print(f"{'  ' * self.subcategory_level}{category}: done in {e + extra_time:.3f}s")
 
     def subcategory(self, name):
         self.elapsed()

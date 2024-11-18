@@ -422,7 +422,7 @@ class CSVLogger:
             self.write(*self.columns)
 
     def write(self, *args):
-        #print(*args, sep=',', file=self.file, flush=True)
+        print(*args, sep=',', file=self.file, flush=True)
 
 
 @contextmanager

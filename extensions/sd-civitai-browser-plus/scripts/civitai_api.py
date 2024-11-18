@@ -200,9 +200,9 @@ def model_list_html(json_data):
                                 if sha256:
                                     existing_files_sha256.add(sha256.upper())
                             else:
-                                #print(f"Invalid JSON data in {json_path}. Expected a dictionary.")
+                                print(f"Invalid JSON data in {json_path}. Expected a dictionary.")
                         except Exception as e:
-                            #print(f"Error decoding JSON in {json_path}: {e}")
+                            print(f"Error decoding JSON in {json_path}: {e}")
     
     for item in json_data['items']:
         model_id = item.get('id')
@@ -296,7 +296,7 @@ def create_api_url(content_type=None, sort_type=None, period_type=None, use_sear
     
     if isNext is not None:
         api_url = gl.json_data['metadata']['nextPage' if isNext else 'prevPage']
-        debug_#print(api_url)
+        debug_print(api_url)
         return api_url
     
     params = {'limit': tile_count, 'sort': sort_type, 'period': period_type.replace(" ", "") if period_type else None}
@@ -334,7 +334,7 @@ def create_api_url(content_type=None, sort_type=None, period_type=None, use_sear
     query_string = urllib.parse.urlencode(query_parts, doseq=True, quote_via=urllib.parse.quote)
     api_url = f"{base_url}?{query_string}"
     
-    debug_#print(api_url)
+    debug_print(api_url)
     return api_url
 
 def convert_LORA_LoCon(content_type):
@@ -524,7 +524,7 @@ def update_model_versions(model_id, json_input=None):
                                                 installed_versions.add(version_name)
                                                 break
                         except Exception as e:
-                            #print(f"failed to read: \"{file}\": {e}")
+                            print(f"failed to read: \"{file}\": {e}")
 
                     #filename_check
                     for version_name, version_filename, _ in version_files:
@@ -889,7 +889,7 @@ def update_model_info(model_string=None, model_version=None, only_html=False, in
                                 
                                 break
                         except Exception as e:
-                            #print(f"Error decoding JSON: {str(e)}")
+                            print(f"Error decoding JSON: {str(e)}")
             else:
                 #filename_check
                 for filename in files:
@@ -1046,7 +1046,7 @@ def update_file_info(model_string, model_version, file_metadata):
                                                             installed = True
                                                             break
                                                     except Exception as e:
-                                                        #print(f"Error decoding JSON: {str(e)}")
+                                                        print(f"Error decoding JSON: {str(e)}")
                                 default_sub = sub_folder_value(content_type, desc)
                                 if folder_location == "None":
                                     folder_location = model_folder
@@ -1134,18 +1134,18 @@ def request_civit_api(api_url=None, skip_error_check=False):
             return data
         response.raise_for_status()
     except requests.exceptions.Timeout as e:
-        #print("The request timed out. Please try again later.")
+        print("The request timed out. Please try again later.")
         return "timeout"
     except requests.exceptions.RequestException as e:
-        #print(f"Error: {e}")
+        print(f"Error: {e}")
         return "error"
     else:
         response.encoding = "utf-8"
         try:
             data = json.loads(response.text)
         except json.JSONDecodeError:
-            #print(response.text)
-            #print("The CivitAI servers are currently offline. Please try again later.")
+            print(response.text)
+            print("The CivitAI servers are currently offline. Please try again later.")
             return "offline"
     return data
 

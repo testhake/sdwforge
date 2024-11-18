@@ -32,14 +32,14 @@ def load_torch_file(ckpt, safe_load=False, device=None):
     else:
         if safe_load:
             if not 'weights_only' in torch.load.__code__.co_varnames:
-                #print("Warning torch.load doesn't support weights_only on this pytorch version, loading unsafely.")
+                print("Warning torch.load doesn't support weights_only on this pytorch version, loading unsafely.")
                 safe_load = False
         if safe_load:
             pl_sd = torch.load(ckpt, map_location=device, weights_only=True)
         else:
             pl_sd = torch.load(ckpt, map_location=device, pickle_module=backend.misc.checkpoint_pickle)
         if "global_step" in pl_sd:
-            #print(f"Global Step: {pl_sd['global_step']}")
+            print(f"Global Step: {pl_sd['global_step']}")
         if "state_dict" in pl_sd:
             sd = pl_sd["state_dict"]
         else:
@@ -171,5 +171,5 @@ def beautiful_print_gguf_state_dict_statics(state_dict):
                 type_counts[type_name] += 1
             else:
                 type_counts[type_name] = 1
-    #print(f'GGUF state dict: {type_counts}')
+    print(f'GGUF state dict: {type_counts}')
     return

@@ -12,9 +12,9 @@ def load_state_dict(model, sd, ignore_errors=[], log_name=None, ignore_start=Non
 
     log_name = log_name or type(model).__name__
     if len(missing) > 0:
-        #print(f'{log_name} Missing: {missing}')
+        print(f'{log_name} Missing: {missing}')
     if len(unexpected) > 0:
-        #print(f'{log_name} Unexpected: {unexpected}')
+        print(f'{log_name} Unexpected: {unexpected}')
     return
 
 

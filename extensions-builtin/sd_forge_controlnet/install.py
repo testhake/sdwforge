@@ -57,8 +57,8 @@ def install_requirements(req_file):
                         f"sd-forge-controlnet requirement: {package}",
                     )
             except Exception as e:
-                #print(e)
-                #print(
+                print(e)
+                print(
                     f"Warning: Failed to install {package}, some preprocessors may not work."
                 )
 

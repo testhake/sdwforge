@@ -83,13 +83,13 @@ class Resize(object):
                 "minimal": Scale as least as possible.  (Output size might be smaller than given size.)
                 Defaults to "lower_bound".
         """
-        #print("Params passed to Resize transform:")
-        #print("\twidth: ", width)
-        #print("\theight: ", height)
-        #print("\tresize_target: ", resize_target)
-        #print("\tkeep_aspect_ratio: ", keep_aspect_ratio)
-        #print("\tensure_multiple_of: ", ensure_multiple_of)
-        #print("\tresize_method: ", resize_method)
+        print("Params passed to Resize transform:")
+        print("\twidth: ", width)
+        print("\theight: ", height)
+        print("\tresize_target: ", resize_target)
+        print("\tkeep_aspect_ratio: ", keep_aspect_ratio)
+        print("\tensure_multiple_of: ", ensure_multiple_of)
+        print("\tresize_method: ", resize_method)
 
         self.__width = width
         self.__height = height
@@ -261,13 +261,13 @@ class MidasCore(nn.Module):
             if denorm:
                 x = denormalize(x)
             x = self.prep(x)
-            # #print("Shape after prep: ", x.shape)
+            # print("Shape after prep: ", x.shape)
 
         with torch.set_grad_enabled(self.trainable):
 
-            # #print("Input size to Midascore", x.shape)
+            # print("Input size to Midascore", x.shape)
             rel_depth = self.core(x)
-            # #print("Output from midas shape", rel_depth.shape)
+            # print("Output from midas shape", rel_depth.shape)
             if not self.fetch_features:
                 return rel_depth
         out = [self.core_out[k] for k in self.layer_names]
@@ -338,7 +338,7 @@ class MidasCore(nn.Module):
         if "img_size" in kwargs:
             kwargs = MidasCore.parse_img_size(kwargs)
         img_size = kwargs.pop("img_size", [384, 384])
-        #print("img_size", img_size)
+        print("img_size", img_size)
         midas_path = os.path.join(os.path.dirname(__file__), 'midas_repo')
         midas = torch.hub.load(midas_path, midas_model_type,
                                pretrained=use_pretrained_midas, force_reload=force_reload, source='local')

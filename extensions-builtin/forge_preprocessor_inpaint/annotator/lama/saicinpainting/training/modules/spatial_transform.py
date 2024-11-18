@@ -46,4 +46,4 @@ if __name__ == '__main__':
     y = layer(x)
     assert x.shape == y.shape
     assert torch.allclose(x[:, :, 1:, 1:][:, :, :-1, :-1], y[:, :, 1:, 1:][:, :, :-1, :-1])
-    #print('all ok')
+    print('all ok')

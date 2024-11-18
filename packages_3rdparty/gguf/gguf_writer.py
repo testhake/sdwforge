@@ -186,7 +186,7 @@ class GGUFWriter:
         if self.dry_run:
             logger.info("Dry run, not writing files")
             for name in filenames:
-                #print(name)  # noqa: NP100
+                print(name)  # noqa: NP100
             exit()
 
         return filenames

@@ -27,7 +27,7 @@ def category_types():
 
 
 def download_default_clip_interrogate_categories(content_dir):
-    #print("Downloading CLIP categories...")
+    print("Downloading CLIP categories...")
 
     tmpdir = f"{content_dir}_tmp"
     category_types = ["artists", "flavors", "mediums", "movements"]

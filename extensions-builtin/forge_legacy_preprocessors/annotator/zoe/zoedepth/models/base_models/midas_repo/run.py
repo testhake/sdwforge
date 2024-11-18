@@ -35,7 +35,7 @@ def process(device, model, model_type, image, input_size, target_size, optimize,
 
     if "openvino" in model_type:
         if first_execution or not use_camera:
-            #print(f"    Input resized to {input_size[0]}x{input_size[1]} before entering the encoder")
+            print(f"    Input resized to {input_size[0]}x{input_size[1]} before entering the encoder")
             first_execution = False
 
         sample = [np.reshape(image, (1, 3, *input_size))]
@@ -47,7 +47,7 @@ def process(device, model, model_type, image, input_size, target_size, optimize,
 
         if optimize and device == torch.device("cuda"):
             if first_execution:
-                #print("  Optimization to half-floats activated. Use with caution, because models like Swin require\n"
+                print("  Optimization to half-floats activated. Use with caution, because models like Swin require\n"
                       "  float precision to work properly and may yield non-finite depth values to some extent for\n"
                       "  half-floats.")
             sample = sample.to(memory_format=torch.channels_last)
@@ -55,7 +55,7 @@ def process(device, model, model_type, image, input_size, target_size, optimize,
 
         if first_execution or not use_camera:
             height, width = sample.shape[2:]
-            #print(f"    Input resized to {width}x{height} before entering the encoder")
+            print(f"    Input resized to {width}x{height} before entering the encoder")
             first_execution = False
 
         prediction = model.forward(sample)
@@ -117,11 +117,11 @@ def run(input_path, output_path, model_path, model_type="dpt_beit_large_512", op
         square (bool): resize to a square resolution?
         grayscale (bool): use a grayscale colormap?
     """
-    #print("Initialize")
+    print("Initialize")
 
     # select device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    #print("Device: %s" % device)
+    print("Device: %s" % device)
 
     model, transform, net_w, net_h = load_model(device, model_path, model_type, optimize, height, square)
 
@@ -130,20 +130,20 @@ def run(input_path, output_path, model_path, model_type="dpt_beit_large_512", op
         image_names = glob.glob(os.path.join(input_path, "*"))
         num_images = len(image_names)
     else:
-        #print("No input path specified. Grabbing images from camera.")
+        print("No input path specified. Grabbing images from camera.")
 
     # create output folder
     if output_path is not None:
         os.makedirs(output_path, exist_ok=True)
 
-    #print("Start processing")
+    print("Start processing")
 
     if input_path is not None:
         if output_path is None:
-            #print("Warning: No output path specified. Images will be processed but not shown or stored anywhere.")
+            print("Warning: No output path specified. Images will be processed but not shown or stored anywhere.")
         for index, image_name in enumerate(image_names):
 
-            #print("  Processing {} ({}/{})".format(image_name, index + 1, num_images))
+            print("  Processing {} ({}/{})".format(image_name, index + 1, num_images))
 
             # input
             original_image_rgb = utils.read_image(image_name)  # in [0, 1]
@@ -194,15 +194,15 @@ def run(input_path, output_path, model_path, model_type="dpt_beit_large_512", op
                     if time.time()-time_start > 0:
                         fps = (1 - alpha) * fps + alpha * 1 / (time.time()-time_start)  # exponential moving average
                         time_start = time.time()
-                    #print(f"\rFPS: {round(fps,2)}", end="")
+                    print(f"\rFPS: {round(fps,2)}", end="")
 
                     if cv2.waitKey(1) == 27:  # Escape key
                         break
 
                     frame_index += 1
-        #print()
+        print()
 
-    #print("Finished")
+    print("Finished")
 
 
 if __name__ == "__main__":

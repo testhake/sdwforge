@@ -17,7 +17,7 @@ def monitor_module_moving():
 
     def new_to(*args, **kwargs):
         traceback.print_stack()
-        #print('Model Movement')
+        print('Model Movement')
 
         return old_to(*args, **kwargs)
 
@@ -39,17 +39,17 @@ def initialize_forge():
 
     for bad in bad_list:
         if bad in sys.argv:
-            #print(f'Arg {bad} is removed in Forge.')
-            #print(f'Now memory management is fully automatic and you do not need any command flags.')
-            #print(f'Please just remove this flag.')
-            #print(f'In extreme cases, if you want to force previous lowvram/medvram behaviors, '
+            print(f'Arg {bad} is removed in Forge.')
+            print(f'Now memory management is fully automatic and you do not need any command flags.')
+            print(f'Please just remove this flag.')
+            print(f'In extreme cases, if you want to force previous lowvram/medvram behaviors, '
                   f'please use --always-offload-from-vram')
 
     from backend.args import args
 
     if args.gpu_device_id is not None:
         os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu_device_id)
-        #print("Set device to:", args.gpu_device_id)
+        print("Set device to:", args.gpu_device_id)
 
     if args.cuda_malloc:
         from modules_forge.cuda_malloc import try_cuda_malloc
@@ -69,7 +69,7 @@ def initialize_forge():
         try_install_bnb()
 
     from backend import stream
-    #print('CUDA Using Stream:', stream.should_use_stream())
+    print('CUDA Using Stream:', stream.should_use_stream())
 
     from modules_forge.shared import diffusers_dir
 

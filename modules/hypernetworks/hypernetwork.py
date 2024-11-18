@@ -260,15 +260,15 @@ class Hypernetwork:
 
         if shared.opts.print_hypernet_extra:
             if self.optional_info is not None:
-                #print(f"  INFO:\n {self.optional_info}\n")
+                print(f"  INFO:\n {self.optional_info}\n")
 
-            #print(f"  Layer structure: {self.layer_structure}")
-            #print(f"  Activation function: {self.activation_func}")
-            #print(f"  Weight initialization: {self.weight_init}")
-            #print(f"  Layer norm: {self.add_layer_norm}")
-            #print(f"  Dropout usage: {self.use_dropout}" )
-            #print(f"  Activate last layer: {self.activate_output}")
-            #print(f"  Dropout structure: {self.dropout_structure}")
+            print(f"  Layer structure: {self.layer_structure}")
+            print(f"  Activation function: {self.activation_func}")
+            print(f"  Weight initialization: {self.weight_init}")
+            print(f"  Layer norm: {self.add_layer_norm}")
+            print(f"  Dropout usage: {self.use_dropout}" )
+            print(f"  Activate last layer: {self.activate_output}")
+            print(f"  Dropout structure: {self.dropout_structure}")
 
         optimizer_saved_dict = torch.load(self.filename + '.optim', map_location='cpu') if os.path.exists(self.filename + '.optim') else {}
 
@@ -279,12 +279,12 @@ class Hypernetwork:
         if self.optimizer_state_dict:
             self.optimizer_name = optimizer_saved_dict.get('optimizer_name', 'AdamW')
             if shared.opts.print_hypernet_extra:
-                #print("Loaded existing optimizer from checkpoint")
-                #print(f"Optimizer name is {self.optimizer_name}")
+                print("Loaded existing optimizer from checkpoint")
+                print(f"Optimizer name is {self.optimizer_name}")
         else:
             self.optimizer_name = "AdamW"
             if shared.opts.print_hypernet_extra:
-                #print("No saved optimizer exists in checkpoint")
+                print("No saved optimizer exists in checkpoint")
 
         for size, sd in state_dict.items():
             if type(size) == int:
@@ -552,7 +552,7 @@ def statistics(data):
 #         optimizer = optimizer_dict[hypernetwork.optimizer_name](params=weights, lr=scheduler.learn_rate)
 #         optimizer_name = hypernetwork.optimizer_name
 #     else:
-#         #print(f"Optimizer type {hypernetwork.optimizer_name} is not defined!")
+#         print(f"Optimizer type {hypernetwork.optimizer_name} is not defined!")
 #         optimizer = torch.optim.AdamW(params=weights, lr=scheduler.learn_rate)
 #         optimizer_name = 'AdamW'
 #
@@ -560,8 +560,8 @@ def statistics(data):
 #         try:
 #             optimizer.load_state_dict(hypernetwork.optimizer_state_dict)
 #         except RuntimeError as e:
-#             #print("Cannot resume from saved optimizer!")
-#             #print(e)
+#             print("Cannot resume from saved optimizer!")
+#             print(e)
 #
 #     scaler = torch.cuda.amp.GradScaler()
 #
@@ -578,7 +578,7 @@ def statistics(data):
 #     # losses = torch.zeros((size,))
 #     # previous_mean_losses = [0]
 #     # previous_mean_loss = 0
-#     # #print("Mean loss of {} elements".format(size))
+#     # print("Mean loss of {} elements".format(size))
 #
 #     steps_without_grad = 0
 #

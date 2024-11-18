@@ -198,20 +198,20 @@ def refresh_memory_management_settings(async_loading=None, inference_memory=None
         pin_shared_memory=memory_management.PIN_SHARED_MEMORY
     )
 
-    #print(f'Environment vars changed: {log_dict}')
+    print(f'Environment vars changed: {log_dict}')
 
     if inference_memory < min(512, total_vram * 0.05):
-        #print('------------------')
-        #print(f'[Low VRAM Warning] You just set Forge to use 100% GPU memory ({model_memory:.2f} MB) to load model weights.')
-        #print('[Low VRAM Warning] This means you will have 0% GPU memory (0.00 MB) to do matrix computation. Computations may fallback to CPU or go Out of Memory.')
-        #print('[Low VRAM Warning] In many cases, image generation will be 10x slower.')
-        #print("[Low VRAM Warning] To solve the problem, you can set the 'GPU Weights' (on the top of page) to a lower value.")
-        #print("[Low VRAM Warning] If you cannot find 'GPU Weights', you can click the 'all' option in the 'UI' area on the left-top corner of the webpage.")
-        #print('[Low VRAM Warning] Make sure that you know what you are testing.')
-        #print('------------------')
+        print('------------------')
+        print(f'[Low VRAM Warning] You just set Forge to use 100% GPU memory ({model_memory:.2f} MB) to load model weights.')
+        print('[Low VRAM Warning] This means you will have 0% GPU memory (0.00 MB) to do matrix computation. Computations may fallback to CPU or go Out of Memory.')
+        print('[Low VRAM Warning] In many cases, image generation will be 10x slower.')
+        print("[Low VRAM Warning] To solve the problem, you can set the 'GPU Weights' (on the top of page) to a lower value.")
+        print("[Low VRAM Warning] If you cannot find 'GPU Weights', you can click the 'all' option in the 'UI' area on the left-top corner of the webpage.")
+        print('[Low VRAM Warning] Make sure that you know what you are testing.')
+        print('------------------')
     else:
         compute_percentage = (inference_memory / total_vram) * 100.0
-        #print(f'[GPU Setting] You will use {(100 - compute_percentage):.2f}% GPU memory ({model_memory:.2f} MB) to load weights, and use {compute_percentage:.2f}% GPU memory ({inference_memory:.2f} MB) to do matrix computation.')
+        print(f'[GPU Setting] You will use {(100 - compute_percentage):.2f}% GPU memory ({model_memory:.2f} MB) to load weights, and use {compute_percentage:.2f}% GPU memory ({inference_memory:.2f} MB) to do matrix computation.')
 
     processing.need_global_unload = True
     return
@@ -232,8 +232,8 @@ def refresh_model_loading_parameters():
         unet_storage_dtype=unet_storage_dtype
     )
 
-    #print(f'Model selected: {model_data.forge_loading_parameters}')
-    #print(f'Using online LoRAs in FP16: {lora_fp16}')
+    print(f'Model selected: {model_data.forge_loading_parameters}')
+    print(f'Using online LoRAs in FP16: {lora_fp16}')
     processing.need_global_unload = True
 
     return

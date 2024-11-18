@@ -81,4 +81,4 @@ if __name__ == "__main__":
     update_paths(conn, "folders", old_base)
     shutil.copy(db_temp_path, "iib.db")
     # os.remove(db_temp_path)
-    #print("Database migration completed successfully.")
+    print("Database migration completed successfully.")

@@ -197,7 +197,7 @@ def generatepatchs(img, base_size):
 
     # Refine initial Grid of patches by discarding the flat (in terms of gradients of the rgb image) ones. Refine
     # each patch size to ensure that there will be enough depth cues for the network to generate a consistent depth map.
-    #print("Selecting patches ...")
+    print("Selecting patches ...")
     patch_bound_list = adaptiveselection(grad_integral_image, patch_bound_list, gf)
 
     # Sort the patch list to make sure the merging operation will be done with the correct order: starting from biggest
@@ -337,7 +337,7 @@ class ImageandPatchs:
                 comment = '\t[default: %s]' % str(default)
             message += '{:>25}: {:<30}{}\n'.format(str(k), str(v), comment)
         message += '----------------- End -------------------'
-        #print(message)
+        print(message)
 
         # save to the disk
         """
@@ -412,7 +412,7 @@ def estimateboost(img, model, model_type, pix2pixmodel, max_res=512):
     # supplementary material.
     whole_image_optimal_size, patch_scale = calculateprocessingres(img, net_receptive_field_size, r_threshold_value, scale_threshold, whole_size_threshold)
 
-    # #print('wholeImage being processed in :', whole_image_optimal_size)
+    # print('wholeImage being processed in :', whole_image_optimal_size)
 
     # Generate the base estimate using the double estimation.
     whole_estimate = doubleestimate(img, net_receptive_field_size, whole_image_optimal_size, pix2pixsize, model, model_type, pix2pixmodel)
@@ -421,11 +421,11 @@ def estimateboost(img, model, model_type, pix2pixmodel, max_res=512):
     # small high-density regions of the image.
     global factor
     factor = max(min(1, 4 * patch_scale * whole_image_optimal_size / whole_size_threshold), 0.2)
-    # #print('Adjust factor is:', 1/factor)
+    # print('Adjust factor is:', 1/factor)
         
     # Check if Local boosting is beneficial.
     if max_res < whole_image_optimal_size:
-        # #print("No Local boosting. Specified Max Res is smaller than R20, Returning doubleestimate result")
+        # print("No Local boosting. Specified Max Res is smaller than R20, Returning doubleestimate result")
         return cv2.resize(whole_estimate, (input_resolution[1], input_resolution[0]), interpolation=cv2.INTER_CUBIC)
 
     # Compute the default target resolution.
@@ -441,7 +441,7 @@ def estimateboost(img, model, model_type, pix2pixmodel, max_res=512):
     """
     # recompute a, b and saturate to max res.
     if max(a,b) > max_res:
-        #print('Default Res is higher than max-res: Reducing final resolution')
+        print('Default Res is higher than max-res: Reducing final resolution')
         if img.shape[0] > img.shape[1]:
             a = max_res
             b = round(max_res * img.shape[1] / img.shape[0])
@@ -458,7 +458,7 @@ def estimateboost(img, model, model_type, pix2pixmodel, max_res=512):
     base_size = net_receptive_field_size * 2
     patchset = generatepatchs(img, base_size)
 
-    # #print('Target resolution: ', img.shape)
+    # print('Target resolution: ', img.shape)
 
     # Computing a scale in case user prompted to generate the results as the same resolution of the input.
     # Notice that our method output resolution is independent of the input resolution and this parameter will only
@@ -467,7 +467,7 @@ def estimateboost(img, model, model_type, pix2pixmodel, max_res=512):
     """
     if output_resolution == 1:
         mergein_scale = input_resolution[0] / img.shape[0]
-        #print('Dynamicly change merged-in resolution; scale:', mergein_scale)
+        print('Dynamicly change merged-in resolution; scale:', mergein_scale)
     else:
         mergein_scale = 1
     """
@@ -480,8 +480,8 @@ def estimateboost(img, model, model_type, pix2pixmodel, max_res=512):
     imageandpatchs.set_base_estimate(whole_estimate_resized.copy())
     imageandpatchs.set_updated_estimate(whole_estimate_resized.copy())
 
-    #print('Resulting depthmap resolution will be :', whole_estimate_resized.shape[:2])
-    #print('Patches to process: '+str(len(imageandpatchs)))
+    print('Resulting depthmap resolution will be :', whole_estimate_resized.shape[:2])
+    print('Patches to process: '+str(len(imageandpatchs)))
 
     # Enumerate through all patches, generate their estimations and refining the base estimate.
     for patch_ind in range(len(imageandpatchs)):
@@ -493,7 +493,7 @@ def estimateboost(img, model, model_type, pix2pixmodel, max_res=512):
         rect = patch['rect'] # patch size and location
         patch_id = patch['id'] # patch ID
         org_size = patch_whole_estimate_base.shape # the original size from the unscaled input
-        #print('\t Processing patch', patch_ind, '/', len(imageandpatchs)-1, '|', rect)
+        print('\t Processing patch', patch_ind, '/', len(imageandpatchs)-1, '|', rect)
 
         # We apply double estimation for patches. The high resolution value is fixed to twice the receptive
         # field size of the network for patches to accelerate the process.

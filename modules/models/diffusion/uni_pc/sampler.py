@@ -58,21 +58,21 @@ class UniPCSampler(object):
                     ctmp = ctmp[0]
                 cbs = ctmp.shape[0]
                 if cbs != batch_size:
-                    #print(f"Warning: Got {cbs} conditionings but batch-size is {batch_size}")
+                    print(f"Warning: Got {cbs} conditionings but batch-size is {batch_size}")
 
             elif isinstance(conditioning, list):
                 for ctmp in conditioning:
                     if ctmp.shape[0] != batch_size:
-                        #print(f"Warning: Got {cbs} conditionings but batch-size is {batch_size}")
+                        print(f"Warning: Got {cbs} conditionings but batch-size is {batch_size}")
 
             else:
                 if conditioning.shape[0] != batch_size:
-                    #print(f"Warning: Got {conditioning.shape[0]} conditionings but batch-size is {batch_size}")
+                    print(f"Warning: Got {conditioning.shape[0]} conditionings but batch-size is {batch_size}")
 
         # sampling
         C, H, W = shape
         size = (batch_size, C, H, W)
-        # #print(f'Data shape for UniPC sampling is {size}')
+        # print(f'Data shape for UniPC sampling is {size}')
 
         device = self.model.betas.device
         if x_T is None:

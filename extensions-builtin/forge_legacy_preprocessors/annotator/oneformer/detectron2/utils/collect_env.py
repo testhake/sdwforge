@@ -210,9 +210,9 @@ def test_nccl_ops():
         import torch.multiprocessing as mp
 
         dist_url = "file:///tmp/nccl_tmp_file"
-        #print("Testing NCCL connectivity ... this should not hang.")
+        print("Testing NCCL connectivity ... this should not hang.")
         mp.spawn(_test_nccl_worker, nprocs=num_gpu, args=(num_gpu, dist_url), daemon=False)
-        #print("NCCL succeeded.")
+        print("NCCL succeeded.")
 
 
 def _test_nccl_worker(rank, num_gpu, dist_url):
@@ -226,9 +226,9 @@ if __name__ == "__main__":
     try:
         from annotator.oneformer.detectron2.utils.collect_env import collect_env_info as f
 
-        #print(f())
+        print(f())
     except ImportError:
-        #print(collect_env_info())
+        print(collect_env_info())
 
     if torch.cuda.is_available():
         num_gpu = torch.cuda.device_count()
@@ -238,7 +238,7 @@ if __name__ == "__main__":
                 x = torch.tensor([1, 2.0], dtype=torch.float32)
                 x = x.to(device)
             except Exception as e:
-                #print(
+                print(
                     f"Unable to copy tensor to device={device}: {e}. "
                     "Your CUDA environment is broken."
                 )

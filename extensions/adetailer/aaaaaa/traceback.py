@@ -163,7 +163,7 @@ def rich_traceback(func: Callable[P, T]) -> Callable[P, T]:
             ]
             tables.append(Traceback(extra_lines=1))
 
-            console.#print(Panel(Group(*tables)))
+            console.print(Panel(Group(*tables)))
             output = "\n" + string.getvalue()
 
             try:

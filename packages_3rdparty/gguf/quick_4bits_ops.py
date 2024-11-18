@@ -25,7 +25,7 @@ if not hasattr(torch, 'uint16'):
     disable_all_optimizations = True
 
 if disable_all_optimizations:
-    #print('You are using PyTorch below version 2.3. Some optimizations will be disabled.')
+    print('You are using PyTorch below version 2.3. Some optimizations will be disabled.')
 
 if not disable_all_optimizations:
     native_4bits_lookup_table = native_unpack_4x4bits_in_1x16bits_to_4x8bits_in_1x32bits(torch.arange(start=0, end=256*256, dtype=torch.long).to(torch.uint16))[:, 0]

@@ -12,7 +12,7 @@ def generate_image_cache(dirs, size:str, verbose=False):
 
   def process_image(item):
     if item.is_dir():
-      verbose and #print(f"Processing directory: {item.path}")
+      verbose and print(f"Processing directory: {item.path}")
       for sub_item in os.scandir(item.path):
         process_image(sub_item)
       return
@@ -28,11 +28,11 @@ def generate_image_cache(dirs, size:str, verbose=False):
       cache_path = os.path.join(cache_dir, f"{size}.webp")
 
       if os.path.exists(cache_path):
-          verbose and #print(f"Image cache already exists: {path}")
+          verbose and print(f"Image cache already exists: {path}")
           return
 
       if os.path.getsize(path) < 64 * 1024:
-          verbose and #print(f"Image size less than 64KB: {path}", "skip")
+          verbose and print(f"Image size less than 64KB: {path}", "skip")
           return
         
       with Image.open(path) as img:
@@ -41,10 +41,10 @@ def generate_image_cache(dirs, size:str, verbose=False):
           os.makedirs(cache_dir, exist_ok=True)
           img.save(cache_path, "webp")
 
-      verbose and #print(f"Image cache generated: {path}")
+      verbose and print(f"Image cache generated: {path}")
     except Exception as e:
-      #print(f"Error generating image cache: {path}")
-      #print(e)
+      print(f"Error generating image cache: {path}")
+      print(e)
 
   with ThreadPoolExecutor() as executor:
     for dir_path in dirs:
@@ -52,7 +52,7 @@ def generate_image_cache(dirs, size:str, verbose=False):
       for item in folder_listing:
         executor.submit(process_image, item)
 
-  #print("Image cache generation completed. ✨")
+  print("Image cache generation completed. ✨")
   end_time = time.time()
   execution_time = end_time - start_time
-  #print(f"Execution time: {execution_time} seconds")
+  print(f"Execution time: {execution_time} seconds")

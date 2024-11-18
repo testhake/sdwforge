@@ -73,8 +73,8 @@ def main():
     optimized_model = optimizer.optimize(onnx_model, passes)
 
     num_optimized_nodes, optimzied_graph_str = traverse_graph(optimized_model.graph)
-    #print('==> The model after optimization:\n{}\n'.format(optimzied_graph_str))
-    #print('==> The optimized model has {} nodes, the original had {}.'.format(num_optimized_nodes, num_original_nodes))
+    print('==> The model after optimization:\n{}\n'.format(optimzied_graph_str))
+    print('==> The optimized model has {} nodes, the original had {}.'.format(num_optimized_nodes, num_original_nodes))
 
     # Save the ONNX model
     onnx.save(optimized_model, args.output)

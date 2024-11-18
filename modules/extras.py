@@ -56,9 +56,9 @@ def create_config(ckpt_result, config_source, a, b, c):
     filename, _ = os.path.splitext(ckpt_result)
     checkpoint_filename = filename + ".yaml"
 
-    #print("Copying config:")
-    #print("   from:", cfg)
-    #print("     to:", checkpoint_filename)
+    print("Copying config:")
+    print("   from:", cfg)
+    print("     to:", checkpoint_filename)
     shutil.copyfile(cfg, checkpoint_filename)
 
 
@@ -149,14 +149,14 @@ def run_modelmerger(id_task, primary_model_name, secondary_model_name, tertiary_
 
     if theta_func2:
         shared.state.textinfo = "Loading B"
-        #print(f"Loading {secondary_model_info.filename}...")
+        print(f"Loading {secondary_model_info.filename}...")
         theta_1 = sd_models.load_torch_file(secondary_model_info.filename)
     else:
         theta_1 = None
 
     if theta_func1:
         shared.state.textinfo = "Loading C"
-        #print(f"Loading {tertiary_model_info.filename}...")
+        print(f"Loading {tertiary_model_info.filename}...")
         theta_2 = sd_models.load_torch_file(tertiary_model_info.filename)
 
         shared.state.textinfo = 'Merging B and C'
@@ -178,10 +178,10 @@ def run_modelmerger(id_task, primary_model_name, secondary_model_name, tertiary_
         shared.state.nextjob()
 
     shared.state.textinfo = f"Loading {primary_model_info.filename}..."
-    #print(f"Loading {primary_model_info.filename}...")
+    print(f"Loading {primary_model_info.filename}...")
     theta_0 = sd_models.load_torch_file(primary_model_info.filename)
 
-    #print("Merging...")
+    print("Merging...")
     shared.state.textinfo = 'Merging A and B'
     shared.state.sampling_steps = len(theta_0.keys())
     for key in tqdm.tqdm(theta_0.keys()):
@@ -220,7 +220,7 @@ def run_modelmerger(id_task, primary_model_name, secondary_model_name, tertiary_
 
     bake_in_vae_filename = sd_vae.vae_dict.get(bake_in_vae, None)
     if bake_in_vae_filename is not None:
-        #print(f"Baking in VAE from {bake_in_vae_filename}")
+        print(f"Baking in VAE from {bake_in_vae_filename}")
         shared.state.textinfo = 'Baking in VAE'
         vae_dict = sd_vae.load_torch_file(bake_in_vae_filename)
 
@@ -252,7 +252,7 @@ def run_modelmerger(id_task, primary_model_name, secondary_model_name, tertiary_
 
     shared.state.nextjob()
     shared.state.textinfo = "Saving"
-    #print(f"Saving to {output_modelname}...")
+    print(f"Saving to {output_modelname}...")
 
     metadata = {}
 
@@ -324,7 +324,7 @@ def run_modelmerger(id_task, primary_model_name, secondary_model_name, tertiary_
     # TODO inside create_config() sd_models_config.find_checkpoint_config_near_filename() is called which has been commented out
     #create_config(output_modelname, config_source, primary_model_info, secondary_model_info, tertiary_model_info)
 
-    #print(f"Checkpoint saved to {output_modelname}.")
+    print(f"Checkpoint saved to {output_modelname}.")
     shared.state.textinfo = "Checkpoint saved"
     shared.state.end()
 

@@ -93,7 +93,7 @@ def draw_polygons(image, prediction, fill_mask=False):
         for _polygon in polygons:
             _polygon = np.array(_polygon).reshape(-1, 2)
             if len(_polygon) < 3:
-                #print('Invalid polygon:', _polygon)
+                print('Invalid polygon:', _polygon)
                 continue
             _polygon = (_polygon * scale).reshape(-1).tolist()
             if fill_mask:

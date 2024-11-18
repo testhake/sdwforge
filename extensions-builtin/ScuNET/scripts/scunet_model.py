@@ -40,7 +40,7 @@ class UpscalerScuNET(modules.upscaler.Upscaler):
         try:
             model = self.load_model(selected_file)
         except Exception as e:
-            #print(f"ScuNET: Unable to load model from {selected_file}: {e}", file=sys.stderr)
+            print(f"ScuNET: Unable to load model from {selected_file}: {e}", file=sys.stderr)
             return img
 
         img = upscaler_utils.upscale_2(

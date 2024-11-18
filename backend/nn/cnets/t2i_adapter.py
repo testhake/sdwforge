@@ -71,7 +71,7 @@ class ResnetBlock(nn.Module):
         if in_c != out_c or sk == False:
             self.in_conv = nn.Conv2d(in_c, out_c, ksize, 1, ps)
         else:
-            # #print('n_in')
+            # print('n_in')
             self.in_conv = None
         self.block1 = nn.Conv2d(out_c, out_c, 3, 1, 1)
         self.act = nn.ReLU()

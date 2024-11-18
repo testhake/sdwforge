@@ -182,7 +182,7 @@ class EmbeddingDatabase:
             embedding = create_embedding_from_data(data, name, filename=filename, filepath=path)
             self.register_embedding(embedding, None)
         else:
-            #print(f"Unable to load Textual inversion embedding due to data issue: '{name}'.")
+            print(f"Unable to load Textual inversion embedding due to data issue: '{name}'.")
 
 
     def load_from_dir(self, embdir):
@@ -233,9 +233,9 @@ class EmbeddingDatabase:
         displayed_embeddings = (tuple(self.word_embeddings.keys()), tuple(self.skipped_embeddings.keys()))
         if shared.opts.textual_inversion_print_at_load and self.previously_displayed_embeddings != displayed_embeddings:
             self.previously_displayed_embeddings = displayed_embeddings
-            #print(f"Textual inversion embeddings loaded({len(self.word_embeddings)}): {', '.join(self.word_embeddings.keys())}")
+            print(f"Textual inversion embeddings loaded({len(self.word_embeddings)}): {', '.join(self.word_embeddings.keys())}")
             if self.skipped_embeddings:
-                #print(f"Textual inversion embeddings skipped({len(self.skipped_embeddings)}): {', '.join(self.skipped_embeddings.keys())}")
+                print(f"Textual inversion embeddings skipped({len(self.skipped_embeddings)}): {', '.join(self.skipped_embeddings.keys())}")
 
     def find_embedding_at_position(self, tokens, offset):
         token = tokens[offset]

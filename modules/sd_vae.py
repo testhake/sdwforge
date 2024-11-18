@@ -60,7 +60,7 @@ def delete_base_vae():
 def restore_base_vae(model):
     global loaded_vae_file
     if base_vae is not None and checkpoint_info == model.sd_checkpoint_info:
-        #print("Restoring base VAE")
+        print("Restoring base VAE")
         _load_vae_dict(model, base_vae)
         loaded_vae_file = None
     delete_base_vae()
@@ -139,7 +139,7 @@ def resolve_vae_from_setting() -> VaeResolution:
         return VaeResolution(vae_from_options, 'specified in settings')
 
     if not is_automatic():
-        #print(f"Couldn't find VAE named {shared.opts.sd_vae}; using None instead")
+        print(f"Couldn't find VAE named {shared.opts.sd_vae}; using None instead")
 
     return VaeResolution(resolved=False)
 

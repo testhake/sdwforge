@@ -282,8 +282,8 @@ class UniFormer(nn.Module):
         self.use_checkpoint = use_checkpoint
         self.checkpoint_num = checkpoint_num
         self.windows = windows
-        #print(f'Use Checkpoint: {self.use_checkpoint}')
-        #print(f'Checkpoint Number: {self.checkpoint_num}')
+        print(f'Use Checkpoint: {self.use_checkpoint}')
+        print(f'Checkpoint Number: {self.checkpoint_num}')
         self.num_features = self.embed_dim = embed_dim  # num_features for consistency with other models
         norm_layer = norm_layer or partial(nn.LayerNorm, eps=1e-6) 
         
@@ -312,14 +312,14 @@ class UniFormer(nn.Module):
             for i in range(layers[1])])
         self.norm2 = norm_layer(embed_dim[1])
         if self.windows:
-            #print('Use local window for all blocks in stage3')
+            print('Use local window for all blocks in stage3')
             self.blocks3 = nn.ModuleList([
             SABlock_Windows(
                 dim=embed_dim[2], num_heads=num_heads[2], window_size=window_size, mlp_ratio=mlp_ratio, qkv_bias=qkv_bias, qk_scale=qk_scale,
                 drop=drop_rate, attn_drop=attn_drop_rate, drop_path=dpr[i+layers[0]+layers[1]], norm_layer=norm_layer)
             for i in range(layers[2])])
         elif hybrid:
-            #print('Use hybrid window for blocks in stage3')
+            print('Use hybrid window for blocks in stage3')
             block3 = []
             for i in range(layers[2]):
                 if (i + 1) % 4 == 0:
@@ -332,7 +332,7 @@ class UniFormer(nn.Module):
                     drop=drop_rate, attn_drop=attn_drop_rate, drop_path=dpr[i+layers[0]+layers[1]], norm_layer=norm_layer))
             self.blocks3 = nn.ModuleList(block3)
         else:
-            #print('Use global window for all blocks in stage3')
+            print('Use global window for all blocks in stage3')
             self.blocks3 = nn.ModuleList([
             SABlock(
                 dim=embed_dim[2], num_heads=num_heads[2], mlp_ratio=mlp_ratio, qkv_bias=qkv_bias, qk_scale=qk_scale,
@@ -363,7 +363,7 @@ class UniFormer(nn.Module):
         if isinstance(pretrained, str):
             logger = get_root_logger()
             load_checkpoint(self, pretrained, map_location='cpu', strict=False, logger=logger)
-            #print(f'Load pretrained model from {pretrained}')
+            print(f'Load pretrained model from {pretrained}')
     def _init_weights(self, m):
         if isinstance(m, nn.Linear):
             trunc_normal_(m.weight, std=.02)

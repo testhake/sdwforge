@@ -261,7 +261,7 @@ class HRNet(nn.Module):
         >>> inputs = torch.rand(1, 1, 32, 32)
         >>> level_outputs = self.forward(inputs)
         >>> for level_out in level_outputs:
-        ...     #print(tuple(level_out.shape))
+        ...     print(tuple(level_out.shape))
         (1, 32, 8, 8)
         (1, 64, 4, 4)
         (1, 128, 2, 2)

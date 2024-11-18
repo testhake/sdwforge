@@ -63,7 +63,7 @@ def add_args(parser, cfg, prefix=''):
         elif isinstance(v, abc.Iterable):
             parser.add_argument('--' + prefix + k, type=type(v[0]), nargs='+')
         else:
-            #print(f'cannot parse key {prefix + k} of type {type(v)}')
+            print(f'cannot parse key {prefix + k} of type {type(v)}')
     return parser
 
 

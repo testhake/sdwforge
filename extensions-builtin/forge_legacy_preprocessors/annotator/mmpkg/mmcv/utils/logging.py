@@ -91,12 +91,12 @@ def print_log(msg, logger=None, level=logging.INFO):
             Some special loggers are:
             - "silent": no message will be printed.
             - other str: the logger obtained with `get_root_logger(logger)`.
-            - None: The `#print()` method will be used to print log messages.
+            - None: The `print()` method will be used to print log messages.
         level (int): Logging level. Only available when `logger` is a Logger
             object or "root".
     """
     if logger is None:
-        #print(msg)
+        print(msg)
     elif isinstance(logger, logging.Logger):
         logger.log(level, msg)
     elif logger == 'silent':

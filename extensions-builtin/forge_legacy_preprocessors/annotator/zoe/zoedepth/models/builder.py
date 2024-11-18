@@ -40,7 +40,7 @@ def build_model(config) -> DepthModel:
         module = import_module(module_name)
     except ModuleNotFoundError as e:
         # print the original error message
-        #print(e)
+        print(e)
         raise ValueError(
             f"Model {config.model} not found. Refer above error for details.") from e
     try:

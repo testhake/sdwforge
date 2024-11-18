@@ -18,7 +18,7 @@ DEBUG_MODE = False
 def debug_info(func):
     def debug_info_(*args, **kwargs):
         if DEBUG_MODE:
-            #print(f"Debug info: {func.__name__}, {args}")
+            print(f"Debug info: {func.__name__}, {args}")
         return func(*args, **kwargs)
     return debug_info_
 

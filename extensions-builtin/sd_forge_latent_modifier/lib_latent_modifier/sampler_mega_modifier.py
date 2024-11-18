@@ -500,7 +500,7 @@ def add_cads_noise(y, timestep, cads_schedule_start, cads_schedule_end, cads_noi
         if not torch.isnan(y_scaled).any():
             y = cads_rescale_factor * y_scaled + (1 - cads_rescale_factor) * y
         else:
-            #print("Encountered NaN in cads rescaling. Skipping rescaling.")
+            print("Encountered NaN in cads rescaling. Skipping rescaling.")
     return y
 
 # Algorithm from https://github.com/v0xie/sd-webui-cads/
@@ -522,7 +522,7 @@ def add_cads_custom_noise(y, noise, timestep, cads_schedule_start, cads_schedule
         if not torch.isnan(y_scaled).any():
             y = cads_rescale_factor * y_scaled + (1 - cads_rescale_factor) * y
         else:
-            #print("Encountered NaN in cads rescaling. Skipping rescaling.")
+            print("Encountered NaN in cads rescaling. Skipping rescaling.")
     return y
 
 # Tonemapping functions
@@ -803,7 +803,7 @@ def spectral_modulation_soft(image: Tensor, modulation_multiplier: float, spectr
     )
     
     mask_mult = ((additive_mult_low * additive_mult_high) ** modulation_multiplier).clamp_(min=0.05, max=20)
-    ##print(mask_mult)
+    #print(mask_mult)
     filtered_fourier = fourier * mask_mult
     
     # Inverse transform back to spatial domain
@@ -915,7 +915,7 @@ class ModelSamplerLatentMegaModifier:
             timestep = model.model.predictor.timestep(args["timestep"])
             sigma = args["sigma"]
             sigma = sigma.view(sigma.shape[:1] + (1,) * (cond.ndim - 1))
-            ##print(model.model.predictor.timestep(timestep))
+            #print(model.model.predictor.timestep(timestep))
 
             x = x_input / (sigma * sigma + 1.0)
             cond = ((x - (x_input - cond)) * (sigma ** 2 + 1.0) ** 0.5) / (sigma)
@@ -983,7 +983,7 @@ class ModelSamplerLatentMegaModifier:
                         cond = add_cads_custom_noise(cond, extra_noise * cond, timestep, 0.6, 0.9, extra_noise_multiplier / 100., 1, True)
                         uncond = add_cads_custom_noise(uncond, extra_noise * uncond, timestep, 0.6, 0.9, extra_noise_multiplier / 100., 1, True)
                     case _:
-                        #print("Haven't heard of a noise method named like that before... (Couldn't find method)")
+                        print("Haven't heard of a noise method named like that before... (Couldn't find method)")
 
             if sharpness_multiplier > 0.0 or sharpness_multiplier < 0.0:
                 match sharpness_method:
@@ -996,7 +996,7 @@ class ModelSamplerLatentMegaModifier:
                     case "cas":
                         degrade_func = lambda image: contrast_adaptive_sharpening(image, amount=sigma.clamp(max=1.00).item())
                     case _:
-                        #print("For some reason, the sharpness filter could not be found.")
+                        print("For some reason, the sharpness filter could not be found.")
                 # Sharpness
                 alpha = 1.0 - (timestep / 999.0)[:, None, None, None].clone() # Get alpha multiplier, lower alpha at high sigmas/high noise
                 alpha *= 0.001 * sharpness_multiplier # User-input and weaken the strength so we don't annihilate the latent.
@@ -1104,7 +1104,7 @@ class ModelSamplerLatentMegaModifier:
                         #time = -(math.cos(time * math.pi) / (3)) + (2/3) # 0.33333 to 1.0, half cosine
                         noise_pred_degraded = spatial_norm_chw_thresholding(noise_pred_degraded, tonemap_multiplier / 2 / cond_scale)
                     case _:
-                        #print("Could not tonemap, for the method was not found.")
+                        print("Could not tonemap, for the method was not found.")
 
             # Spectral Modification
             if spectral_mod_multiplier > 0 or spectral_mod_multiplier < 0:

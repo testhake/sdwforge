@@ -98,7 +98,7 @@ txt2img_submit_button = img2img_submit_button = None
 txt2img_submit_button = cast(gr.Button, txt2img_submit_button)
 img2img_submit_button = cast(gr.Button, img2img_submit_button)
 
-#print(
+print(
     f"[-] ADetailer initialized. version: {__version__}, num models: {len(model_mapping)}"
 )
 
@@ -153,7 +153,7 @@ class AfterDetailerScript(scripts.Script):
                 self.controlnet_ext.init_controlnet()
             except ImportError:
                 error = traceback.format_exc()
-                #print(
+                print(
                     f"[-] ADetailer: ControlNetExt init failed:\n{error}",
                     file=sys.stderr,
                 )
@@ -214,7 +214,7 @@ class AfterDetailerScript(scripts.Script):
         if is_img2img_inpaint(p):
             p._ad_disabled = True
             msg = "[-] ADetailer: img2img inpainting with skip img2img is not supported. (because it's buggy)"
-            #print(msg)
+            print(msg)
             return
 
         p._ad_orig = SkipImg2ImgOrig(
@@ -245,7 +245,7 @@ class AfterDetailerScript(scripts.Script):
                 inp = ADetailerArgs(**arg_dict)
             except ValueError:
                 msg = f"[-] ADetailer: ValidationError when validating {ordinal(n)} arguments:"
-                #print(msg, arg_dict, file=sys.stderr)
+                print(msg, arg_dict, file=sys.stderr)
                 continue
 
             all_inputs.append(inp)
@@ -638,13 +638,13 @@ class AfterDetailerScript(scripts.Script):
     def compare_prompt(extra_params: dict[str, Any], processed, n: int = 0):
         pt = "ADetailer prompt" + suffix(n)
         if pt in extra_params and extra_params[pt] != processed.all_prompts[0]:
-            #print(
+            print(
                 f"[-] ADetailer: applied {ordinal(n + 1)} ad_prompt: {processed.all_prompts[0]!r}"
             )
 
         ng = "ADetailer negative prompt" + suffix(n)
         if ng in extra_params and extra_params[ng] != processed.all_negative_prompts[0]:
-            #print(
+            print(
                 f"[-] ADetailer: applied {ordinal(n + 1)} ad_negative_prompt: {processed.all_negative_prompts[0]!r}"
             )
 
@@ -695,7 +695,7 @@ class AfterDetailerScript(scripts.Script):
             image_size=image_size,
         )
 
-        #print(
+        print(
             f"[-] ADetailer: dynamic denoising -- {denoise_strength:.2f} -> {modified_strength:.2f}"
         )
 
@@ -719,7 +719,7 @@ class AfterDetailerScript(scripts.Script):
         if calculate_optimal_crop == InpaintBBoxMatchMode.STRICT.value:
             if not shared.sd_model.is_sdxl:
                 msg = "[-] ADetailer: strict inpaint bounding box size matching is only available for SDXL. Use Free mode instead."
-                #print(msg)
+                print(msg)
                 return (inpaint_width, inpaint_height)
 
             optimal_resolution = optimal_crop_size.sdxl(
@@ -734,7 +734,7 @@ class AfterDetailerScript(scripts.Script):
 
         if optimal_resolution is None:
             msg = "[-] ADetailer: unsupported inpaint bounding box match mode. Original inpainting dimensions will be used."
-            #print(msg)
+            print(msg)
             return (inpaint_width, inpaint_height)
 
         # Only use optimal dimensions if they're different enough to current inpaint dimensions.
@@ -742,7 +742,7 @@ class AfterDetailerScript(scripts.Script):
             abs(optimal_resolution[0] - inpaint_width) > inpaint_width * 0.1
             or abs(optimal_resolution[1] - inpaint_height) > inpaint_height * 0.1
         ):
-            #print(
+            print(
                 f"[-] ADetailer: inpaint dimensions optimized -- {inpaint_width}x{inpaint_height} -> {optimal_resolution[0]}x{optimal_resolution[1]}"
             )
 
@@ -777,7 +777,7 @@ class AfterDetailerScript(scripts.Script):
             msg = (
                 "[-] ADetailer: img2img inpainting with no mask -- adetailer disabled."
             )
-            #print(msg)
+            print(msg)
             return
 
         if not self.is_ad_enabled(*args_):
@@ -836,7 +836,7 @@ class AfterDetailerScript(scripts.Script):
                 )
 
         if pred.preview is None:
-            #print(
+            print(
                 f"[-] ADetailer: nothing detected on image {i + 1} with {ordinal(n + 1)} settings."
             )
             return False
@@ -856,7 +856,7 @@ class AfterDetailerScript(scripts.Script):
         state.job_count += steps
 
         if is_mediapipe:
-            #print(f"mediapipe: {steps} detected.")
+            print(f"mediapipe: {steps} detected.")
 
         p2 = copy(i2i)
         for j in range(steps):
@@ -873,7 +873,7 @@ class AfterDetailerScript(scripts.Script):
                 processed = process_images(p2)
             except NansException as e:
                 msg = f"[-] ADetailer: 'NansException' occurred with {ordinal(n + 1)} settings.\n{e}"
-                #print(msg, file=sys.stderr)
+                print(msg, file=sys.stderr)
                 continue
             finally:
                 p2.close()
@@ -1183,7 +1183,7 @@ def on_before_ui():
         make_axis_on_xyz_grid()
     except Exception:
         error = traceback.format_exc()
-        #print(
+        print(
             f"[-] ADetailer: xyz_grid error:\n{error}",
             file=sys.stderr,
         )

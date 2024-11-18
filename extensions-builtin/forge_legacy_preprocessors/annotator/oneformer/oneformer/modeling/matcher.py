@@ -24,9 +24,9 @@ def linear_sum_assignment_with_nan(cost_matrix):
 
     if not empty:
         if nan_all:
-            #print('Matrix contains all NaN values!')
+            print('Matrix contains all NaN values!')
         elif nan:
-            #print('Matrix contains NaN values!')
+            print('Matrix contains NaN values!')
 
         if nan_all:
             cost_matrix = np.empty(shape=(0, 0))

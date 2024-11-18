@@ -315,7 +315,7 @@ def createConvFunc(op_type):
             return y
         return func
     else:
-        #print('impossible to be here unless you force that')
+        print('impossible to be here unless you force that')
         return None
 
 class Conv2d(nn.Module):
@@ -543,7 +543,7 @@ class PiDiNet(nn.Module):
         nn.init.constant_(self.classifier.weight, 0.25)
         nn.init.constant_(self.classifier.bias, 0)
 
-        # #print('initialization done')
+        # print('initialization done')
 
     def get_weights(self):
         conv_weights = []
@@ -623,7 +623,7 @@ def config_model(model):
     assert model in model_options, \
         'unrecognized model, please choose from %s' % str(model_options)
 
-    # #print(str(nets[model]))
+    # print(str(nets[model]))
 
     pdcs = []
     for i in range(16):

@@ -32,7 +32,7 @@ def list_config_states():
                     j["filepath"] = path
                     config_states.append(j)
             except Exception as e:
-                #print(f'[ERROR]: Config states {path}, {e}')
+                print(f'[ERROR]: Config states {path}, {e}')
 
     config_states = sorted(config_states, key=lambda cs: cs["created_at"], reverse=True)
 
@@ -113,16 +113,16 @@ def get_config():
 
 
 def restore_webui_config(config):
-    #print("* Restoring webui state...")
+    print("* Restoring webui state...")
 
     if "webui" not in config:
-        #print("Error: No webui data saved to config")
+        print("Error: No webui data saved to config")
         return
 
     webui_config = config["webui"]
 
     if "commit_hash" not in webui_config:
-        #print("Error: No commit saved to webui config")
+        print("Error: No commit saved to webui config")
         return
 
     webui_commit_hash = webui_config.get("commit_hash", None)
@@ -138,16 +138,16 @@ def restore_webui_config(config):
     try:
         webui_repo.git.fetch(all=True)
         webui_repo.git.reset(webui_commit_hash, hard=True)
-        #print(f"* Restored webui to commit {webui_commit_hash}.")
+        print(f"* Restored webui to commit {webui_commit_hash}.")
     except Exception:
         errors.report(f"Error restoring webui to commit{webui_commit_hash}")
 
 
 def restore_extension_config(config):
-    #print("* Restoring extension state...")
+    print("* Restoring extension state...")
 
     if "extensions" not in config:
-        #print("Error: No extension data saved to config")
+        print("Error: No extension data saved to config")
         return
 
     ext_config = config["extensions"]
@@ -190,9 +190,9 @@ def restore_extension_config(config):
     shared.opts.disabled_extensions = disabled
     shared.opts.save(shared.config_filename)
 
-    #print("* Finished restoring extensions. Results:")
+    print("* Finished restoring extensions. Results:")
     for ext, prev_commit, success, result in results:
         if success:
-            #print(f"  + {ext.name}: {prev_commit} -> {result}")
+            print(f"  + {ext.name}: {prev_commit} -> {result}")
         else:
-            #print(f"  ! {ext.name}: FAILURE ({result})")
+            print(f"  ! {ext.name}: FAILURE ({result})")

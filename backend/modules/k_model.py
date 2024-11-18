@@ -13,7 +13,7 @@ class KModel(torch.nn.Module):
         self.storage_dtype = model.storage_dtype
         self.computation_dtype = model.computation_dtype
 
-        #print(f'K-Model Created: {dict(storage_dtype=self.storage_dtype, computation_dtype=self.computation_dtype)}')
+        print(f'K-Model Created: {dict(storage_dtype=self.storage_dtype, computation_dtype=self.computation_dtype)}')
 
         self.diffusion_model = model
 

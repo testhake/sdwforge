@@ -97,7 +97,7 @@ def git_tag():
 
 def run(command, desc=None, errdesc=None, custom_env=None, live: bool = default_command_live) -> str:
     if desc is not None:
-        #print(desc)
+        print(desc)
 
     run_kwargs = {
         "args": command,
@@ -171,7 +171,7 @@ def run_git(dir, name, command, desc=None, errdesc=None, custom_env=None, live: 
         if not autofix:
             raise
 
-    #print(f"{errdesc}, attempting autofix...")
+    print(f"{errdesc}, attempting autofix...")
     git_fix_workspace(dir, name)
 
     return run(f'"{git}" -C "{dir}" {command}', desc=desc, errdesc=errdesc, custom_env=custom_env, live=live)
@@ -212,9 +212,9 @@ def git_pull_recursive(dir):
         if os.path.exists(os.path.join(subdir, '.git')):
             try:
                 output = subprocess.check_output([git, '-C', subdir, 'pull', '--autostash'])
-                #print(f"Pulled changes for repository in '{subdir}':\n{output.decode('utf-8').strip()}\n")
+                print(f"Pulled changes for repository in '{subdir}':\n{output.decode('utf-8').strip()}\n")
             except subprocess.CalledProcessError as e:
-                #print(f"Couldn't perform 'git pull' on repository in '{subdir}':\n{e.output.decode('utf-8').strip()}\n")
+                print(f"Couldn't perform 'git pull' on repository in '{subdir}':\n{e.output.decode('utf-8').strip()}\n")
 
 
 def version_check(commit):
@@ -222,16 +222,16 @@ def version_check(commit):
         import requests
         commits = requests.get('https://api.github.com/repos/AUTOMATIC1111/stable-diffusion-webui/branches/master').json()
         if commit != "<none>" and commits['commit']['sha'] != commit:
-            #print("--------------------------------------------------------")
-            #print("| You are not up to date with the most recent release. |")
-            #print("| Consider running `git pull` to update.               |")
-            #print("--------------------------------------------------------")
+            print("--------------------------------------------------------")
+            print("| You are not up to date with the most recent release. |")
+            print("| Consider running `git pull` to update.               |")
+            print("--------------------------------------------------------")
         elif commits['commit']['sha'] == commit:
-            #print("You are up to date with the most recent release.")
+            print("You are up to date with the most recent release.")
         else:
-            #print("Not a git clone, can't perform version check.")
+            print("Not a git clone, can't perform version check.")
     except Exception as e:
-        #print("version check failed", e)
+        print("version check failed", e)
 
 
 def run_extension_installer(extension_dir):
@@ -245,7 +245,7 @@ def run_extension_installer(extension_dir):
 
         stdout = run(f'"{python}" "{path_installer}"', errdesc=f"Error running install.py for extension {extension_dir}", custom_env=env).strip()
         if stdout:
-            #print(stdout)
+            print(stdout)
     except Exception as e:
         errors.report(str(e))
 
@@ -422,9 +422,9 @@ def prepare_environment():
     tag = git_tag()
     startup_timer.record("git version info")
 
-    #print(f"Python {sys.version}")
-    #print(f"Version: {tag}")
-    #print(f"Commit hash: {commit}")
+    print(f"Python {sys.version}")
+    print(f"Version: {tag}")
+    print(f"Commit hash: {commit}")
 
     if args.reinstall_torch or not is_installed("torch") or not is_installed("torchvision"):
         run(f'"{python}" -m {torch_command}', "Installing torch and torchvision", "Couldn't install torch", live=True)
@@ -495,7 +495,7 @@ def prepare_environment():
         startup_timer.record("update extensions")
 
     if "--exit" in sys.argv:
-        #print("Exiting because of --exit argument")
+        print("Exiting because of --exit argument")
         exit(0)
 
 
@@ -533,7 +533,7 @@ def configure_forge_reference_checkout(a1111_home: Path):
     for ref in refs:
         target_path = a1111_home / ref.relative_path
         if not target_path.exists():
-            #print(f"Path {target_path} does not exist. Skip setting {ref.arg_name}")
+            print(f"Path {target_path} does not exist. Skip setting {ref.arg_name}")
             continue
 
         if ref.arg_name in sys.argv:
@@ -545,7 +545,7 @@ def configure_forge_reference_checkout(a1111_home: Path):
 
 
 def start():
-    #print(f"Launching {'API server' if '--nowebui' in sys.argv else 'Web UI'} with arguments: {shlex.join(sys.argv[1:])}")
+    print(f"Launching {'API server' if '--nowebui' in sys.argv else 'Web UI'} with arguments: {shlex.join(sys.argv[1:])}")
     import webui
     if '--nowebui' in sys.argv:
         webui.api_only()

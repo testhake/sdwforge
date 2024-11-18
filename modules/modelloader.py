@@ -38,7 +38,7 @@ def load_models(model_path: str, model_url: str = None, command_path: str = None
         if command_path is not None and command_path != model_path:
             pretrained_path = os.path.join(command_path, 'experiments/pretrained_models')
             if os.path.exists(pretrained_path):
-                #print(f"Appending path: {pretrained_path}")
+                print(f"Appending path: {pretrained_path}")
                 places.append(pretrained_path)
             elif os.path.exists(command_path):
                 places.append(command_path)
@@ -48,7 +48,7 @@ def load_models(model_path: str, model_url: str = None, command_path: str = None
         for place in places:
             for full_path in shared.walk_files(place, allowed_extensions=ext_filter):
                 if os.path.islink(full_path) and not os.path.exists(full_path):
-                    #print(f"Skipping broken symlink: {full_path}")
+                    print(f"Skipping broken symlink: {full_path}")
                     continue
                 if ext_blacklist is not None and any(full_path.endswith(x) for x in ext_blacklist):
                     continue

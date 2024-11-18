@@ -32,7 +32,7 @@ class Task:
             last_exception = None
         except Exception as e:
             traceback.print_exc()
-            #print(e)
+            print(e)
             self.exception = e
             last_exception = e
 

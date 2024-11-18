@@ -10,7 +10,7 @@ for item in aria2path.iterdir():
 def install_req(check_name, install_name=None):
     if not install_name: install_name = check_name
     if not launch.is_installed(f"{check_name}"):
-        #print("")
+        print("")
         launch.run_pip(f"install {install_name}", f"Installing missing requirement \"{check_name}\" for CivitAI Browser")
 
 install_req("send2trash", "send2trash==1.8.2")

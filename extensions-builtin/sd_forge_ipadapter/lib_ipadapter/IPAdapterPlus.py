@@ -637,7 +637,7 @@ class IPAdapterApply:
                             face_embed.append(torch.from_numpy(face[0].embedding).unsqueeze(0))
 
                             if 640 not in size:
-                                #print(f"\033[33mINFO: InsightFace detection resolution lowered to {size}.\033[0m")
+                                print(f"\033[33mINFO: InsightFace detection resolution lowered to {size}.\033[0m")
                             break
                     else:
                         raise Exception('InsightFace: No face detected.')
@@ -659,7 +659,7 @@ class IPAdapterApply:
                             face_clipvision.append(NPToTensor(insightface_face_align.norm_crop(face_img[i], landmark=face[0].kps, image_size=224)))
 
                             if 640 not in size:
-                                #print(f"\033[33mINFO: InsightFace detection resolution lowered to {size}.\033[0m")
+                                print(f"\033[33mINFO: InsightFace detection resolution lowered to {size}.\033[0m")
                             break
                     else:
                         raise Exception('InsightFace: No face detected.')
@@ -683,7 +683,7 @@ class IPAdapterApply:
                     clip_embed_zeroed = torch.zeros_like(clip_embed)
             else:
                 if image.shape[1] != image.shape[2]:
-                    #print("\033[33mINFO: the IPAdapter reference image is not a square, CLIPImageProcessor will resize and crop it at the center. If the main focus of the picture is not in the middle the result might not be what you are expecting.\033[0m")
+                    print("\033[33mINFO: the IPAdapter reference image is not a square, CLIPImageProcessor will resize and crop it at the center. If the main focus of the picture is not in the middle the result might not be what you are expecting.\033[0m")
 
                 clip_embed = clip_vision.encode_image(image)
                 neg_image = image_add_noise(image, noise) if noise > 0 else None

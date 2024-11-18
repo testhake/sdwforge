@@ -170,7 +170,7 @@ def inference(
     start_time = time.time()
     start_time_struct = time.localtime(start_time)
     start_time_formatted = time.strftime("%H:%M:%S", start_time_struct)
-    #print(f"Inference started at {start_time_formatted}")
+    print(f"Inference started at {start_time_formatted}")
 
     # Generate the initial image
     # init_image = init_pipe(prompt).images[0]
@@ -212,7 +212,7 @@ def inference(
     end_time = time.time()
     end_time_struct = time.localtime(end_time)
     end_time_formatted = time.strftime("%H:%M:%S", end_time_struct)
-    #print(f"Inference ended at {end_time_formatted}, taking {end_time - start_time}s")
+    print(f"Inference ended at {end_time_formatted}, taking {end_time - start_time}s")
 
     # Save image + metadata
     user_history.save_image(

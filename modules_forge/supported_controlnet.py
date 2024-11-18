@@ -86,7 +86,7 @@ class ControlNetPatcher(ControlModelPatcher):
 
             leftover_keys = controlnet_data.keys()
             if len(leftover_keys) > 0:
-                #print("leftover keys:", leftover_keys)
+                print("leftover keys:", leftover_keys)
             controlnet_data = new_sd
 
         pth_key = 'control_model.zero_convs.0.0.weight'
@@ -120,7 +120,7 @@ class ControlNetPatcher(ControlModelPatcher):
 
         if pth:
             if 'difference' in controlnet_data:
-                #print("WARNING: Your controlnet model is diff version rather than official float16 model. "
+                print("WARNING: Your controlnet model is diff version rather than official float16 model. "
                       "Please use an official float16/float32 model for robust performance.")
 
             class WeightsLoader(torch.nn.Module):
@@ -131,7 +131,7 @@ class ControlNetPatcher(ControlModelPatcher):
             missing, unexpected = w.load_state_dict(controlnet_data, strict=False)
         else:
             missing, unexpected = control_model.load_state_dict(controlnet_data, strict=False)
-        #print(missing, unexpected)
+        print(missing, unexpected)
 
         global_average_pooling = False
         filename = os.path.splitext(ckpt_path)[0]

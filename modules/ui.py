@@ -51,7 +51,7 @@ if not cmd_opts.share and not cmd_opts.listen:
 
 if cmd_opts.ngrok is not None:
     import modules.ngrok as ngrok
-    #print('ngrok authtoken detected, trying to connect...')
+    print('ngrok authtoken detected, trying to connect...')
     ngrok.connect(
         cmd_opts.ngrok,
         cmd_opts.port if cmd_opts.port is not None else 7860,
@@ -128,7 +128,7 @@ def process_interrogate(interrogation_function, mode, ii_input_dir, ii_output_di
     elif mode == 5:
         assert not shared.cmd_opts.hide_ui_dir_config, "Launched with --hide-ui-dir-config, batch img2img disabled"
         images = shared.listfiles(ii_input_dir)
-        #print(f"Will process {len(images)} images.")
+        print(f"Will process {len(images)} images.")
         if ii_output_dir != "":
             os.makedirs(ii_output_dir, exist_ok=True)
         else:
@@ -138,7 +138,7 @@ def process_interrogate(interrogation_function, mode, ii_input_dir, ii_output_di
             img = Image.open(image)
             filename = os.path.basename(image)
             left, _ = os.path.splitext(filename)
-            #print(interrogation_function(img), file=open(os.path.join(ii_output_dir, f"{left}.txt"), 'a', encoding='utf-8'))
+            print(interrogation_function(img), file=open(os.path.join(ii_output_dir, f"{left}.txt"), 'a', encoding='utf-8'))
 
         return [gr.update(), None]
 

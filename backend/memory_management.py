@@ -40,7 +40,7 @@ lowvram_available = True
 xpu_available = False
 
 if args.pytorch_deterministic:
-    #print("Using deterministic algorithms for pytorch")
+    print("Using deterministic algorithms for pytorch")
     torch.use_deterministic_algorithms(True, warn_only=True)
 
 directml_enabled = False
@@ -53,7 +53,7 @@ if args.directml is not None:
         directml_device = torch_directml.device()
     else:
         directml_device = torch_directml.device(device_index)
-    #print("Using directml with device: {}".format(torch_directml.device_name(device_index)))
+    print("Using directml with device: {}".format(torch_directml.device_name(device_index)))
 
 try:
     import intel_extension_for_pytorch as ipex
@@ -132,10 +132,10 @@ def get_total_memory(dev=None, torch_total_too=False):
 
 total_vram = get_total_memory(get_torch_device()) / (1024 * 1024)
 total_ram = psutil.virtual_memory().total / (1024 * 1024)
-#print("Total VRAM {:0.0f} MB, total RAM {:0.0f} MB".format(total_vram, total_ram))
+print("Total VRAM {:0.0f} MB, total RAM {:0.0f} MB".format(total_vram, total_ram))
 
 try:
-    #print("pytorch version: {}".format(torch.version.__version__))
+    print("pytorch version: {}".format(torch.version.__version__))
 except:
     pass
 
@@ -163,10 +163,10 @@ else:
             pass
         try:
             XFORMERS_VERSION = xformers.version.__version__
-            #print("xformers version: {}".format(XFORMERS_VERSION))
+            print("xformers version: {}".format(XFORMERS_VERSION))
             if XFORMERS_VERSION.startswith("0.0.18"):
-                #print("\nWARNING: This version of xformers has a major bug where you will get black images when generating high resolution images.")
-                #print("Please downgrade or upgrade xformers to a different version.\n")
+                print("\nWARNING: This version of xformers has a major bug where you will get black images when generating high resolution images.")
+                print("Please downgrade or upgrade xformers to a different version.\n")
                 XFORMERS_ENABLED_VAE = False
         except:
             pass
@@ -227,11 +227,11 @@ elif args.always_high_vram or args.always_gpu:
 FORCE_FP32 = False
 FORCE_FP16 = False
 if args.all_in_fp32:
-    #print("Forcing FP32, if this improves things please report it.")
+    print("Forcing FP32, if this improves things please report it.")
     FORCE_FP32 = True
 
 if args.all_in_fp16:
-    #print("Forcing FP16.")
+    print("Forcing FP16.")
     FORCE_FP16 = True
 
 if lowvram_available:
@@ -244,17 +244,17 @@ if cpu_state != CPUState.GPU:
 if cpu_state == CPUState.MPS:
     vram_state = VRAMState.SHARED
 
-#print(f"Set vram state to: {vram_state.name}")
+print(f"Set vram state to: {vram_state.name}")
 
 ALWAYS_VRAM_OFFLOAD = args.always_offload_from_vram
 
 if ALWAYS_VRAM_OFFLOAD:
-    #print("Always offload VRAM")
+    print("Always offload VRAM")
 
 PIN_SHARED_MEMORY = args.pin_shared_memory
 
 if PIN_SHARED_MEMORY:
-    #print("Always pin shared GPU memory")
+    print("Always pin shared GPU memory")
 
 
 def get_torch_device_name(device):
@@ -275,14 +275,14 @@ def get_torch_device_name(device):
 
 try:
     torch_device_name = get_torch_device_name(get_torch_device())
-    #print("Device: {}".format(torch_device_name))
+    print("Device: {}".format(torch_device_name))
 except:
     torch_device_name = ''
-    #print("Could not pick default device.")
+    print("Could not pick default device.")
 
 if 'rtx' in torch_device_name.lower():
     if not args.cuda_malloc:
-        #print('Hint: your device supports --cuda-malloc for potential speed improvements.')
+        print('Hint: your device supports --cuda-malloc for potential speed improvements.')
 
 
 current_loaded_models = []
@@ -472,7 +472,7 @@ class LoadedModel:
             raise e
 
         if do_not_need_cpu_swap:
-            #print('All loaded to GPU.')
+            print('All loaded to GPU.')
         else:
             gpu_modules, gpu_modules_only_extras, cpu_modules = build_module_profile(self.real_model, model_gpu_memory_when_using_cpu_swap)
             pin_memory = PIN_SHARED_MEMORY and is_device_cpu(self.model.offload_device)
@@ -506,7 +506,7 @@ class LoadedModel:
 
             swap_flag = 'Shared' if PIN_SHARED_MEMORY else 'CPU'
             method_flag = 'asynchronous' if stream.should_use_stream() else 'blocked'
-            #print(f"{swap_flag} Swap Loaded ({method_flag} method): {swap_counter / (1024 * 1024):.2f} MB, GPU Loaded: {mem_counter / (1024 * 1024):.2f} MB")
+            print(f"{swap_flag} Swap Loaded ({method_flag} method): {swap_counter / (1024 * 1024):.2f} MB, GPU Loaded: {mem_counter / (1024 * 1024):.2f} MB")
 
             self.model_accelerated = True
 
@@ -567,23 +567,23 @@ def free_memory(memory_required, device, keep_loaded=[], free_all=False):
 
     if free_all:
         memory_required = 1e30
-        #print(f"[Unload] Trying to free all memory for {device} with {len(keep_loaded)} models keep loaded ... ", end="")
+        print(f"[Unload] Trying to free all memory for {device} with {len(keep_loaded)} models keep loaded ... ", end="")
     else:
-        #print(f"[Unload] Trying to free {memory_required / (1024 * 1024):.2f} MB for {device} with {len(keep_loaded)} models keep loaded ... ", end="")
+        print(f"[Unload] Trying to free {memory_required / (1024 * 1024):.2f} MB for {device} with {len(keep_loaded)} models keep loaded ... ", end="")
 
     offload_everything = ALWAYS_VRAM_OFFLOAD or vram_state == VRAMState.NO_VRAM
     unloaded_model = False
     for i in range(len(current_loaded_models) - 1, -1, -1):
         if not offload_everything:
             free_memory = get_free_memory(device)
-            #print(f"Current free memory is {free_memory / (1024 * 1024):.2f} MB ... ", end="")
+            print(f"Current free memory is {free_memory / (1024 * 1024):.2f} MB ... ", end="")
             if free_memory > memory_required:
                 break
         shift_model = current_loaded_models[i]
         if shift_model.device == device:
             if shift_model not in keep_loaded:
                 m = current_loaded_models.pop(i)
-                #print(f"Unload model {m.model.model.__class__.__name__} ", end="")
+                print(f"Unload model {m.model.model.__class__.__name__} ", end="")
                 m.model_unload()
                 del m
                 unloaded_model = True
@@ -596,7 +596,7 @@ def free_memory(memory_required, device, keep_loaded=[], free_all=False):
             if mem_free_torch > mem_free_total * 0.25:
                 soft_empty_cache()
 
-    #print('Done.')
+    print('Done.')
     return
 
 
@@ -638,7 +638,7 @@ def load_models_gpu(models, memory_required=0, hard_memory_preservation=0):
 
         moving_time = time.perf_counter() - execution_start_time
         if moving_time > 0.1:
-            #print(f'Memory cleanup has taken {moving_time:.2f} seconds')
+            print(f'Memory cleanup has taken {moving_time:.2f} seconds')
 
         return
 
@@ -670,7 +670,7 @@ def load_models_gpu(models, memory_required=0, hard_memory_preservation=0):
             current_free_mem = get_free_memory(torch_dev)
             estimated_remaining_memory = current_free_mem - model_require - memory_for_inference
 
-            #print(f"[Memory Management] Target: {loaded_model.model.model.__class__.__name__}, Free GPU: {current_free_mem / (1024 * 1024):.2f} MB, Model Require: {model_require / (1024 * 1024):.2f} MB, Previously Loaded: {previously_loaded / (1024 * 1024):.2f} MB, Inference Require: {memory_for_inference / (1024 * 1024):.2f} MB, Remaining: {estimated_remaining_memory / (1024 * 1024):.2f} MB, ", end="")
+            print(f"[Memory Management] Target: {loaded_model.model.model.__class__.__name__}, Free GPU: {current_free_mem / (1024 * 1024):.2f} MB, Model Require: {model_require / (1024 * 1024):.2f} MB, Previously Loaded: {previously_loaded / (1024 * 1024):.2f} MB, Inference Require: {memory_for_inference / (1024 * 1024):.2f} MB, Remaining: {estimated_remaining_memory / (1024 * 1024):.2f} MB, ", end="")
 
             if estimated_remaining_memory < 0:
                 vram_set_state = VRAMState.LOW_VRAM
@@ -685,7 +685,7 @@ def load_models_gpu(models, memory_required=0, hard_memory_preservation=0):
         current_loaded_models.insert(0, loaded_model)
 
     moving_time = time.perf_counter() - execution_start_time
-    #print(f'Moving model(s) has taken {moving_time:.2f} seconds')
+    print(f'Moving model(s) has taken {moving_time:.2f} seconds')
 
     return
 
@@ -855,7 +855,7 @@ def vae_dtype(device=None, allowed_dtypes=[]):
     return VAE_DTYPES[0]
 
 
-#print(f"VAE dtype preferences: {VAE_DTYPES} -> {vae_dtype()}")
+print(f"VAE dtype preferences: {VAE_DTYPES} -> {vae_dtype()}")
 
 
 def get_autocast_device(dev):
