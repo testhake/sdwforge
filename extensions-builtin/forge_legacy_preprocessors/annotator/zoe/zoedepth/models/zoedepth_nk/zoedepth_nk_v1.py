@@ -230,7 +230,7 @@ class ZoeDepthNK(DepthModel):
         x = clb(last, b_embedding)
 
         # Now depth value is Sum px * cx , where cx are bin_centers from the last bin tensor
-        # print(x.shape, b_centers.shape)
+        # #print(x.shape, b_centers.shape)
         # b_centers = nn.functional.interpolate(b_centers, x.shape[-2:], mode='bilinear', align_corners=True)
         out = torch.sum(x * b_centers, dim=1, keepdim=True)
 

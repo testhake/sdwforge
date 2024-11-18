@@ -65,7 +65,7 @@ def imshow_keypoints(img,
         if idx > 1:
             continue
         kpts = kpts['keypoints']
-        # print(kpts)
+        # #print(kpts)
         kpts = np.array(kpts, copy=False)
 
         # draw each point on image

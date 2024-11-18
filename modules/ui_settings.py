@@ -285,8 +285,8 @@ class UiSettings:
                     completed = 0
                     for _ in as_completed(futures):
                         completed += 1
-                        print(f"{completed} / {len(checkpoints_list)} ")
-                    print("Finish calculating hash for all checkpoints")
+                        #print(f"{completed} / {len(checkpoints_list)} ")
+                    #print("Finish calculating hash for all checkpoints")
 
             calculate_all_checkpoint_hash.click(
                 fn=calculate_all_checkpoint_hash_fn,
@@ -355,6 +355,6 @@ class UiSettings:
         )
 
     def search(self, text):
-        print(text)
+        #print(text)
 
         return [gr.update(visible=text in (comp.label or "")) for comp in self.components]

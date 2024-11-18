@@ -23,7 +23,7 @@ if new_category_id not in categories.mapping:
 
 # Print out the existing categories to verify
 #for cat_id, category in categories.mapping.items():
-#    print(f"ID: {cat_id}, Label: {category.label}")
+#    #print(f"ID: {cat_id}, Label: {category.label}")
 
 basedir = scripts.basedir()
 js_folder = os.path.join(basedir, "javascript")
@@ -175,7 +175,7 @@ class StreamToLogger(io.StringIO):
         pass  # No need to implement this method
 
 def test_function():
-    print("-----------------------------------------------------")
+    #print("-----------------------------------------------------")
     return ""
 
 def check_and_create_dev():
@@ -194,11 +194,11 @@ def run_vite_build():
     try:
         # Call 'npm run build' 
         result = subprocess.run([shared.opts.uiux_nodejs_path, 'run', 'build'], check=True, capture_output=True, text=True, cwd=basedir) 
-        print(result.stdout)
+        #print(result.stdout)
         
     except subprocess.CalledProcessError as e:
-        print("Error during Vite build:")
-        print(e.stderr)
+        #print("Error during Vite build:")
+        #print(e.stderr)
 
 
 def on_ui_tabs():

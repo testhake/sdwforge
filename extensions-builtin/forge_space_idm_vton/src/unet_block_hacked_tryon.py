@@ -1137,10 +1137,10 @@ class CrossAttnDownBlock2D(nn.Module):
         lora_scale = cross_attention_kwargs.get("scale", 1.0) if cross_attention_kwargs is not None else 1.0
 
         blocks = list(zip(self.resnets, self.attentions))
-        # print("len(self.resnets)")
-        # print(len(self.resnets))
-        # print("len(self.attentions)")
-        # print(len(self.attentions))
+        # #print("len(self.resnets)")
+        # #print(len(self.resnets))
+        # #print("len(self.attentions)")
+        # #print(len(self.attentions))
         for i, (resnet, attn) in enumerate(blocks):
             if self.training and self.gradient_checkpointing:
 
@@ -2344,8 +2344,8 @@ class CrossAttnUpBlock2D(nn.Module):
                 )
 
             hidden_states = torch.cat([hidden_states, res_hidden_states], dim=1)
-            # print(hidden_states.shape)
-            # print(encoder_hidden_states.shape)
+            # #print(hidden_states.shape)
+            # #print(encoder_hidden_states.shape)
             if self.training and self.gradient_checkpointing:
 
                 def create_custom_forward(module, return_dict=None):

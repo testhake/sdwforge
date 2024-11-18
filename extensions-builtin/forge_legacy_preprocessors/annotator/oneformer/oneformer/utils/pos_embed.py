@@ -84,7 +84,7 @@ def interpolate_pos_embed(model, checkpoint_model, pos_embed_key):
         new_size = int(num_patches ** 0.5)
         # class_token and dist_token are kept unchanged
         if orig_size != new_size:
-            print(
+            #print(
                 "Position interpolate from %dx%d to %dx%d"
                 % (orig_size, orig_size, new_size, new_size)
             )

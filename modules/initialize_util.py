@@ -31,7 +31,7 @@ def fix_pytorch_lightning():
     if 'pytorch_lightning.utilities.distributed' not in sys.modules:
         import pytorch_lightning
         # Lets the user know that the library was not found and then will set it to pytorch_lightning.utilities.rank_zero
-        print("Pytorch_lightning.distributed not found, attempting pytorch_lightning.rank_zero")
+        #print("Pytorch_lightning.distributed not found, attempting pytorch_lightning.rank_zero")
         sys.modules["pytorch_lightning.utilities.distributed"] = pytorch_lightning.utilities.rank_zero
 
 def fix_asyncio_event_loop_policy():
@@ -85,13 +85,13 @@ def restore_config_state_file():
     shared.opts.save(shared.config_filename)
 
     if os.path.isfile(config_state_file):
-        print(f"*** About to restore extension state from file: {config_state_file}")
+        #print(f"*** About to restore extension state from file: {config_state_file}")
         with open(config_state_file, "r", encoding="utf-8") as f:
             config_state = json.load(f)
             config_states.restore_extension_config(config_state)
         startup_timer.record("restore extension config")
     elif config_state_file:
-        print(f"!!! Config state backup not found: {config_state_file}")
+        #print(f"!!! Config state backup not found: {config_state_file}")
 
 
 def validate_tls_options():
@@ -102,14 +102,14 @@ def validate_tls_options():
 
     try:
         if not os.path.exists(cmd_opts.tls_keyfile):
-            print("Invalid path to TLS keyfile given")
+            #print("Invalid path to TLS keyfile given")
         if not os.path.exists(cmd_opts.tls_certfile):
-            print(f"Invalid path to TLS certfile: '{cmd_opts.tls_certfile}'")
+            #print(f"Invalid path to TLS certfile: '{cmd_opts.tls_certfile}'")
     except TypeError:
         cmd_opts.tls_keyfile = cmd_opts.tls_certfile = None
-        print("TLS setup invalid, running webui without TLS")
+        #print("TLS setup invalid, running webui without TLS")
     else:
-        print("Running with TLS")
+        #print("Running with TLS")
     startup_timer.record("TLS")
 
 
@@ -154,7 +154,7 @@ def dumpstacks():
             if line:
                 code.append("  " + line.strip())
 
-    print("\n".join(code))
+    #print("\n".join(code))
 
 
 def configure_sigint_handler():
@@ -163,7 +163,7 @@ def configure_sigint_handler():
     from modules import shared
 
     def sigint_handler(sig, frame):
-        print(f'Interrupted with signal {sig} in {frame}')
+        #print(f'Interrupted with signal {sig} in {frame}')
 
         if shared.opts.dump_stacks_on_signal:
             dumpstacks()

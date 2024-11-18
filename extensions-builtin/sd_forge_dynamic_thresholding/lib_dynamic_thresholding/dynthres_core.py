@@ -158,7 +158,7 @@ class DynThresh:
             res_rgb = torch.einsum("laxy,ab -> lbxy", actual_res, coefs)
             max_r, max_g, max_b, max_w = res_rgb[0][0].max(), res_rgb[0][1].max(), res_rgb[0][2].max(), res_rgb[0][3].max()
             max_rgb = max(max_r, max_g, max_b)
-            print(f"test max = r={max_r}, g={max_g}, b={max_b}, w={max_w}, rgb={max_rgb}")
+            #print(f"test max = r={max_r}, g={max_g}, b={max_b}, w={max_w}, rgb={max_rgb}")
             if self.step / (self.max_steps - 1) > 0.2:
                 if max_rgb < 2.0 and max_w < 3.0:
                     res_rgb /= max_rgb / 2.4

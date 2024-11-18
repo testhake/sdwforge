@@ -103,7 +103,7 @@ def load_state_dict(module, state_dict, strict=False, logger=None):
         elif logger is not None:
             logger.warning(err_msg)
         else:
-            print(err_msg)
+            #print(err_msg)
 
 
 def get_torchvision_models():

@@ -25,7 +25,7 @@ def parse_image_info(image_path: str) -> ImageGenerationInfo:
                     return parser.parse(img, image_path)
                 except Exception as e:
                     logger.error(e, stack_info=True)
-                    print(e)
-                    print(traceback.format_exc())
+                    #print(e)
+                    #print(traceback.format_exc())
                     return ImageGenerationInfo()
         raise Exception("matched parser is not found")

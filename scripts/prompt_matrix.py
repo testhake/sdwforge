@@ -86,7 +86,7 @@ class Script(scripts.Script):
         p.n_iter = math.ceil(len(all_prompts) / p.batch_size)
         p.do_not_save_grid = True
 
-        print(f"Prompt matrix will create {len(all_prompts)} images using a total of {p.n_iter} batches.")
+        #print(f"Prompt matrix will create {len(all_prompts)} images using a total of {p.n_iter} batches.")
 
         if prompt_type == "positive":
             p.prompt = all_prompts

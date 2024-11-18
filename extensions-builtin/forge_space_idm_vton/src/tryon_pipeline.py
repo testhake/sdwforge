@@ -456,7 +456,7 @@ class StableDiffusionXLInpaintPipeline(
     # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.encode_image
     def encode_image(self, image, device, num_images_per_prompt, output_hidden_states=None):
         dtype = next(self.image_encoder.parameters()).dtype
-        # print(image.shape)
+        # #print(image.shape)
         if not isinstance(image, torch.Tensor):
             image = self.feature_extractor(image, return_tensors="pt").pixel_values
 
@@ -488,14 +488,14 @@ class StableDiffusionXLInpaintPipeline(
         #         f"`ip_adapter_image` must have same length as the number of IP Adapters. Got {len(ip_adapter_image)} images and {len(self.unet.encoder_hid_proj.image_projection_layers)} IP Adapters."
         #     )
         output_hidden_state = not isinstance(self.unet.encoder_hid_proj, ImageProjection)
-        # print(output_hidden_state)
+        # #print(output_hidden_state)
         image_embeds, negative_image_embeds = self.encode_image(
             ip_adapter_image, device, 1, output_hidden_state
         )
-        # print(single_image_embeds.shape)
+        # #print(single_image_embeds.shape)
         # single_image_embeds = torch.stack([single_image_embeds] * num_images_per_prompt, dim=0)
         # single_negative_image_embeds = torch.stack([single_negative_image_embeds] * num_images_per_prompt, dim=0)
-        # print(single_image_embeds.shape)
+        # #print(single_image_embeds.shape)
         if self.do_classifier_free_guidance:
             image_embeds = torch.cat([negative_image_embeds, image_embeds])
             image_embeds = image_embeds.to(device)
@@ -1782,12 +1782,12 @@ class StableDiffusionXLInpaintPipeline(
                     added_cond_kwargs["image_embeds"] = image_embeds
                 # down,reference_features = self.UNet_Encoder(cloth,t, text_embeds_cloth,added_cond_kwargs= {"text_embeds": pooled_prompt_embeds_c, "time_ids": add_time_ids},return_dict=False)
                 down,reference_features = self.unet_encoder(cloth,t, text_embeds_cloth,return_dict=False)
-                # print(type(reference_features))
-                # print(reference_features)
+                # #print(type(reference_features))
+                # #print(reference_features)
                 reference_features = list(reference_features)
-                # print(len(reference_features))
+                # #print(len(reference_features))
                 # for elem in reference_features:
-                #     print(elem.shape)
+                #     #print(elem.shape)
                 # exit(1)
                 if self.do_classifier_free_guidance:
                     reference_features = [torch.cat([torch.zeros_like(d), d]) for d in reference_features]

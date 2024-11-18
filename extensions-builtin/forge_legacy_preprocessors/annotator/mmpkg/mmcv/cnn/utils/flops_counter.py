@@ -300,7 +300,7 @@ def print_model_with_flops(model,
             del m.accumulate_flops
 
     model.apply(add_extra_repr)
-    print(model, file=ost, flush=flush)
+    #print(model, file=ost, flush=flush)
     model.apply(del_extra_repr)
 
 
@@ -503,7 +503,7 @@ def batch_counter_hook(module, input, output):
         batch_size = len(input)
     else:
         pass
-        print('Warning! No positional inputs found for a module, '
+        #print('Warning! No positional inputs found for a module, '
               'assuming batch size is 1.')
     module.__batch_counter__ += batch_size
 
@@ -530,7 +530,7 @@ def remove_batch_counter_hook_function(module):
 def add_flops_counter_variable_or_reset(module):
     if is_supported_instance(module):
         if hasattr(module, '__flops__') or hasattr(module, '__params__'):
-            print('Warning: variables __flops__ or __params__ are already '
+            #print('Warning: variables __flops__ or __params__ are already '
                   'defined for the module' + type(module).__name__ +
                   ' ptflops can affect your code!')
         module.__flops__ = 0

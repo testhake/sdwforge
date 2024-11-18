@@ -118,7 +118,7 @@ def merge_lora_to_weight(patches, weight, key="online_lora", computation_dtype=t
                 if w1.shape != weight.shape:
                     if w1.ndim == weight.ndim == 4:
                         new_shape = [max(n, m) for n, m in zip(weight.shape, w1.shape)]
-                        print(f'Merged with {key} channel changed to {new_shape}')
+                        #print(f'Merged with {key} channel changed to {new_shape}')
                         new_diff = strength * memory_management.cast_to_device(w1, weight.device, weight.dtype)
                         new_weight = torch.zeros(size=new_shape).to(weight)
                         new_weight[:weight.shape[0], :weight.shape[1], :weight.shape[2], :weight.shape[3]] = weight
@@ -126,7 +126,7 @@ def merge_lora_to_weight(patches, weight, key="online_lora", computation_dtype=t
                         new_weight = new_weight.contiguous().clone()
                         weight = new_weight
                     else:
-                        print("WARNING SHAPE MISMATCH {} WEIGHT NOT MERGED {} != {}".format(key, w1.shape, weight.shape))
+                        #print("WARNING SHAPE MISMATCH {} WEIGHT NOT MERGED {} != {}".format(key, w1.shape, weight.shape))
                 else:
                     weight += strength * memory_management.cast_to_device(w1, weight.device, weight.dtype)
         elif patch_type == "lora":
@@ -149,7 +149,7 @@ def merge_lora_to_weight(patches, weight, key="online_lora", computation_dtype=t
                 else:
                     weight += function(((strength * alpha) * lora_diff).type(weight.dtype))
             except Exception as e:
-                print("ERROR {} {} {}".format(patch_type, key, e))
+                #print("ERROR {} {} {}".format(patch_type, key, e))
                 raise e
         elif patch_type == "lokr":
             w1 = v[0]
@@ -196,7 +196,7 @@ def merge_lora_to_weight(patches, weight, key="online_lora", computation_dtype=t
                 else:
                     weight += function(((strength * alpha) * lora_diff).type(weight.dtype))
             except Exception as e:
-                print("ERROR {} {} {}".format(patch_type, key, e))
+                #print("ERROR {} {} {}".format(patch_type, key, e))
                 raise e
         elif patch_type == "loha":
             w1a = v[0]
@@ -234,7 +234,7 @@ def merge_lora_to_weight(patches, weight, key="online_lora", computation_dtype=t
                 else:
                     weight += function(((strength * alpha) * lora_diff).type(weight.dtype))
             except Exception as e:
-                print("ERROR {} {} {}".format(patch_type, key, e))
+                #print("ERROR {} {} {}".format(patch_type, key, e))
                 raise e
         elif patch_type == "glora":
             if v[4] is not None:
@@ -256,12 +256,12 @@ def merge_lora_to_weight(patches, weight, key="online_lora", computation_dtype=t
                 else:
                     weight += function(((strength * alpha) * lora_diff).type(weight.dtype))
             except Exception as e:
-                print("ERROR {} {} {}".format(patch_type, key, e))
+                #print("ERROR {} {} {}".format(patch_type, key, e))
                 raise e
         elif patch_type in extra_weight_calculators:
             weight = extra_weight_calculators[patch_type](weight, strength, v)
         else:
-            print("patch type not recognized {} {}".format(patch_type, key))
+            #print("patch type not recognized {} {}".format(patch_type, key))
 
         if old_weight is not None:
             weight = old_weight
@@ -375,7 +375,7 @@ class LoraLoader:
             try:
                 weight = merge_lora_to_weight(current_patches, weight, key, computation_dtype=torch.float32)
             except:
-                print('Patching LoRA weights out of memory. Retrying by offloading models.')
+                #print('Patching LoRA weights out of memory. Retrying by offloading models.')
                 set_parameter_devices(self.model, parameter_devices={k: offload_device for k in parameter_devices.keys()})
                 memory_management.soft_empty_cache()
                 weight = merge_lora_to_weight(current_patches, weight, key, computation_dtype=torch.float32)

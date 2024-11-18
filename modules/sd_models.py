@@ -176,7 +176,7 @@ def list_models():
 
         shared.opts.data['sd_model_checkpoint'] = checkpoint_info.title
     elif cmd_ckpt is not None and cmd_ckpt != shared.default_sd_model_file:
-        print(f"Checkpoint in --ckpt argument not found (Possible it was moved to {model_path}: {cmd_ckpt}", file=sys.stderr)
+        #print(f"Checkpoint in --ckpt argument not found (Possible it was moved to {model_path}: {cmd_ckpt}", file=sys.stderr)
 
     for filename in model_list:
         checkpoint_info = CheckpointInfo(filename)
@@ -239,12 +239,12 @@ def select_checkpoint():
         return checkpoint_info
 
     if len(checkpoints_list) == 0:
-        print('You do not have any model!')
+        #print('You do not have any model!')
         return None
 
     checkpoint_info = next(iter(checkpoints_list.values()))
     if model_checkpoint is not None:
-        print(f"Checkpoint {model_checkpoint} not found; loading fallback {checkpoint_info.title}", file=sys.stderr)
+        #print(f"Checkpoint {model_checkpoint} not found; loading fallback {checkpoint_info.title}", file=sys.stderr)
 
     return checkpoint_info
 
@@ -295,12 +295,12 @@ def get_checkpoint_state_dict(checkpoint_info: CheckpointInfo, timer):
 
     if checkpoint_info in checkpoints_loaded:
         # use checkpoint cache
-        print(f"Loading weights [{sd_model_hash}] from cache")
+        #print(f"Loading weights [{sd_model_hash}] from cache")
         # move to end as latest
         checkpoints_loaded.move_to_end(checkpoint_info)
         return checkpoints_loaded[checkpoint_info]
 
-    print(f"Loading weights [{sd_model_hash}] from {checkpoint_info.filename}")
+    #print(f"Loading weights [{sd_model_hash}] from {checkpoint_info.filename}")
     res = load_torch_file(checkpoint_info.filename)
     timer.record("load weights from disk")
 
@@ -457,7 +457,7 @@ def apply_token_merging(sd_model, token_merging_ratio):
     if token_merging_ratio <= 0:
         return
 
-    print(f'token_merging_ratio = {token_merging_ratio}')
+    #print(f'token_merging_ratio = {token_merging_ratio}')
 
     from backend.misc.tomesd import TomePatcher
 
@@ -476,7 +476,7 @@ def forge_model_reload():
     if model_data.forge_hash == current_hash:
         return model_data.sd_model, False
 
-    print('Loading Model: ' + str(model_data.forge_loading_parameters))
+    #print('Loading Model: ' + str(model_data.forge_loading_parameters))
 
     timer = Timer()
 
@@ -519,7 +519,7 @@ def forge_model_reload():
 
     timer.record("scripts callbacks")
 
-    print(f"Model loaded in {timer.summary()}.")
+    #print(f"Model loaded in {timer.summary()}.")
 
     model_data.forge_hash = current_hash
 

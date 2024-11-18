@@ -276,7 +276,7 @@ def resize_image(resize_mode, im, width, height, upscaler_name=None, force_RGBA=
             upscalers = [x for x in shared.sd_upscalers if x.name == upscaler_name]
             if len(upscalers) == 0:
                 upscaler = shared.sd_upscalers[0]
-                print(f"could not find upscaler named {upscaler_name or '<empty string>'}, using {upscaler.name} as a fallback")
+                #print(f"could not find upscaler named {upscaler_name or '<empty string>'}, using {upscaler.name} as a fallback")
             else:
                 upscaler = upscalers[0]
 
@@ -658,7 +658,7 @@ def save_image(image, path, basename, seed=None, prompt=None, extension='png', i
 
     # WebP and JPG formats have maximum dimension limits of 16383 and 65535 respectively. switch to PNG which has a much higher limit
     if (image.height > 65535 or image.width > 65535) and extension.lower() in ("jpg", "jpeg") or (image.height > 16383 or image.width > 16383) and extension.lower() == "webp":
-        print('Image dimensions too large; saving as PNG')
+        #print('Image dimensions too large; saving as PNG')
         extension = "png"
 
     if save_to_dirs is None:

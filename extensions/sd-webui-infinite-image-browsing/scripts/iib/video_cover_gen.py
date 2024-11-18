@@ -14,7 +14,7 @@ def generate_video_covers(dirs,verbose=False):
 
   def process_video(item):
     if item.is_dir():
-      verbose and print(f"Processing directory: {item.path}")
+      verbose and #print(f"Processing directory: {item.path}")
       for sub_item in os.scandir(item.path):
         process_video(sub_item)
       return
@@ -31,7 +31,7 @@ def generate_video_covers(dirs,verbose=False):
 
       # 如果缓存文件存在，则直接返回该文件
       if os.path.exists(cache_path):
-        print(f"Video cover already exists: {path}")
+        #print(f"Video cover already exists: {path}")
         return
 
       frame = iio.imread(
@@ -42,10 +42,10 @@ def generate_video_covers(dirs,verbose=False):
 
       os.makedirs(cache_dir, exist_ok=True)
       iio.imwrite(cache_path, frame, extension=".webp")
-      verbose and print(f"Video cover generated: {path}")
+      verbose and #print(f"Video cover generated: {path}")
     except Exception as e:
-      print(f"Error generating video cover: {path}")
-      print(e)
+      #print(f"Error generating video cover: {path}")
+      #print(e)
 
   with ThreadPoolExecutor() as executor:
     for dir_path in dirs:
@@ -53,7 +53,7 @@ def generate_video_covers(dirs,verbose=False):
       for item in folder_listing:
         executor.submit(process_video, item)
 
-  print("Video covers generated successfully.")
+  #print("Video covers generated successfully.")
   end_time = time.time()
   execution_time = end_time - start_time
-  print(f"Execution time: {execution_time} seconds")
+  #print(f"Execution time: {execution_time} seconds")

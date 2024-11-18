@@ -240,13 +240,13 @@ def list_extensions():
     loaded_extensions.clear()
 
     if shared.cmd_opts.disable_all_extensions:
-        print("*** \"--disable-all-extensions\" arg was used, will not load any extensions ***")
+        #print("*** \"--disable-all-extensions\" arg was used, will not load any extensions ***")
     elif shared.opts.disable_all_extensions == "all":
-        print("*** \"Disable all extensions\" option was set, will not load any extensions ***")
+        #print("*** \"Disable all extensions\" option was set, will not load any extensions ***")
     elif shared.cmd_opts.disable_extra_extensions:
-        print("*** \"--disable-extra-extensions\" arg was used, will only load built-in extensions ***")
+        #print("*** \"--disable-extra-extensions\" arg was used, will only load built-in extensions ***")
     elif shared.opts.disable_all_extensions == "extra":
-        print("*** \"Disable all extensions\" option was set, will only load built-in extensions ***")
+        #print("*** \"Disable all extensions\" option was set, will only load built-in extensions ***")
 
 
     # scan through extensions directory and load metadata

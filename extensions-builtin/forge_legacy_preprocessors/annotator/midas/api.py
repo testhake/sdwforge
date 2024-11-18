@@ -132,7 +132,7 @@ def load_model(model_type):
         )
 
     else:
-        print(f"model_type '{model_type}' not implemented, use: --model_type large")
+        #print(f"model_type '{model_type}' not implemented, use: --model_type large")
         assert False
 
     transform = Compose(

@@ -104,7 +104,7 @@ class Script(scripts.Script):
                 work_latent_mask.append(tiledata_latent_mask[2])
 
         batch_count = len(work)
-        print(f"Poor man's outpainting will process a total of {len(work)} images tiled as {len(grid.tiles[0][2])}x{len(grid.tiles)}.")
+        #print(f"Poor man's outpainting will process a total of {len(work)} images tiled as {len(grid.tiles[0][2])}x{len(grid.tiles)}.")
 
         state.job_count = batch_count
 

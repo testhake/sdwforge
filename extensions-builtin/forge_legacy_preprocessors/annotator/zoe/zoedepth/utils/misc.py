@@ -232,7 +232,7 @@ def compute_metrics(gt, pred, interpolate=True, garg_crop=False, eigen_crop=True
                       int(0.03594771 * gt_width):int(0.96405229 * gt_width)] = 1
 
         elif eigen_crop:
-            # print("-"*10, " EIGEN CROP ", "-"*10)
+            # #print("-"*10, " EIGEN CROP ", "-"*10)
             if dataset == 'kitti':
                 eval_mask[int(0.3324324 * gt_height):int(0.91351351 * gt_height),
                           int(0.0359477 * gt_width):int(0.96405229 * gt_width)] = 1
@@ -265,7 +265,7 @@ def parallelize(config, model, find_unused_parameters=True):
         # config.batch_size = 8
         config.workers = int(
             (config.num_workers + config.ngpus_per_node - 1) / config.ngpus_per_node)
-        print("Device", config.gpu, "Rank",  config.rank, "batch size",
+        #print("Device", config.gpu, "Rank",  config.rank, "batch size",
               config.batch_size, "Workers", config.workers)
         torch.cuda.set_device(config.gpu)
         model = nn.SyncBatchNorm.convert_sync_batchnorm(model)
@@ -335,7 +335,7 @@ class colors:
 
 
 def printc(text, color):
-    print(f"{color}{text}{colors.reset}")
+    #print(f"{color}{text}{colors.reset}")
 
 ############################################
 
@@ -365,4 +365,4 @@ def save_raw_16bit(depth, fpath="raw.png"):
     depth = depth.astype(np.uint16)
     depth = Image.fromarray(depth)
     depth.save(fpath)
-    print("Saved raw depth to", fpath)
+    #print("Saved raw depth to", fpath)

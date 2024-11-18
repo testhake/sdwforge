@@ -21,8 +21,8 @@ class Instances:
        .. code-block:: python
 
           instances.gt_boxes = Boxes(...)
-          print(instances.pred_masks)  # a tensor of shape (N, H, W)
-          print('gt_masks' in instances)
+          #print(instances.pred_masks)  # a tensor of shape (N, H, W)
+          #print('gt_masks' in instances)
 
     2. ``len(instances)`` returns the number of instances
     3. Indexing: ``instances[indices]`` will apply the indexing on all the fields

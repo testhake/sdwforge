@@ -70,7 +70,7 @@ def load_control_net_lllite_patch(ctrl_sd, cond_image, multiplier, num_steps, st
         if len(modules) == 1:
             module.is_first = True
 
-    print(f"{len(modules)} modules")
+    #print(f"{len(modules)} modules")
 
     # cond imageをセットする
     cond_image = cond_image.permute(0, 3, 1, 2)  # b,h,w,3 -> b,3,h,w
@@ -187,7 +187,7 @@ class LLLiteModule(torch.nn.Module):
 
     # @torch.inference_mode()
     def set_cond_image(self, cond_image):
-        # print("set_cond_image", self.name)
+        # #print("set_cond_image", self.name)
         self.cond_image = cond_image
         self.cond_emb = None
         self.current_step = 0
@@ -199,20 +199,20 @@ class LLLiteModule(torch.nn.Module):
                 return torch.zeros_like(x)
             elif self.current_step >= self.end_step:
                 if self.is_first and self.current_step == self.end_step:
-                    print(f"end LLLite: step {self.current_step}")
+                    #print(f"end LLLite: step {self.current_step}")
                 self.current_step += 1
                 if self.current_step >= self.num_steps:
                     self.current_step = 0  # reset
                 return torch.zeros_like(x)
             else:
                 if self.is_first and self.current_step == self.start_step:
-                    print(f"start LLLite: step {self.current_step}")
+                    #print(f"start LLLite: step {self.current_step}")
                 self.current_step += 1
                 if self.current_step >= self.num_steps:
                     self.current_step = 0  # reset
 
         if self.cond_emb is None:
-            # print(f"cond_emb is None, {self.name}")
+            # #print(f"cond_emb is None, {self.name}")
             cx = self.conditioning1(self.cond_image.to(x.device, dtype=x.dtype))
             if not self.is_conv2d:
                 # reshape / b,c,h,w -> b,h*w,c
@@ -221,14 +221,14 @@ class LLLiteModule(torch.nn.Module):
             self.cond_emb = cx
 
         cx = self.cond_emb
-        # print(f"forward {self.name}, {cx.shape}, {x.shape}")
+        # #print(f"forward {self.name}, {cx.shape}, {x.shape}")
 
         # uncond/condでxはバッチサイズが2倍
         if x.shape[0] != cx.shape[0]:
             if self.is_conv2d:
                 cx = cx.repeat(x.shape[0] // cx.shape[0], 1, 1, 1)
             else:
-                # print("x.shape[0] != cx.shape[0]", x.shape[0], cx.shape[0])
+                # #print("x.shape[0] != cx.shape[0]", x.shape[0], cx.shape[0])
                 cx = cx.repeat(x.shape[0] // cx.shape[0], 1, 1)
 
         cx = torch.cat([cx, self.down(x)], dim=1 if self.is_conv2d else 2)

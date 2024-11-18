@@ -84,7 +84,7 @@
 #         super().__init__()
 #         assert parameterization in ["eps", "x0"], 'currently only supporting "eps" and "x0"'
 #         self.parameterization = parameterization
-#         print(f"{self.__class__.__name__}: Running in {self.parameterization}-prediction mode")
+#         #print(f"{self.__class__.__name__}: Running in {self.parameterization}-prediction mode")
 #         self.cond_stage_model = None
 #         self.clip_denoised = clip_denoised
 #         self.log_every_t = log_every_t
@@ -109,7 +109,7 @@
 #
 #         if self.use_ema and load_ema:
 #             self.model_ema = LitEma(self.model)
-#             print(f"Keeping EMAs of {len(list(self.model_ema.buffers()))}.")
+#             #print(f"Keeping EMAs of {len(list(self.model_ema.buffers()))}.")
 #
 #         if ckpt_path is not None:
 #             self.init_from_ckpt(ckpt_path, ignore_keys=ignore_keys or [], only_model=load_only_unet)
@@ -117,7 +117,7 @@
 #             # If initialing from EMA-only checkpoint, create EMA model after loading.
 #             if self.use_ema and not load_ema:
 #                 self.model_ema = LitEma(self.model)
-#                 print(f"Keeping EMAs of {len(list(self.model_ema.buffers()))}.")
+#                 #print(f"Keeping EMAs of {len(list(self.model_ema.buffers()))}.")
 #
 #         self.register_schedule(given_betas=given_betas, beta_schedule=beta_schedule, timesteps=timesteps,
 #                                linear_start=linear_start, linear_end=linear_end, cosine_s=cosine_s)
@@ -190,14 +190,14 @@
 #             self.model_ema.store(self.model.parameters())
 #             self.model_ema.copy_to(self.model)
 #             if context is not None:
-#                 print(f"{context}: Switched to EMA weights")
+#                 #print(f"{context}: Switched to EMA weights")
 #         try:
 #             yield None
 #         finally:
 #             if self.use_ema:
 #                 self.model_ema.restore(self.model.parameters())
 #                 if context is not None:
-#                     print(f"{context}: Restored training weights")
+#                     #print(f"{context}: Restored training weights")
 #
 #     def init_from_ckpt(self, path, ignore_keys=None, only_model=False):
 #         ignore_keys = ignore_keys or []
@@ -222,7 +222,7 @@
 #             input_weight = self_sd[input_key]
 #
 #             if input_weight.size() != sd[input_key].size():
-#                 print(f"Manual init: {input_key}")
+#                 #print(f"Manual init: {input_key}")
 #                 input_weight.zero_()
 #                 input_weight[:, :4, :, :].copy_(sd[input_key])
 #                 ignore_keys.append(input_key)
@@ -230,15 +230,15 @@
 #         for k in keys:
 #             for ik in ignore_keys:
 #                 if k.startswith(ik):
-#                     print(f"Deleting key {k} from state_dict.")
+#                     #print(f"Deleting key {k} from state_dict.")
 #                     del sd[k]
 #         missing, unexpected = self.load_state_dict(sd, strict=False) if not only_model else self.model.load_state_dict(
 #             sd, strict=False)
-#         print(f"Restored from {path} with {len(missing)} missing and {len(unexpected)} unexpected keys")
+#         #print(f"Restored from {path} with {len(missing)} missing and {len(unexpected)} unexpected keys")
 #         if missing:
-#             print(f"Missing Keys: {missing}")
+#             #print(f"Missing Keys: {missing}")
 #         if unexpected:
-#             print(f"Unexpected Keys: {unexpected}")
+#             #print(f"Unexpected Keys: {unexpected}")
 #
 #     def q_mean_variance(self, x_start, t):
 #         """
@@ -505,7 +505,7 @@
 #
 #             if self.use_ema and not load_ema:
 #                 self.model_ema = LitEma(self.model)
-#                 print(f"Keeping EMAs of {len(list(self.model_ema.buffers()))}.")
+#                 #print(f"Keeping EMAs of {len(list(self.model_ema.buffers()))}.")
 #
 #     def make_cond_schedule(self, ):
 #         self.cond_ids = torch.full(size=(self.num_timesteps,), fill_value=self.num_timesteps - 1, dtype=torch.long)
@@ -519,15 +519,15 @@
 #         if self.scale_by_std and self.current_epoch == 0 and self.global_step == 0 and batch_idx == 0 and not self.restarted_from_ckpt:
 #             assert self.scale_factor == 1., 'rather not use custom rescaling and std-rescaling simultaneously'
 #             # set rescale weight to 1./std of encodings
-#             print("### USING STD-RESCALING ###")
+#             #print("### USING STD-RESCALING ###")
 #             x = super().get_input(batch, self.first_stage_key)
 #             x = x.to(self.device)
 #             encoder_posterior = self.encode_first_stage(x)
 #             z = self.get_first_stage_encoding(encoder_posterior).detach()
 #             del self.scale_factor
 #             self.register_buffer('scale_factor', 1. / z.flatten().std())
-#             print(f"setting self.scale_factor to {self.scale_factor}")
-#             print("### USING STD-RESCALING ###")
+#             #print(f"setting self.scale_factor to {self.scale_factor}")
+#             #print("### USING STD-RESCALING ###")
 #
 #     def register_schedule(self,
 #                           given_betas=None, beta_schedule="linear", timesteps=1000,
@@ -548,10 +548,10 @@
 #     def instantiate_cond_stage(self, config):
 #         if not self.cond_stage_trainable:
 #             if config == "__is_first_stage__":
-#                 print("Using first stage also as cond stage.")
+#                 #print("Using first stage also as cond stage.")
 #                 self.cond_stage_model = self.first_stage_model
 #             elif config == "__is_unconditional__":
-#                 print(f"Training {self.__class__.__name__} as an unconditional model.")
+#                 #print(f"Training {self.__class__.__name__} as an unconditional model.")
 #                 self.cond_stage_model = None
 #                 # self.be_unconditional = True
 #             else:
@@ -740,11 +740,11 @@
 #                 bs, nc, h, w = z.shape
 #                 if ks[0] > h or ks[1] > w:
 #                     ks = (min(ks[0], h), min(ks[1], w))
-#                     print("reducing Kernel")
+#                     #print("reducing Kernel")
 #
 #                 if stride[0] > h or stride[1] > w:
 #                     stride = (min(stride[0], h), min(stride[1], w))
-#                     print("reducing stride")
+#                     #print("reducing stride")
 #
 #                 fold, unfold, normalization, weighting = self.get_fold_unfold(z, ks, stride, uf=uf)
 #
@@ -800,11 +800,11 @@
 #                 bs, nc, h, w = z.shape
 #                 if ks[0] > h or ks[1] > w:
 #                     ks = (min(ks[0], h), min(ks[1], w))
-#                     print("reducing Kernel")
+#                     #print("reducing Kernel")
 #
 #                 if stride[0] > h or stride[1] > w:
 #                     stride = (min(stride[0], h), min(stride[1], w))
-#                     print("reducing stride")
+#                     #print("reducing stride")
 #
 #                 fold, unfold, normalization, weighting = self.get_fold_unfold(z, ks, stride, uf=uf)
 #
@@ -853,11 +853,11 @@
 #                 bs, nc, h, w = x.shape
 #                 if ks[0] > h or ks[1] > w:
 #                     ks = (min(ks[0], h), min(ks[1], w))
-#                     print("reducing Kernel")
+#                     #print("reducing Kernel")
 #
 #                 if stride[0] > h or stride[1] > w:
 #                     stride = (min(stride[0], h), min(stride[1], w))
-#                     print("reducing stride")
+#                     #print("reducing stride")
 #
 #                 fold, unfold, normalization, weighting = self.get_fold_unfold(x, ks, stride, df=df)
 #                 z = unfold(x)  # (bn, nc * prod(**ks), L)
@@ -962,19 +962,19 @@
 #                 # tokenize crop coordinates for the bounding boxes of the respective patches
 #                 patch_limits_tknzd = [torch.LongTensor(self.bbox_tokenizer._crop_encoder(bbox))[None].to(self.device)
 #                                       for bbox in patch_limits]  # list of length l with tensors of shape (1, 2)
-#                 print(patch_limits_tknzd[0].shape)
+#                 #print(patch_limits_tknzd[0].shape)
 #                 # cut tknzd crop position from conditioning
 #                 assert isinstance(cond, dict), 'cond must be dict to be fed into model'
 #                 cut_cond = cond['c_crossattn'][0][..., :-2].to(self.device)
-#                 print(cut_cond.shape)
+#                 #print(cut_cond.shape)
 #
 #                 adapted_cond = torch.stack([torch.cat([cut_cond, p], dim=1) for p in patch_limits_tknzd])
 #                 adapted_cond = rearrange(adapted_cond, 'l b n -> (l b) n')
-#                 print(adapted_cond.shape)
+#                 #print(adapted_cond.shape)
 #                 adapted_cond = self.get_learned_conditioning(adapted_cond)
-#                 print(adapted_cond.shape)
+#                 #print(adapted_cond.shape)
 #                 adapted_cond = rearrange(adapted_cond, '(l b) n d -> l b n d', l=z.shape[-1])
-#                 print(adapted_cond.shape)
+#                 #print(adapted_cond.shape)
 #
 #                 cond_list = [{'c_crossattn': [e]} for e in adapted_cond]
 #
@@ -1377,17 +1377,17 @@
 #         lr = self.learning_rate
 #         params = list(self.model.parameters())
 #         if self.cond_stage_trainable:
-#             print(f"{self.__class__.__name__}: Also optimizing conditioner params!")
+#             #print(f"{self.__class__.__name__}: Also optimizing conditioner params!")
 #             params = params + list(self.cond_stage_model.parameters())
 #         if self.learn_logvar:
-#             print('Diffusion model optimizing logvar')
+#             #print('Diffusion model optimizing logvar')
 #             params.append(self.logvar)
 #         opt = torch.optim.AdamW(params, lr=lr)
 #         if self.use_scheduler:
 #             assert 'target' in self.scheduler_config
 #             scheduler = instantiate_from_config(self.scheduler_config)
 #
-#             print("Setting up LambdaLR scheduler...")
+#             #print("Setting up LambdaLR scheduler...")
 #             scheduler = [
 #                 {
 #                     'scheduler': LambdaLR(opt, lr_lambda=scheduler.schedule),

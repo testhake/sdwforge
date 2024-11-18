@@ -4,7 +4,7 @@ Usage:
 
 ```
 g = Generator(seed=0)
-print(g.randn(shape=(3, 4)))
+#print(g.randn(shape=(3, 4)))
 ```
 
 Expected output:

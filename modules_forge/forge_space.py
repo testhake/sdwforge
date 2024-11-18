@@ -58,7 +58,7 @@ def remove_dir(dir_path):
             try:
                 os.remove(file_path)
             except Exception as e:
-                print(f"Error removing file {file_path}: {e}")
+                #print(f"Error removing file {file_path}: {e}")
 
         for name in dirs:
             dir_to_remove = os.path.join(root, name)
@@ -66,13 +66,13 @@ def remove_dir(dir_path):
             try:
                 os.rmdir(dir_to_remove)
             except Exception as e:
-                print(f"Error removing directory {dir_to_remove}: {e}")
+                #print(f"Error removing directory {dir_to_remove}: {e}")
 
     try:
         os.rmdir(dir_path)
-        print(f"Deleted: {dir_path}")
+        #print(f"Deleted: {dir_path}")
     except Exception as e:
-        print(f"Error removing directory {dir_path}: {e}. You may try to manually delete the folder.")
+        #print(f"Error removing directory {dir_path}: {e}. You may try to manually delete the folder.")
     return
 
 
@@ -143,7 +143,7 @@ class ForgeSpace:
                 allow_patterns=self.allow_patterns,
                 ignore_patterns=self.ignore_patterns
             )
-            print(f'Downloaded: {downloaded}')
+            #print(f'Downloaded: {downloaded}')
 
         requirements_filename = os.path.abspath(os.path.realpath(os.path.join(self.root_path, 'requirements.txt')))
 
@@ -151,13 +151,13 @@ class ForgeSpace:
             from modules.launch_utils import run_pip
             run_pip(f'install -r "{requirements_filename}"', desc=f"space requirements for [{self.title}]")
 
-        print(f'Install finished: {self.title}')
+        #print(f'Install finished: {self.title}')
 
         return self.refresh_gradio()
 
     def uninstall(self):
         remove_dir(self.hf_path)
-        print('Uninstall finished. You can also manually delete some diffusers models in "/models/diffusers" to release more spaces, but those diffusers models may be reused by other spaces or extensions. ')
+        #print('Uninstall finished. You can also manually delete some diffusers models in "/models/diffusers" to release more spaces, but those diffusers models may be reused by other spaces or extensions. ')
         return self.refresh_gradio()
 
     def terminate(self):

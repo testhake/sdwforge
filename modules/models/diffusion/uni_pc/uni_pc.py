@@ -520,7 +520,7 @@ class UniPC:
             return self.multistep_uni_pc_vary_update(x, model_prev_list, t_prev_list, t, order, **kwargs)
 
     def multistep_uni_pc_vary_update(self, x, model_prev_list, t_prev_list, t, order, use_corrector=True):
-        #print(f'using unified predictor-corrector with order {order} (solver type: vary coeff)')
+        ##print(f'using unified predictor-corrector with order {order} (solver type: vary coeff)')
         ns = self.noise_schedule
         assert order <= len(model_prev_list)
 
@@ -564,7 +564,7 @@ class UniPC:
             A_p = C_inv_p
 
         if use_corrector:
-            #print('using corrector')
+            ##print('using corrector')
             C_inv = torch.linalg.inv(C)
             A_c = C_inv
 
@@ -623,7 +623,7 @@ class UniPC:
         return x_t, model_t
 
     def multistep_uni_pc_bh_update(self, x, model_prev_list, t_prev_list, t, order, x_t=None, use_corrector=True):
-        #print(f'using unified predictor-corrector with order {order} (solver type: B(h))')
+        ##print(f'using unified predictor-corrector with order {order} (solver type: B(h))')
         ns = self.noise_schedule
         assert order <= len(model_prev_list)
         dims = x.dim()
@@ -691,7 +691,7 @@ class UniPC:
             D1s = None
 
         if use_corrector:
-            #print('using corrector')
+            ##print('using corrector')
             # for order 1, we use a simplified version
             if order == 1:
                 rhos_c = torch.tensor([0.5], device=b.device)
@@ -753,7 +753,7 @@ class UniPC:
         if method == 'multistep':
             assert steps >= order, "UniPC order must be < sampling steps"
             timesteps = self.get_time_steps(skip_type=skip_type, t_T=t_T, t_0=t_0, N=steps, device=device)
-            #print(f"Running UniPC Sampling with {timesteps.shape[0]} timesteps, order {order}")
+            ##print(f"Running UniPC Sampling with {timesteps.shape[0]} timesteps, order {order}")
             assert timesteps.shape[0] - 1 == steps
             with torch.no_grad():
                 vec_t = timesteps[0].expand((x.shape[0]))
@@ -778,9 +778,9 @@ class UniPC:
                             step_order = min(order, steps + 1 - step)
                         else:
                             step_order = order
-                        #print('this step order:', step_order)
+                        ##print('this step order:', step_order)
                         if step == steps:
-                            #print('do not run corrector at the last step')
+                            ##print('do not run corrector at the last step')
                             use_corrector = False
                         else:
                             use_corrector = True

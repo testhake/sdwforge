@@ -18,7 +18,7 @@ def run(input_path, output_path, model_path, model_type="large"):
         output_path (str): path to output folder
         model_path (str): path to saved model
     """
-    print("initialize")
+    #print("initialize")
 
     # the runtime initialization will not allocate all memory on the device to avoid out of GPU memory
     gpus = tf.config.experimental.list_physical_devices('GPU')
@@ -29,7 +29,7 @@ def run(input_path, output_path, model_path, model_type="large"):
           tf.config.experimental.set_virtual_device_configuration(gpu,
             [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=4000)])
       except RuntimeError as e:
-        print(e)
+        #print(e)
 
     # network resolution
     if model_type == "large":
@@ -37,7 +37,7 @@ def run(input_path, output_path, model_path, model_type="large"):
     elif model_type == "small":
         net_w, net_h = 256, 256
     else:
-        print(f"model_type '{model_type}' not implemented, use: --model_type large")
+        #print(f"model_type '{model_type}' not implemented, use: --model_type large")
         assert False
 
     # load network
@@ -50,7 +50,7 @@ def run(input_path, output_path, model_path, model_type="large"):
     model_operations = tf.compat.v1.get_default_graph().get_operations()
     input_node = '0:0'
     output_layer = model_operations[len(model_operations) - 1].name + ':0'
-    print("Last layer name: ", output_layer)
+    #print("Last layer name: ", output_layer)
 
     resize_image = Resize(
                 net_w,
@@ -74,14 +74,14 @@ def run(input_path, output_path, model_path, model_type="large"):
     # create output folder
     os.makedirs(output_path, exist_ok=True)
 
-    print("start processing")
+    #print("start processing")
 
     with tf.compat.v1.Session() as sess:
       try:
         # load images
         for ind, img_name in enumerate(img_names):
 
-            print("  processing {} ({}/{})".format(img_name, ind + 1, num_images))
+            #print("  processing {} ({}/{})".format(img_name, ind + 1, num_images))
 
             # input
             img = utils.read_image(img_name)
@@ -103,7 +103,7 @@ def run(input_path, output_path, model_path, model_type="large"):
         print ("Couldn't find input node: ' + input_node + ' or output layer: " + output_layer + ".")
         exit(-1)
 
-    print("finished")
+    #print("finished")
 
 
 if __name__ == "__main__":

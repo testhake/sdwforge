@@ -121,7 +121,7 @@ class ProfilerHook(Hook):
             if trace_type == 'log_trace':
 
                 def _log_handler(prof):
-                    print(prof.key_averages().table(**trace_cfg))
+                    #print(prof.key_averages().table(**trace_cfg))
 
                 _on_trace_ready = _log_handler
             elif trace_type == 'tb_trace':  # tensorboard_trace handler

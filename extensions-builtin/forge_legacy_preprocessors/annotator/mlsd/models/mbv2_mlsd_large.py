@@ -113,7 +113,7 @@ class ConvBNReLU(nn.Sequential):
         # TFLite uses  different padding
         if self.stride == 2:
             x = F.pad(x, (0, 1, 0, 1), "constant", 0)
-            #print(x.shape)
+            ##print(x.shape)
 
         for module in self:
             if not isinstance(module, nn.MaxPool2d):

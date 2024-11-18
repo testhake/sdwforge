@@ -82,4 +82,4 @@ if __name__ == '__main__':
     model = Baseline()
     x = torch.rand(2, 3, 480, 640)
     out = model(x)
-    print(out.shape)
+    #print(out.shape)

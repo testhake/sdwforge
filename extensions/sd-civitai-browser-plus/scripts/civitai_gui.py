@@ -41,7 +41,7 @@ if not forge:
             ver = ver.split('-')[0].rsplit('-', 1)[0]
             ver_bool = version.parse(ver[0:]) >= version.parse("1.7")
     except ImportError:
-        print("Python module 'packaging' has not been imported correctly, please try to restart or install it manually.")
+        #print("Python module 'packaging' has not been imported correctly, please try to restart or install it manually.")
         ver_bool = False
 
 gl.init()
@@ -70,8 +70,8 @@ def saveSettings(ust, ct, pt, st, bf, cj, td, ol, hi, sn, ss, ts):
         with open(config, "r", encoding="utf8") as file:
             data = json.load(file)
     except:
-        print(f"Cannot save settings, failed to open \"{file}\"")
-        print("Please try to manually repair the file or remove it to reset settings.")
+        #print(f"Cannot save settings, failed to open \"{file}\"")
+        #print("Please try to manually repair the file or remove it to reset settings.")
         return
 
     # Remove any keys containing the text `civitai_interface`
@@ -85,7 +85,7 @@ def saveSettings(ust, ct, pt, st, bf, cj, td, ol, hi, sn, ss, ts):
     # Save the modified content back to the file
     with open(config, 'w', encoding="utf-8") as file:
         json.dump(data, file, indent=4)
-        print(f"Updated settings to: {config}")
+        #print(f"Updated settings to: {config}")
 
 def all_visible(html_check):
     return gr.Button.update(visible="model-checkbox" in html_check)
@@ -154,14 +154,14 @@ def get_base_models():
     "Stable Cascade","Pony","SVD","SVD XT","Playground v2","PixArt a", "Flux.1 S", "Flux.1 D","Other"]
     
     if not isinstance(json_return, dict):
-        print("Couldn't fetch latest baseModel options, using default.")
+        #print("Couldn't fetch latest baseModel options, using default.")
         return default_options
     
     try:
         options = json_return['error']['issues'][0]['unionErrors'][0]['issues'][0]['options']
         return options
     except (KeyError, IndexError) as e:
-        print(f"Basemodel fetch error extracting options: {e}")
+        #print(f"Basemodel fetch error extracting options: {e}")
         return default_options
 
 def on_ui_tabs():    

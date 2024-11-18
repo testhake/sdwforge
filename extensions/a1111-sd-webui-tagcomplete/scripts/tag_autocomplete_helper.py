@@ -39,7 +39,7 @@ try:
     if int(db.version) != int(tdb.db_ver):
         raise ValueError("Database version mismatch")
 except (ImportError, ValueError, sqlite3.Error) as e:
-    print(f"Tag Autocomplete: Tag frequency database error - \"{e}\"")
+    #print(f"Tag Autocomplete: Tag frequency database error - \"{e}\"")
     db = None
 
 def get_embed_db(sd_model=None):
@@ -70,7 +70,7 @@ try:
         load_textual_inversion_embeddings = lambda *args, **kwargs: None
 except Exception as e: # Not supported.
     load_textual_inversion_embeddings = lambda *args, **kwargs: None
-    print("Tag Autocomplete: Cannot reload embeddings instantly:", e)
+    #print("Tag Autocomplete: Cannot reload embeddings instantly:", e)
 
 # Sorting functions for extra networks / embeddings stuff
 sort_criteria = {
@@ -189,10 +189,10 @@ def get_yaml_wildcards():
                     else:
                         parse_dynamic_prompt_format(yaml_wildcards, data, path)
                 else:
-                    print('No data found in ' + path.name)
+                    #print('No data found in ' + path.name)
         except (yaml.YAMLError, UnicodeDecodeError, AttributeError, TypeError) as e:
             # YAML file not in wildcard format or couldn't be read
-            print(f'Issue in parsing YAML file {path.name}: {e}')
+            #print(f'Issue in parsing YAML file {path.name}: {e}')
             continue
         except Exception as e:
             # Something else went wrong, just skip
@@ -267,7 +267,7 @@ def get_embeddings(sd_model):
 
         results = sort_models(emb_v1) + sort_models(emb_v2) + sort_models(emb_vXL) + sort_models(emb_unknown)
     except AttributeError:
-        print("tag_autocomplete_helper: Old webui version or unrecognized model shape, using fallback for embedding completion.")
+        #print("tag_autocomplete_helper: Old webui version or unrecognized model shape, using fallback for embedding completion.")
         # Get a list of all embeddings in the folder
         all_embeds = [str(e.relative_to(EMB_PATH)) for e in EMB_PATH.rglob("*") if e.suffix in {".bin", ".pt", ".png",'.webp', '.jxl', '.avif'} and e.is_file()]
         # Remove files with a size of 0
@@ -353,7 +353,7 @@ try:
 except Exception as e:
     pass
     # no need to report
-    # print(f'Exception setting-up performant fetchers: {e}')
+    # #print(f'Exception setting-up performant fetchers: {e}')
 
 
 def is_visible(p: Path) -> bool:
@@ -535,7 +535,7 @@ def write_temp_files(skip_wildcard_refresh = False):
         if lyco:
             write_to_temp_file('lyco.txt', lyco)
     elif lyco_exists and lora_exists and LYCO_PATH.samefile(LORA_PATH):
-        print("tag_autocomplete_helper: LyCORIS path is the same as LORA path, skipping")
+        #print("tag_autocomplete_helper: LyCORIS path is the same as LORA path, skipping")
 
     if model_keyword_installed:
         update_hash_cache()

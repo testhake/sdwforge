@@ -643,7 +643,7 @@ _C.VIS_PERIOD = 0
 # and access it with:
 #
 # from annotator.oneformer.detectron2.config import global_cfg
-# print(global_cfg.HACK)
+# #print(global_cfg.HACK)
 #
 # Do not commit any configs into it.
 _C.GLOBAL = CN()

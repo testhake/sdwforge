@@ -24,5 +24,5 @@ with open(req_file) as file:
             elif not launch.is_installed(dist2package(package)):
                 launch.run_pip(f"install {package}", f"sd-webui-infinite-image-browsing requirement: {package}")
         except Exception as e:
-            print(e)
-            print(f'Warning: Failed to install {package}, something may not work.')
+            #print(e)
+            #print(f'Warning: Failed to install {package}, something may not work.')

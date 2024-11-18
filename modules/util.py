@@ -51,11 +51,11 @@ def walk_files(path, allowed_extensions=None):
             yield os.path.join(root, filename)
 
 
-def ldm_print(*args, **kwargs):
+def ldm_#print(*args, **kwargs):
     if shared.opts.hide_ldm_prints:
         return
 
-    print(*args, **kwargs)
+    #print(*args, **kwargs)
 
 
 def truncate_path(target_path, base_path=cwd):
@@ -90,7 +90,7 @@ class MassFileListerCachedDir:
             self.files[filename.lower()] = entry
             self.files_cased[filename] = entry
         except FileNotFoundError as e:
-            print(f'MassFileListerCachedDir.add_entry: "{file_path}" {e}')
+            #print(f'MassFileListerCachedDir.add_entry: "{file_path}" {e}')
 
 
 class MassFileLister:
@@ -188,7 +188,7 @@ def open_folder(path):
 
     if not os.path.exists(path):
         msg = f'Folder "{path}" does not exist. after you save an image, the folder will be created.'
-        print(msg)
+        #print(msg)
         gr.Info(msg)
         return
     elif not os.path.isdir(path):
@@ -198,7 +198,7 @@ An open_folder request was made with an path that is not a folder.
 This could be an error or a malicious attempt to run code on your computer.
 Requested path was: {path}
 """
-        print(msg, file=sys.stderr)
+        #print(msg, file=sys.stderr)
         gr.Warning(msg)
         return
 
@@ -244,7 +244,7 @@ def load_file_from_url(
     if re_download or not os.path.exists(cached_file):
         os.makedirs(model_dir, exist_ok=True)
         temp_file = os.path.join(model_dir, f"{file_name}.tmp")
-        print(f'\nDownloading: "{url}" to {cached_file}')
+        #print(f'\nDownloading: "{url}" to {cached_file}')
         response = requests.get(url, stream=True)
         response.raise_for_status()
         total_size = int(response.headers.get('content-length', 0))
@@ -256,7 +256,7 @@ def load_file_from_url(
                         progress_bar.update(len(chunk))
 
         if hash_prefix and not compare_sha256(temp_file, hash_prefix):
-            print(f"Hash mismatch for {temp_file}. Deleting the temporary file.")
+            #print(f"Hash mismatch for {temp_file}. Deleting the temporary file.")
             os.remove(temp_file)
             raise ValueError(f"File hash does not match the expected hash prefix {hash_prefix}!")
 

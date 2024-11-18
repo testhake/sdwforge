@@ -86,7 +86,7 @@ def try_cuda_malloc():
 
         os.environ['PYTORCH_CUDA_ALLOC_CONF'] = env_var
 
-        print('Using cudaMallocAsync backend.')
+        #print('Using cudaMallocAsync backend.')
     else:
-        print('Failed to use cudaMallocAsync backend.')
+        #print('Failed to use cudaMallocAsync backend.')
     return

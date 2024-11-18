@@ -210,7 +210,7 @@ def attention_split(q, k, v, heads, mask=None, attn_precision=None, skip_reshape
 
     if mem_required > mem_free_total:
         steps = 2 ** (math.ceil(math.log(mem_required / mem_free_total, 2)))
-        # print(f"Expected tensor size:{tensor_size/gb:0.1f}GB, cuda free:{mem_free_cuda/gb:0.1f}GB "
+        # #print(f"Expected tensor size:{tensor_size/gb:0.1f}GB, cuda free:{mem_free_cuda/gb:0.1f}GB "
         #      f"torch free:{mem_free_torch/gb:0.1f} total:{mem_free_total/gb:0.1f} steps:{steps}")
 
     if steps > 64:
@@ -225,7 +225,7 @@ def attention_split(q, k, v, heads, mask=None, attn_precision=None, skip_reshape
             bs = mask.shape[0]
         mask = mask.reshape(bs, -1, mask.shape[-2], mask.shape[-1]).expand(b, heads, -1, -1).reshape(-1, mask.shape[-2], mask.shape[-1])
 
-    # print("steps", steps, mem_required, mem_free_total, modifier, q.element_size(), tensor_size)
+    # #print("steps", steps, mem_required, mem_free_total, modifier, q.element_size(), tensor_size)
     first_op_done = False
     cleared_cache = False
     while True:
@@ -257,12 +257,12 @@ def attention_split(q, k, v, heads, mask=None, attn_precision=None, skip_reshape
                 memory_management.soft_empty_cache(True)
                 if cleared_cache == False:
                     cleared_cache = True
-                    print("out of memory error, emptying cache and trying again")
+                    #print("out of memory error, emptying cache and trying again")
                     continue
                 steps *= 2
                 if steps > 64:
                     raise e
-                print("out of memory error, increasing steps and trying again {}".format(steps))
+                #print("out of memory error, increasing steps and trying again {}".format(steps))
             else:
                 raise e
 
@@ -372,7 +372,7 @@ def slice_attention_single_head_spatial(q, k, v):
             steps *= 2
             if steps > 128:
                 raise e
-            print("out of memory error, increasing steps and trying again {}".format(steps))
+            #print("out of memory error, increasing steps and trying again {}".format(steps))
 
     return r1
 
@@ -421,33 +421,33 @@ def pytorch_attention_single_head_spatial(q, k, v):
         out = torch.nn.functional.scaled_dot_product_attention(q, k, v, attn_mask=None, dropout_p=0.0, is_causal=False)
         out = out.transpose(2, 3).reshape(B, C, H, W)
     except memory_management.OOM_EXCEPTION as e:
-        print("scaled_dot_product_attention OOMed: switched to slice attention")
+        #print("scaled_dot_product_attention OOMed: switched to slice attention")
         out = slice_attention_single_head_spatial(q.view(B, -1, C), k.view(B, -1, C).transpose(1, 2),
                                                   v.view(B, -1, C).transpose(1, 2)).reshape(B, C, H, W)
     return out
 
 
 if memory_management.xformers_enabled():
-    print("Using xformers cross attention")
+    #print("Using xformers cross attention")
     attention_function = attention_xformers
 elif memory_management.pytorch_attention_enabled():
-    print("Using pytorch cross attention")
+    #print("Using pytorch cross attention")
     attention_function = attention_pytorch
 elif args.attention_split:
-    print("Using split optimization for cross attention")
+    #print("Using split optimization for cross attention")
     attention_function = attention_split
 else:
-    print("Using sub quadratic optimization for cross attention")
+    #print("Using sub quadratic optimization for cross attention")
     attention_function = attention_sub_quad
 
 if memory_management.xformers_enabled_vae():
-    print("Using xformers attention for VAE")
+    #print("Using xformers attention for VAE")
     attention_function_single_head_spatial = xformers_attention_single_head_spatial
 elif memory_management.pytorch_attention_enabled():
-    print("Using pytorch attention for VAE")
+    #print("Using pytorch attention for VAE")
     attention_function_single_head_spatial = pytorch_attention_single_head_spatial
 else:
-    print("Using split attention for VAE")
+    #print("Using split attention for VAE")
     attention_function_single_head_spatial = normal_attention_single_head_spatial
 
 

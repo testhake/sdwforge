@@ -26,7 +26,7 @@ class video_show:
         try:
             cv_image = self.bridge.imgmsg_to_cv2(data)
         except CvBridgeError as e:
-            print(e)
+            #print(e)
             return
 
         if cv_image.size == 0:
@@ -54,7 +54,7 @@ def main(args):
     try:
         rospy.spin()
     except KeyboardInterrupt:
-        print("Shutting down")
+        #print("Shutting down")
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':

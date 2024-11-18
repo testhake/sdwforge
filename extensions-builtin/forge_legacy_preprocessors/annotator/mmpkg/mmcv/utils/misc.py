@@ -231,7 +231,7 @@ def check_prerequisites(
                 if not checker(item):
                     missing.append(item)
             if missing:
-                print(msg_tmpl.format(', '.join(missing), func.__name__))
+                #print(msg_tmpl.format(', '.join(missing), func.__name__))
                 raise RuntimeError('Prerequisites not meet.')
             else:
                 return func(*args, **kwargs)
@@ -279,7 +279,7 @@ def requires_executable(prerequisites):
     Example:
         >>> @requires_executable('ffmpeg')
         >>> func(arg1, args):
-        >>>     print(1)
+        >>>     #print(1)
         1
     """
     return check_prerequisites(prerequisites, checker=_check_executable)

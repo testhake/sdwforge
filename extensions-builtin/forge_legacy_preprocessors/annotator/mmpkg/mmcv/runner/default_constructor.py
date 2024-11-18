@@ -25,7 +25,7 @@ class DefaultRunnerConstructor:
         ...                                default_args=self.default_args)
         ...         # Add new properties for existing runner
         ...         runner.my_name = 'my_runner'
-        ...         runner.my_function = lambda self: print(self.my_name)
+        ...         runner.my_function = lambda self: #print(self.my_name)
         ...         ...
         >>> # build your runner
         >>> runner_cfg = dict(type='EpochBasedRunner', max_epochs=40,

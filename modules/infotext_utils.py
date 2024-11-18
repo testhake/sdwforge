@@ -297,7 +297,7 @@ Steps: 20, Sampler: Euler a, CFG scale: 7, Seed: 965400086, Size: 512x512, Model
         # Civitai also confuse CFG scale and Distilled CFG Scale
         lastline = lastline.replace('CFG scale: ', 'CFG scale: 1, Distilled CFG Scale: ')
 
-        print('Applied Forge Fix to broken Civitai Flux Meta.')
+        #print('Applied Forge Fix to broken Civitai Flux Meta.')
 
     for k, v in re_param.findall(lastline):
         try:
@@ -311,7 +311,7 @@ Steps: 20, Sampler: Euler a, CFG scale: 7, Seed: 965400086, Size: 512x512, Model
             else:
                 res[k] = v
         except Exception:
-            print(f"Error parsing \"{k}: {v}\"")
+            #print(f"Error parsing \"{k}: {v}\"")
 
     # Extract styles from prompt
     if shared.opts.infotext_styles != "Ignore":

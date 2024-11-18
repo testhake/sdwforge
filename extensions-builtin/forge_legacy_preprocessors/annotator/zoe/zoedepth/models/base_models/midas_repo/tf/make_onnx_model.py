@@ -67,7 +67,7 @@ def run(model_path):
     Args:
         model_path (str): path to saved model
     """
-    print("initialize")
+    #print("initialize")
 
     # select device
 
@@ -77,7 +77,7 @@ def run(model_path):
 
     model.eval()
     
-    print("start processing")
+    #print("start processing")
 
     # input
     img_input = np.zeros((3, 384, 384), np.float32)  
@@ -100,7 +100,7 @@ def run(model_path):
 
     torch.onnx.export(model, sample, ntpath.basename(model_path).rsplit('.', 1)[0]+'.onnx', opset_version=9)    
     
-    print("finished")
+    #print("finished")
 
 
 if __name__ == "__main__":

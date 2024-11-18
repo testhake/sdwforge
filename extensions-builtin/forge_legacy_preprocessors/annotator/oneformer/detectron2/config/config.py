@@ -116,7 +116,7 @@ def set_global_cfg(cfg: CfgNode) -> None:
     `set_global_cfg(cfg)`, the key can be accessed by:
     ::
         from annotator.oneformer.detectron2.config import global_cfg
-        print(global_cfg.KEY)
+        #print(global_cfg.KEY)
 
     By using a hacky global config, you can access these configs anywhere,
     without having to pass the config object or the values deep into the code.

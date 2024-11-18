@@ -284,13 +284,13 @@ if __name__ == '__main__':
     device = "cpu"
     input = torch.rand(batch_size, 3, img_height, img_width).to(device)
     # target = torch.rand(batch_size, 1, img_height, img_width).to(device)
-    print(f"input shape: {input.shape}")
+    #print(f"input shape: {input.shape}")
     model = TED().to(device)
     output = model(input)
-    print(f"output shapes: {[t.shape for t in output]}")
+    #print(f"output shapes: {[t.shape for t in output]}")
 
     # for i in range(20000):
-    #     print(i)
+    #     #print(i)
     #     output = model(input)
     #     loss = nn.MSELoss()(output[-1], target)
     #     loss.backward()

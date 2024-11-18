@@ -34,7 +34,7 @@ def load_fooocus_patch(lora: dict, to_load: dict):
             loaded_keys.add(key)
 
     not_loaded = sum(1 for x in lora if x not in loaded_keys)
-    print(f"[Fooocus Patch Loader] {len(loaded_keys)} keys loaded, {not_loaded} remaining keys not found in model.")
+    #print(f"[Fooocus Patch Loader] {len(loaded_keys)} keys loaded, {not_loaded} remaining keys not found in model.")
     return patch_dict
 
 
@@ -46,7 +46,7 @@ def calculate_weight_fooocus(weight, alpha, v):
         w1 = (w1 / 255.0) * (w_max - w_min) + w_min
         weight += alpha * cast_to_device(w1, weight.device, weight.dtype)
     else:
-        print(f"[Fooocus Patch Loader] weight not merged ({w1.shape} != {weight.shape})")
+        #print(f"[Fooocus Patch Loader] weight not merged ({w1.shape} != {weight.shape})")
     return weight
 
 
@@ -101,7 +101,7 @@ class FooocusInpaintPatcher(ControlModelPatcher):
         not_patched_count = sum(1 for x in loaded_lora if x not in patched)
 
         if not_patched_count > 0:
-            print(f"[Fooocus Patch Loader] Failed to load {not_patched_count} keys")
+            #print(f"[Fooocus Patch Loader] Failed to load {not_patched_count} keys")
 
         sigma_start = unet.model.predictor.percent_to_sigma(self.start_percent)
         sigma_end = unet.model.predictor.percent_to_sigma(self.end_percent)

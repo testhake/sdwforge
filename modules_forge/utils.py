@@ -12,12 +12,12 @@ from backend import memory_management
 def prepare_free_memory(aggressive=False):
     if aggressive:
         memory_management.unload_all_models()
-        print('Cleanup all memory.')
+        #print('Cleanup all memory.')
         return
 
     memory_management.free_memory(memory_required=memory_management.minimum_inference_memory(),
                                  device=memory_management.get_torch_device())
-    print('Cleanup minimal inference memory.')
+    #print('Cleanup minimal inference memory.')
     return
 
 
@@ -25,7 +25,7 @@ def apply_circular_forge(model, tiling_enabled=False):
     if model.tiling_enabled == tiling_enabled:
         return
 
-    print(f'Tiling: {tiling_enabled}')
+    #print(f'Tiling: {tiling_enabled}')
     model.tiling_enabled = tiling_enabled
 
     # def flatten(el):
@@ -40,7 +40,7 @@ def apply_circular_forge(model, tiling_enabled=False):
     # for layer in [layer for layer in layers if 'Conv' in type(layer).__name__]:
     #     layer.padding_mode = 'circular' if tiling_enabled else 'zeros'
 
-    print(f'Tiling is currently under maintenance and unavailable. Sorry for the inconvenience.')
+    #print(f'Tiling is currently under maintenance and unavailable. Sorry for the inconvenience.')
 
     return
 

@@ -26,12 +26,12 @@ class Timer:
     it takes 1.0 seconds
     >>> timer = mmcv.Timer()
     >>> time.sleep(0.5)
-    >>> print(timer.since_start())
+    >>> #print(timer.since_start())
     0.500
     >>> time.sleep(0.5)
-    >>> print(timer.since_last_check())
+    >>> #print(timer.since_last_check())
     0.500
-    >>> print(timer.since_start())
+    >>> #print(timer.since_start())
     1.000
     """
 
@@ -51,7 +51,7 @@ class Timer:
         return self
 
     def __exit__(self, type, value, traceback):
-        print(self.print_tmpl.format(self.since_last_check()))
+        #print(self.print_tmpl.format(self.since_last_check()))
         self._is_running = False
 
     def start(self):

@@ -325,7 +325,7 @@ class Face(object):
         self.model.load_state_dict(torch.load(face_model_path))
         # if torch.cuda.is_available():
         #     self.model = self.model.cuda()
-            # print('cuda')
+            # #print('cuda')
         self.model.eval()
 
     def __call__(self, face_img):

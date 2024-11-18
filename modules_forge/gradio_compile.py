@@ -16,17 +16,17 @@ def gradio_compile(items, prefix):
             min = int(d['min'])
             max = int(d['max'])
             step = int(d.get('step', 1))
-            print(f'{name} = gr.Slider(label=\'{title}\', minimum={min}, maximum={max}, step={step}, value={default})')
+            #print(f'{name} = gr.Slider(label=\'{title}\', minimum={min}, maximum={max}, step={step}, value={default})')
             names.append(name)
         elif t == 'FLOAT':
             default = float(d['default'])
             min = float(d['min'])
             max = float(d['max'])
             step = float(d.get('step', 0.001))
-            print(f'{name} = gr.Slider(label=\'{title}\', minimum={min}, maximum={max}, step={step}, value={default})')
+            #print(f'{name} = gr.Slider(label=\'{title}\', minimum={min}, maximum={max}, step={step}, value={default})')
             names.append(name)
         elif isinstance(t, list):
-            print(f'{name} = gr.Radio(label=\'{title}\', choices={str(t)}, value=\'{t[0]}\')')
+            #print(f'{name} = gr.Radio(label=\'{title}\', choices={str(t)}, value=\'{t[0]}\')')
             names.append(name)
         elif t == 'MODEL':
             pass
@@ -41,17 +41,17 @@ def gradio_compile(items, prefix):
         elif t == 'VAE':
             pass
         else:
-            print('error ' + str(t))
+            #print('error ' + str(t))
 
     return ['enabled'] + names
 
 
 def print_info_text(name_list, prefix):
-    print(', '.join(name_list))
-    print('p.extra_generation_params.update(dict(')
+    #print(', '.join(name_list))
+    #print('p.extra_generation_params.update(dict(')
     for n in name_list:
-        print(prefix + '_' + n + ' = ' + n + ', ')
-    print(')')
+        #print(prefix + '_' + n + ' = ' + n + ', ')
+    #print(')')
     return
 
 
@@ -60,5 +60,5 @@ def print_info_text(name_list, prefix):
 # ps += gradio_compile(SVD_img2vid_Conditioning.INPUT_TYPES(), prefix='')
 # ps += gradio_compile(KSampler.INPUT_TYPES(), prefix='sampling')
 # ps += gradio_compile(VideoLinearCFGGuidance.INPUT_TYPES(), prefix='guidance')
-# print(', '.join(ps))
+# #print(', '.join(ps))
 # print_info_text(ps, '123')

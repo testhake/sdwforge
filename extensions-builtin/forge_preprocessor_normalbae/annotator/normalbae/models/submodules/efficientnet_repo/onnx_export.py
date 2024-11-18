@@ -59,7 +59,7 @@ def main():
     if args.checkpoint:
         args.pretrained = False
 
-    print("==> Creating PyTorch {} model".format(args.model))
+    #print("==> Creating PyTorch {} model".format(args.model))
     # NOTE exportable=True flag disables autofn/jit scripted activations and uses Conv2dSameExport layers
     # for models using SAME padding
     model = geffnet.create_model(
@@ -82,7 +82,7 @@ def main():
     # scripting it (an approach that should work). Perhaps in a future PyTorch or ONNX versions...
     model(example_input)
 
-    print("==> Exporting model to ONNX format at '{}'".format(args.output))
+    #print("==> Exporting model to ONNX format at '{}'".format(args.output))
     input_names = ["input0"]
     output_names = ["output0"]
     dynamic_axes = {'input0': {0: 'batch'}, 'output0': {0: 'batch'}}
@@ -99,21 +99,21 @@ def main():
         output_names=output_names, keep_initializers_as_inputs=args.keep_init, dynamic_axes=dynamic_axes,
         opset_version=args.opset, operator_export_type=export_type)
 
-    print("==> Loading and checking exported model from '{}'".format(args.output))
+    #print("==> Loading and checking exported model from '{}'".format(args.output))
     onnx_model = onnx.load(args.output)
     onnx.checker.check_model(onnx_model)  # assuming throw on error
-    print("==> Passed")
+    #print("==> Passed")
 
     if args.keep_init and args.aten_fallback:
         import caffe2.python.onnx.backend as onnx_caffe2
         # Caffe2 loading only works properly in newer PyTorch/ONNX combos when
         # keep_initializers_as_inputs and aten_fallback are set to True.
-        print("==> Loading model into Caffe2 backend and comparing forward pass.".format(args.output))
+        #print("==> Loading model into Caffe2 backend and comparing forward pass.".format(args.output))
         caffe2_backend = onnx_caffe2.prepare(onnx_model)
         B = {onnx_model.graph.input[0].name: x.data.numpy()}
         c2_out = caffe2_backend.run(B)[0]
         np.testing.assert_almost_equal(torch_out.data.numpy(), c2_out, decimal=5)
-        print("==> Passed")
+        #print("==> Passed")
 
 
 if __name__ == '__main__':

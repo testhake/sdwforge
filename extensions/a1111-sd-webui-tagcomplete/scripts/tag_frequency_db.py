@@ -22,7 +22,7 @@ def transaction(db=db_file):
         yield cursor
         cursor.execute("COMMIT")
     except sqlite3.Error as e:
-        print("Tag Autocomplete: Frequency database error:", e)
+        #print("Tag Autocomplete: Frequency database error:", e)
     finally:
         if conn:
             conn.close()
@@ -36,11 +36,11 @@ class TagFrequencyDb:
 
     def __check(self):
         if not db_file.exists():
-            print("Tag Autocomplete: Creating frequency database")
+            #print("Tag Autocomplete: Creating frequency database")
             with transaction() as cursor:
                 self.__create_db(cursor)
                 self.__update_db_data(cursor, "version", db_ver)
-            print("Tag Autocomplete: Database successfully created")
+            #print("Tag Autocomplete: Database successfully created")
 
         return self.__get_version()
 

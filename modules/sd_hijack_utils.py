@@ -21,7 +21,7 @@ class CondFunc:
                 orig_func = getattr(resolved_obj, func_path[-1])
                 setattr(resolved_obj, func_path[-1], lambda *args, **kwargs: self(*args, **kwargs))
             except AttributeError:
-                print(f"Warning: Failed to resolve {orig_func} for CondFunc hijack")
+                #print(f"Warning: Failed to resolve {orig_func} for CondFunc hijack")
                 pass
         self.__init__(orig_func, sub_func, cond_func)
         return lambda *args, **kwargs: self(*args, **kwargs)

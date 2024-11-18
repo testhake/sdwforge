@@ -79,7 +79,7 @@ def wrap_gradio_call_no_job(func, extra_outputs=None, add_stats=False):
                 e = main_thread.last_exception
             else:
                 traceback.print_exc()
-                print(e)
+                #print(e)
 
             if extra_outputs_array is None:
                 extra_outputs_array = [None, '']

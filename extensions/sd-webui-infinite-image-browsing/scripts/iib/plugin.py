@@ -29,8 +29,8 @@ try:
             res = plugin.Main()
             plugin_insts.append(res)
             plugin_inst_map[res.source_identifier] = res
-            print(f'IIB loaded plugin: {res.name}')
+            #print(f'IIB loaded plugin: {res.name}')
         except Exception as e:
-            print(f'Error running plugin {plugin.__class__.__name__}: {e}')
+            #print(f'Error running plugin {plugin.__class__.__name__}: {e}')
 except Exception as e:
-    print(f'Error loading plugins: {e}')
+    #print(f'Error loading plugins: {e}')

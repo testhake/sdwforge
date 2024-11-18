@@ -12,7 +12,7 @@ except ImportError:
 
 def load_checkpoint(model, checkpoint_path):
     if checkpoint_path and os.path.isfile(checkpoint_path):
-        print("=> Loading checkpoint '{}'".format(checkpoint_path))
+        #print("=> Loading checkpoint '{}'".format(checkpoint_path))
         checkpoint = torch.load(checkpoint_path)
         if isinstance(checkpoint, dict) and 'state_dict' in checkpoint:
             new_state_dict = OrderedDict()
@@ -25,15 +25,15 @@ def load_checkpoint(model, checkpoint_path):
             model.load_state_dict(new_state_dict)
         else:
             model.load_state_dict(checkpoint)
-        print("=> Loaded checkpoint '{}'".format(checkpoint_path))
+        #print("=> Loaded checkpoint '{}'".format(checkpoint_path))
     else:
-        print("=> Error: No checkpoint found at '{}'".format(checkpoint_path))
+        #print("=> Error: No checkpoint found at '{}'".format(checkpoint_path))
         raise FileNotFoundError()
 
 
 def load_pretrained(model, url, filter_fn=None, strict=True):
     if not url:
-        print("=> Warning: Pretrained model URL is empty, using random initialization.")
+        #print("=> Warning: Pretrained model URL is empty, using random initialization.")
         return
 
     state_dict = load_state_dict_from_url(url, progress=False, map_location='cpu')
@@ -47,12 +47,12 @@ def load_pretrained(model, url, filter_fn=None, strict=True):
     pretrained_in_chans = state_dict[input_conv_weight].shape[1]
     if in_chans != pretrained_in_chans:
         if in_chans == 1:
-            print('=> Converting pretrained input conv {} from {} to 1 channel'.format(
+            #print('=> Converting pretrained input conv {} from {} to 1 channel'.format(
                 input_conv_weight, pretrained_in_chans))
             conv1_weight = state_dict[input_conv_weight]
             state_dict[input_conv_weight] = conv1_weight.sum(dim=1, keepdim=True)
         else:
-            print('=> Discarding pretrained input conv {} since input channel count != {}'.format(
+            #print('=> Discarding pretrained input conv {} since input channel count != {}'.format(
                 input_conv_weight, pretrained_in_chans))
             del state_dict[input_conv_weight]
             strict = False
@@ -60,7 +60,7 @@ def load_pretrained(model, url, filter_fn=None, strict=True):
     classifier_weight = classifier + '.weight'
     pretrained_num_classes = state_dict[classifier_weight].shape[0]
     if num_classes != pretrained_num_classes:
-        print('=> Discarding pretrained classifier since num_classes != {}'.format(pretrained_num_classes))
+        #print('=> Discarding pretrained classifier since num_classes != {}'.format(pretrained_num_classes))
         del state_dict[classifier_weight]
         del state_dict[classifier + '.bias']
         strict = False

@@ -22,12 +22,12 @@ def run(input_path, output_path, model_path, model_type="large"):
         output_path (str): path to output folder
         model_path (str): path to saved model
     """
-    print("initialize")
+    #print("initialize")
 
     # select device
     device = "CUDA:0"
     #device = "CPU"
-    print("device: %s" % device)
+    #print("device: %s" % device)
 
     # network resolution
     if model_type == "large":
@@ -35,11 +35,11 @@ def run(input_path, output_path, model_path, model_type="large"):
     elif model_type == "small":
         net_w, net_h = 256, 256
     else:
-        print(f"model_type '{model_type}' not implemented, use: --model_type large")
+        #print(f"model_type '{model_type}' not implemented, use: --model_type large")
         assert False
 
     # load network
-    print("loading model...")
+    #print("loading model...")
     model = rt.InferenceSession(model_path)
     input_name = model.get_inputs()[0].name
     output_name = model.get_outputs()[0].name
@@ -66,11 +66,11 @@ def run(input_path, output_path, model_path, model_type="large"):
     # create output folder
     os.makedirs(output_path, exist_ok=True)
 
-    print("start processing")
+    #print("start processing")
 
     for ind, img_name in enumerate(img_names):
 
-        print("  processing {} ({}/{})".format(img_name, ind + 1, num_images))
+        #print("  processing {} ({}/{})".format(img_name, ind + 1, num_images))
 
         # input
         img = utils.read_image(img_name)
@@ -87,7 +87,7 @@ def run(input_path, output_path, model_path, model_type="large"):
         )
         utils.write_depth(filename, prediction, bits=2)
 
-    print("finished")
+    #print("finished")
 
 
 if __name__ == "__main__":

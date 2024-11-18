@@ -43,7 +43,7 @@ try:
 
     load_dotenv(os.path.join(cwd, ".env"))
 except Exception as e:
-    print(e)
+    #print(e)
 
 
 
@@ -72,7 +72,7 @@ def backup_db_file(db_file_path):
             file_to_remove = os.path.join(backup_folder, sorted_backup_files[i][0])
             os.remove(file_to_remove)
             
-    print(f"\033[92mIIB Database file has been successfully backed up to the backup folder.\033[0m")
+    #print(f"\033[92mIIB Database file has been successfully backed up to the backup folder.\033[0m")
 
 def get_sd_webui_conf(**kwargs):
     try:
@@ -264,21 +264,21 @@ def get_temp_path():
             os.environ.get("TMPDIR") or os.environ.get("TMP") or os.environ.get("TEMP")
         )
     except Exception as e:
-        print("获取系统环境变量临时文件目录路径失败，错误信息：", e)
+        #print("获取系统环境变量临时文件目录路径失败，错误信息：", e)
 
     # 如果系统环境变量中没有设置临时文件目录路径，则使用 Python 的 tempfile 模块创建临时文件目录
     if not temp_path:
         try:
             temp_path = tempfile.gettempdir()
         except Exception as e:
-            print("使用 Python 的 tempfile 模块创建临时文件目录失败，错误信息：", e)
+            #print("使用 Python 的 tempfile 模块创建临时文件目录失败，错误信息：", e)
 
     # 确保临时文件目录存在
     if not os.path.exists(temp_path):
         try:
             os.makedirs(temp_path)
         except Exception as e:
-            print("创建临时文件目录失败，错误信息：", e)
+            #print("创建临时文件目录失败，错误信息：", e)
 
     return temp_path
 
@@ -576,7 +576,7 @@ def parse_generation_parameters(x: str):
             else:
                 res[k] = v
         except Exception:
-            print(f"Error parsing \"{k}: {v}\"")
+            #print(f"Error parsing \"{k}: {v}\"")
             
     prompt_parse_res = parse_prompt(prompt)
     lora = prompt_parse_res["lora"]

@@ -81,7 +81,7 @@ send_img_path = {"value": ""}
 mem = {"secret_key_hash": None, "extra_paths": [], "all_scanned_paths": []}
 secret_key = os.getenv("IIB_SECRET_KEY")
 if secret_key:
-    print("Secret key loaded successfully. ")
+    #print("Secret key loaded successfully. ")
 
 WRITEABLE_PERMISSIONS = ["read-write", "write-only"]
 
@@ -122,7 +122,7 @@ def infinite_image_browsing_api(app: FastAPI, **kwargs):
     fe_public_path = kwargs.get("fe_public_path") if isinstance(kwargs.get("fe_public_path"), str) else api_base
     cache_base_dir = get_cache_dir()
 
-    # print(f"IIB api_base:{api_base} fe_public_path:{fe_public_path}")
+    # #print(f"IIB api_base:{api_base} fe_public_path:{fe_public_path}")
     if IIB_DEBUG or is_exe_ver:
         @app.exception_handler(Exception)
         async def exception_handler(request: Request, exc: Exception):
@@ -171,7 +171,7 @@ def infinite_image_browsing_api(app: FastAPI, **kwargs):
         try:
             return get_valid_img_dirs(get_sd_webui_conf(**kwargs))
         except Exception as e:
-            print(e)
+            #print(e)
             return []
 
     def update_all_scanned_paths():
@@ -287,7 +287,7 @@ def infinite_image_browsing_api(app: FastAPI, **kwargs):
             update_extra_paths(conn)
             app_fe_setting = GlobalSetting.get_all_settings(conn)
         except Exception as e:
-            print(e)
+            #print(e)
         return {
             "global_setting": get_sd_webui_conf(**kwargs),
             "cwd": cwd,

@@ -44,7 +44,7 @@ class UpscalerSwinIR(Upscaler):
             try:
                 model = self.load_model(model_file)
             except Exception as e:
-                print(f"Failed loading SwinIR model {model_file}: {e}", file=sys.stderr)
+                #print(f"Failed loading SwinIR model {model_file}: {e}", file=sys.stderr)
                 return img
             self._cached_model = model
             self._cached_model_config = current_config

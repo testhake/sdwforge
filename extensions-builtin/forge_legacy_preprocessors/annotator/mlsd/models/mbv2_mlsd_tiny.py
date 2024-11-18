@@ -112,7 +112,7 @@ class ConvBNReLU(nn.Sequential):
         # TFLite uses  different padding
         if self.stride == 2:
             x = F.pad(x, (0, 1, 0, 1), "constant", 0)
-            #print(x.shape)
+            ##print(x.shape)
 
         for module in self:
             if not isinstance(module, nn.MaxPool2d):
@@ -269,7 +269,7 @@ class MobileV2_MLSD_Tiny(nn.Module):
         x = self.block15(x)
         x = self.block16(x)
         x = x[:, 7:, :, :]
-        #print(x.shape)
+        ##print(x.shape)
         x = F.interpolate(x, scale_factor=2.0, mode='bilinear', align_corners=True)
 
         return x

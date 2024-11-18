@@ -274,7 +274,7 @@ class ClassicTextProcessingEngine:
             names = []
 
             for name, embedding in used_embeddings.items():
-                print(f'[Textual Inversion] Used Embedding [{name}] in CLIP of [{self.embedding_key}]')
+                #print(f'[Textual Inversion] Used Embedding [{name}] in CLIP of [{self.embedding_key}]')
                 names.append(name.replace(":", "").replace(",", ""))
 
             if "TI" in last_extra_generation_params:

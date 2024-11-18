@@ -578,9 +578,9 @@ def load_t2i_adapter(t2i_data):
 
     missing, unexpected = model_ad.load_state_dict(t2i_data)
     if len(missing) > 0:
-        print("t2i missing", missing)
+        #print("t2i missing", missing)
 
     if len(unexpected) > 0:
-        print("t2i unexpected", unexpected)
+        #print("t2i unexpected", unexpected)
 
     return T2IAdapter(model_ad, model_ad.input_channels)

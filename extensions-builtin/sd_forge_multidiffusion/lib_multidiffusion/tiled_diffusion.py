@@ -560,7 +560,7 @@ class MixtureOfDiffusers(AbstractDiffusion):
                         # vcond = self.get_vcond(c_in)
                         # vcond_tile_list.append(vcond)
                     else:
-                        print('>> [WARN] not supported, make an issue on github!!')
+                        #print('>> [WARN] not supported, make an issue on github!!')
                 n_rep = len(bboxes)
                 x_tile = torch.cat(x_tile_list, dim=0)  # differs each
                 t_tile = self.repeat_tensor(t_in, n_rep)  # just repeat

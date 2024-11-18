@@ -45,7 +45,7 @@ def update_image_data(search_dirs: List[str], is_rebuild = False):
     def process_folder(folder_path: str):
         if not Folder.check_need_update(conn, folder_path):
             return
-        print(f"Processing folder: {folder_path}")
+        #print(f"Processing folder: {folder_path}")
         for filename in os.listdir(folder_path):
             file_path = os.path.normpath(os.path.join(folder_path, filename))
             try:

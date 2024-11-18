@@ -821,7 +821,7 @@ def setup_ui(ui, gallery):
         # this function is here for backwards compatibility and likely will be removed soon
 
         if len(images) == 0:
-            print("There is no image in gallery to save as a preview.")
+            #print("There is no image in gallery to save as a preview.")
             return [page.create_html(ui.tabname) for page in ui.stored_extra_pages]
 
         index = int(index)

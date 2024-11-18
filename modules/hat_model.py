@@ -25,7 +25,7 @@ class UpscalerHAT(Upscaler):
         try:
             model = self.load_model(selected_model)
         except Exception as e:
-            print(f"Unable to load HAT model {selected_model}: {e}", file=sys.stderr)
+            #print(f"Unable to load HAT model {selected_model}: {e}", file=sys.stderr)
             return img
         model.to(devices.device_esrgan)  # TODO: should probably be device_hat
         return upscale_with_model(

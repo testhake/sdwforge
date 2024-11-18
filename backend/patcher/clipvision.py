@@ -172,7 +172,7 @@ def load_clipvision_from_sd(sd, prefix="", convert_keys=False):
     clip = ClipVisionModel(config)
     m, u = clip.load_sd(sd)
     if len(m) > 0:
-        print("extra clip vision:", m)
+        #print("extra clip vision:", m)
     u = set(u)
     keys = list(sd.keys())
     for k in keys:

@@ -137,7 +137,7 @@ def apply_size(p, x: str, xs) -> None:
         p.width = width
         p.height = height
     except ValueError:
-        print(f"Invalid size in XYZ plot: {x}")
+        #print(f"Invalid size in XYZ plot: {x}")
 
 
 def find_vae(name: str):
@@ -145,7 +145,7 @@ def find_vae(name: str):
         return 'Automatic'
     elif name == 'none':
         return 'None'
-    return next((k for k in modules.sd_vae.vae_dict if k.lower() == name), print(f'No VAE found for {name}; using Automatic') or 'Automatic')
+    return next((k for k in modules.sd_vae.vae_dict if k.lower() == name), #print(f'No VAE found for {name}; using Automatic') or 'Automatic')
 
 
 def apply_vae(p, x, xs):
@@ -387,10 +387,10 @@ def draw_xyz_grid(p, xs, ys, zs, x_labels, y_labels, z_labels, cell, draw_legend
 
     if not processed_result:
         # Should never happen, I've only seen it on one of four open tabs and it needed to refresh.
-        print("Unexpected error: Processing could not begin, you may need to refresh the tab or restart the service.")
+        #print("Unexpected error: Processing could not begin, you may need to refresh the tab or restart the service.")
         return Processed(p, [])
     elif not any(processed_result.images):
-        print("Unexpected error: draw_xyz_grid failed to return even a single processed image")
+        #print("Unexpected error: draw_xyz_grid failed to return even a single processed image")
         return Processed(p, [])
 
     z_count = len(zs)
@@ -695,7 +695,7 @@ class Script(scripts.Script):
         image_cell_count = p.n_iter * p.batch_size
         cell_console_text = f"; {image_cell_count} images per cell" if image_cell_count > 1 else ""
         plural_s = 's' if len(zs) > 1 else ''
-        print(f"X/Y/Z plot will create {len(xs) * len(ys) * len(zs) * image_cell_count} images on {len(zs)} {len(xs)}x{len(ys)} grid{plural_s}{cell_console_text}. (Total steps to process: {total_steps})")
+        #print(f"X/Y/Z plot will create {len(xs) * len(ys) * len(zs) * image_cell_count} images on {len(zs)} {len(xs)}x{len(ys)} grid{plural_s}{cell_console_text}. (Total steps to process: {total_steps})")
         shared.total_tqdm.updateTotal(total_steps)
 
         state.xyz_plot_x = AxisInfo(x_opt, xs)

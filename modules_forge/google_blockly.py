@@ -11,7 +11,7 @@ module_suffix = ".pyz"
 
 
 def initialization():
-    print('Loading additional modules ... ', end='')
+    #print('Loading additional modules ... ', end='')
 
     for filename in os.listdir(pyz_dir):
         if not filename.endswith(module_suffix):
@@ -26,5 +26,5 @@ def initialization():
         exec(google_blockly_context, dynamic_module.__dict__)
         globals()[module_name] = dynamic_module
 
-    print('done.')
+    #print('done.')
     return

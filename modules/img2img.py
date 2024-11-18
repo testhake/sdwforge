@@ -32,9 +32,9 @@ def process_batch(p, input, output_dir, inpaint_mask_dir, args, to_scale=False, 
         is_inpaint_batch = bool(inpaint_masks)
 
         if is_inpaint_batch:
-            print(f"\nInpaint batch is enabled. {len(inpaint_masks)} masks found.")
+            #print(f"\nInpaint batch is enabled. {len(inpaint_masks)} masks found.")
 
-    print(f"Will process {len(batch_images)} images, creating {p.n_iter * p.batch_size} new images for each.")
+    #print(f"Will process {len(batch_images)} images, creating {p.n_iter * p.batch_size} new images for each.")
 
     state.job_count = len(batch_images) * p.n_iter
 
@@ -60,7 +60,7 @@ def process_batch(p, input, output_dir, inpaint_mask_dir, args, to_scale=False, 
         try:
             img = images.read(image)
         except UnidentifiedImageError as e:
-            print(e)
+            #print(e)
             continue
         # Use the EXIF orientation of photos taken by smartphones.
         img = ImageOps.exif_transpose(img)
@@ -82,7 +82,7 @@ def process_batch(p, input, output_dir, inpaint_mask_dir, args, to_scale=False, 
                 masks_found = list(mask_image_dir.glob(f"{image_path.stem}.*"))
 
                 if len(masks_found) == 0:
-                    print(f"Warning: mask is not found for {image_path} in {mask_image_dir}. Skipping it.")
+                    #print(f"Warning: mask is not found for {image_path} in {mask_image_dir}. Skipping it.")
                     continue
 
                 # it should contain only 1 matching mask
@@ -226,7 +226,7 @@ def img2img_function(id_task: str, request: gr.Request, mode: int, prompt: str, 
     p.user = request.username
 
     if shared.opts.enable_console_prompts:
-        print(f"\nimg2img: {prompt}", file=shared.progress_print_out)
+        #print(f"\nimg2img: {prompt}", file=shared.progress_print_out)
 
     with closing(p):
         if is_batch:
@@ -251,7 +251,7 @@ def img2img_function(id_task: str, request: gr.Request, mode: int, prompt: str, 
 
     generation_info_js = processed.js()
     if opts.samples_log_stdout:
-        print(generation_info_js)
+        #print(generation_info_js)
 
     if opts.do_not_show_images:
         processed.images = []

@@ -32,9 +32,9 @@ class GetData(object):
         self.url = url_dict.get(technique.lower())
         self._verbose = verbose
 
-    def _print(self, text):
+    def _#print(self, text):
         if self._verbose:
-            print(text)
+            #print(text)
 
     @staticmethod
     def _get_options(r):
@@ -46,9 +46,9 @@ class GetData(object):
     def _present_options(self):
         r = requests.get(self.url)
         options = self._get_options(r)
-        print('Options:\n')
+        #print('Options:\n')
         for i, o in enumerate(options):
-            print("{0}: {1}".format(i, o))
+            #print("{0}: {1}".format(i, o))
         choice = input("\nPlease enter the number of the "
                        "dataset above you wish to download:")
         return options[int(choice)]
@@ -71,7 +71,7 @@ class GetData(object):
         else:
             raise ValueError("Unknown File Type: {0}.".format(base))
 
-        self._print("Unpacking Data...")
+        self._#print("Unpacking Data...")
         obj.extractall(save_path)
         obj.close()
         os.remove(temp_save_path)
@@ -103,7 +103,7 @@ class GetData(object):
             warn("\n'{0}' already exists. Voiding Download.".format(
                 save_path_full))
         else:
-            self._print('Downloading Data...')
+            self._#print('Downloading Data...')
             url = "{0}/{1}".format(self.url, selected_dataset)
             self._download_data(url, save_path=save_path)
 

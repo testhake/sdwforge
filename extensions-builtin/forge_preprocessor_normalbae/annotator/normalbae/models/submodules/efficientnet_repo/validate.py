@@ -72,7 +72,7 @@ def main():
     amp_autocast = suppress  # do nothing
     if args.amp:
         if not has_native_amp:
-            print("Native Torch AMP is not available (requires torch >= 1.6), using FP32.")
+            #print("Native Torch AMP is not available (requires torch >= 1.6), using FP32.")
         else:
             amp_autocast = torch.cuda.amp.autocast
 
@@ -92,7 +92,7 @@ def main():
         torch.jit.optimized_execution(True)
         model = torch.jit.script(model)
 
-    print('Model %s created, param count: %d' %
+    #print('Model %s created, param count: %d' %
           (args.model, sum([m.numel() for m in model.parameters()])))
 
     data_config = resolve_data_config(model, args)
@@ -149,7 +149,7 @@ def main():
             end = time.time()
 
             if i % args.print_freq == 0:
-                print('Test: [{0}/{1}]\t'
+                #print('Test: [{0}/{1}]\t'
                       'Time {batch_time.val:.3f} ({batch_time.avg:.3f}, {rate_avg:.3f}/s) \t'
                       'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                       'Prec@1 {top1.val:.3f} ({top1.avg:.3f})\t'
@@ -158,7 +158,7 @@ def main():
                     rate_avg=input.size(0) / batch_time.avg,
                     loss=losses, top1=top1, top5=top5))
 
-    print(' * Prec@1 {top1.avg:.3f} ({top1a:.3f}) Prec@5 {top5.avg:.3f} ({top5a:.3f})'.format(
+    #print(' * Prec@1 {top1.avg:.3f} ({top1a:.3f}) Prec@5 {top5.avg:.3f} ({top5a:.3f})'.format(
         top1=top1, top1a=100-top1.avg, top5=top5, top5a=100.-top5.avg))
 
 
