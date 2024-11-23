@@ -54,8 +54,8 @@ def txt2img_create_processing(id_task: str, request: gr.Request, prompt: str, ne
     p.user = request.username
 
     if shared.opts.enable_console_prompts:
-        print(f"\ntxt2img: {prompt}", file=shared.progress_print_out)
-        #print(f"\ntxt2img: prompt", file=shared.progress_print_out)
+        #print(f"\ntxt2img: {prompt}", file=shared.progress_print_out)
+        print(f"\ntxt2img: prompt", file=shared.progress_print_out)
 
     return p
 
