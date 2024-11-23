@@ -151,8 +151,8 @@ def generate_image(
     generator = torch.Generator(device=device).manual_seed(seed)
 
     print("Start inference...")
-    #print(f"[Debug] Seed: {seed}")
-    #print(f"[Debug] Prompt: {prompt}, \n[Debug] Neg Prompt: {negative_prompt}")
+    print(f"[Debug] Seed: {seed}")
+    print(f"[Debug] Prompt: {prompt}, \n[Debug] Neg Prompt: {negative_prompt}")
     start_merge_step = int(float(style_strength_ratio) / 100 * num_steps)
     if start_merge_step > 30:
         start_merge_step = 30
